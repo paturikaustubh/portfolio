@@ -1,0 +1,5 @@
+.__stroke-only {
+  color: transparent;
+  -webkit-text-stroke: var(--text-color);
+  -webkit-text-stroke-width: 2px;
+}
