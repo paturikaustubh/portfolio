@@ -22,7 +22,6 @@ export default function Name() {
           start: "top 80%",
           end: "bottom 40%",
           // markers: true,
-          toggleActions: "restart none none none",
         },
         scaleY: 0,
         y: -10,
@@ -54,7 +53,7 @@ export default function Name() {
     });
   }, []);
   return (
-    <div className="overflow-hidden h-screen flex flex-col justify-center items-center gap-20 bg-transparent select-none">
+    <div className="overflow-hidden h-screen p-5 flex flex-col justify-center items-center gap-20 bg-transparent select-none">
       <section
         id="full-name"
         className="flex gap-4 justify-center items-center lg:text-9xl md:text-7xl text-5xl font-semibold __animate-full-name __element-text __cursor-blend"

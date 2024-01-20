@@ -15,7 +15,9 @@ export default function Cursor() {
       element.addEventListener("mouseenter", () => {
         if (cursorElement) {
           cursorElement.style.scale = "10";
-          cursorElement.style.backgroundColor = "var(--bg-color)";
+          const mode = document.body.className;
+          cursorElement.style.backgroundColor =
+            mode === "__dark-mode" ? "var(--text-color)" : "var(--bg-color)";
           cursorElement.style.mixBlendMode = "difference";
         }
       });

@@ -65,6 +65,7 @@ body.__dark-mode {
   left: 0;
   opacity: 0;
   animation: fade-in 300ms linear 300ms forwards;
+  transition: 300ms ease-in-out;
 }
 
 .__element-text::before {
