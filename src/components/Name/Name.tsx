@@ -9,7 +9,7 @@ import "./styles.css";
 
 export default function Name() {
   useEffect(() => {
-    const textDropSplits = document.querySelectorAll(".__animate-text-drop");
+    const textDropSplits = document.querySelectorAll(".__animate-full-name");
     textDropSplits.forEach((char) => {
       const { chars } = new SplitType(char as TargetElement, {
         types: "chars",
@@ -18,17 +18,22 @@ export default function Name() {
       gsap.from(chars, {
         scrollTrigger: {
           trigger: char,
-          scrub: false,
+          // scrub: true,
+          start: "top 80%",
+          end: "bottom 40%",
+          // markers: true,
+          toggleActions: "restart none none none",
         },
         scaleY: 0,
         y: -10,
+        // delay: 1,
         opacity: 0,
         transformOrigin: "left left",
         stagger: 0.02,
       });
     });
 
-    const textFadeSplits = document.querySelectorAll(".__animate-text-fade");
+    const textFadeSplits = document.querySelectorAll(".__animate-profession");
     textFadeSplits.forEach((char) => {
       const { chars } = new SplitType(char as TargetElement, {
         types: "chars",
@@ -37,7 +42,10 @@ export default function Name() {
       gsap.from(chars, {
         scrollTrigger: {
           trigger: char,
-          scrub: false,
+          // scrub: true,
+          start: "top 80%",
+          end: "bottom 40%",
+          // markers: true,
         },
         opacity: 0,
         transformOrigin: "left left",
@@ -46,10 +54,10 @@ export default function Name() {
     });
   }, []);
   return (
-    <div className="overflow-hidden h-screen flex flex-col justify-center items-center gap-20 bg-transparent">
+    <div className="overflow-hidden h-screen flex flex-col justify-center items-center gap-20 bg-transparent select-none">
       <section
         id="full-name"
-        className="flex gap-4 justify-center items-center lg:text-9xl md:text-7xl text-5xl font-semibold __animate-text-drop __element-text"
+        className="flex gap-4 justify-center items-center lg:text-9xl md:text-7xl text-5xl font-semibold __animate-full-name __element-text __cursor-blend"
         data-element-text-info={`<section id = "full-name">`}
       >
         <span>Kaustubh</span>
@@ -57,7 +65,7 @@ export default function Name() {
       </section>
       <section
         id="profession"
-        className=" text-4xl __element-text __animate-text-fade"
+        className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend"
         data-element-text-info={'<section id="profession">'}
       >
         <span>Full Stack Developer</span>

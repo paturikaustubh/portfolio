@@ -16,6 +16,11 @@ body {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
   transition: 300ms ease-in-out;
+  cursor: none !important;
+}
+
+a {
+  cursor: none !important;
 }
 
 ::selection {

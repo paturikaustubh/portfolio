@@ -1,0 +1,17 @@
+.__custom-cursor {
+  scale: 0;
+  position: fixed;
+  z-index: 11;
+  pointer-events: none;
+  cursor: none !important;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  transition: scale 300ms, top 200ms ease-out, left 200ms ease-out;
+  /* transition: width 300ms; */
+}
+
+@media (max-width: 768px) {
+  .__custom-cursor {
+    display: none;
+  }
+}
