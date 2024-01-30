@@ -57,7 +57,7 @@ function App() {
       <Cursor />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/portfolio" element={<Hero />} />
       </Routes>
     </Router>
   );
