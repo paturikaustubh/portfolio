@@ -21,6 +21,19 @@ function App() {
     }
     requestAnimationFrame(raf);
 
+    gsap.fromTo(
+      "nav",
+      {
+        y: "-100%",
+        stagger: 0.02,
+      },
+      {
+        y: 0,
+        delay: 0.5,
+        duration: 0.8,
+      }
+    );
+
     const darkThemeElements = document.querySelectorAll(".__theme-change-dark");
 
     darkThemeElements.forEach((darkElement) => {
@@ -29,7 +42,7 @@ function App() {
           trigger: darkElement,
           start: "top 60%",
           end: "bottom 40%",
-          markers: true,
+          // markers: true,
           onEnter: () => document.body.classList.add("__dark-mode"),
           onEnterBack: () => document.body.classList.add("__dark-mode"),
           onLeave: () => document.body.classList.remove("__dark-mode"),

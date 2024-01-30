@@ -49,14 +49,33 @@ export default function Name() {
         opacity: 0,
         transformOrigin: "left left",
         stagger: 0.02,
+        delay: 0.5,
       });
     });
   }, []);
   return (
-    <div className="overflow-hidden h-screen p-5 flex flex-col justify-center items-center gap-20 bg-transparent select-none">
+    <div className="overflow-hidden relative h-screen p-5 flex flex-col justify-center items-center gap-20 bg-transparent select-none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.0"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 125"
+        enableBackground="new 0 0 100 100"
+        className="absolute inset-0 m-auto lg:scale-[0.3] md:scale-50 scale-75 -z-10 fill-amber-700-translate-y-1/s4"
+      >
+        <path
+          className="fill-[#aba59a]"
+          d="M53.333,36.667V70H10v20h80V36.667H53.333z"
+        />
+        <path
+          className="fill-[#CCC8C0]"
+          d="M10,10v53.333h36.667V30H90V10H10z"
+        />
+      </svg>
       <section
         id="full-name"
-        className="flex gap-4 justify-center items-center lg:text-9xl md:text-7xl text-5xl font-semibold __animate-full-name __element-text __cursor-blend"
+        className="flex gap-4 justify-center items-center lg:text-9xl text-7xl md:flex-row flex-col font-semibold __animate-full-name __element-text __cursor-blend"
         data-element-text-info={`<section id = "full-name">`}
       >
         <span>Kaustubh</span>

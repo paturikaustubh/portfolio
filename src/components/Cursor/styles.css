@@ -9,9 +9,3 @@
   transition: scale 300ms, top 200ms ease-out, left 200ms ease-out;
   /* transition: width 300ms; */
 }
-
-@media (max-width: 768px) {
-  .__custom-cursor {
-    display: none;
-  }
-}

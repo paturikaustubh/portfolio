@@ -9,7 +9,7 @@ export default function Navbar() {
     <>
       <div
         id="navigation-menu"
-        className="absolute inset-0 overflow-hidden block md:hidden justify-between z-10"
+        className="fixed inset-0 overflow-hidden block md:hidden justify-between z-10"
       >
         <div className="flex flex-col justify-between h-full py-5">
           <section className="flex justify-between items-center text-4xl px-4 border-b pb-5">
@@ -37,8 +37,8 @@ export default function Navbar() {
             <Link to="#skills" className={navMenuElementStyle}>
               Skills
             </Link>
-            <Link to="#works" className={navMenuElementStyle}>
-              Works
+            <Link to="#projects" className={navMenuElementStyle}>
+              Projects
             </Link>
             <Link to="#contact" className={navMenuElementStyle}>
               Contact
@@ -96,8 +96,8 @@ export default function Navbar() {
           <Link to="#skills" className="__nav-underline-element">
             Skills
           </Link>
-          <Link to="#works" className="__nav-underline-element">
-            Works
+          <Link to="#projects" className="__nav-underline-element">
+            Projects
           </Link>
           <Link to="#contact" className="__nav-underline-element">
             Contact
