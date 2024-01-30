@@ -6,6 +6,6 @@
   cursor: none !important;
   border-radius: 50%;
   background-color: var(--text-color);
-  transition: scale 300ms, top 200ms ease-out, left 200ms ease-out;
+  transition: scale 300ms;
   /* transition: width 300ms; */
 }
