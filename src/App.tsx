@@ -69,6 +69,23 @@ function App() {
         ease: "back.out",
       });
     });
+
+    const fadeInText = document.querySelectorAll(".__fade-in");
+    fadeInText.forEach((char) => {
+      const { words } = new SplitType(char as TargetElement, {
+        types: "words",
+      });
+      gsap.from(words, {
+        scrollTrigger: {
+          trigger: char,
+          scrub: 1,
+          start: "top 70%",
+          end: "bottom 50%",
+        },
+        opacity: 0.03,
+        stagger: 0.02,
+      });
+    });
   }, []);
 
   return (

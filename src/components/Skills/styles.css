@@ -1,0 +1,49 @@
+.tech-stack-info-card {
+  border-color: var(--text-color);
+  transition: background-color 300ms ease, border-radius 700ms ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+  z-index: 1;
+}
+
+.tech-stack-info-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-color: var(--text-color);
+  transform: translateY(100%);
+  z-index: -1;
+  transition: 300ms ease;
+}
+
+.tech-stack-info-card:hover::after {
+  transform: translateY(0%);
+}
+
+.tech-stack-info-card:hover {
+  color: var(--bg-color);
+  background-color: var(--text-color);
+}
+
+.tech-stack-info-card:hover .accordion-expand-indicator {
+  fill: var(--bg-color);
+}
+
+.tech-stack-info-card.active {
+  color: var(--bg-color);
+  background-color: var(--text-color);
+}
+
+.tech-stack-info-card.active:hover .__custom-cursor {
+  background-color: red !important;
+}
+
+.accordion-expand-indicator {
+  fill: var(--text-color);
+}
+
+.tech-stack-info-card.active .accordion-expand-indicator {
+  fill: var(--bg-color);
+}

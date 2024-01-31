@@ -88,8 +88,7 @@ export default function Name() {
       </div>
       <div
         id="profession"
-        className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend"
-        data-element-text-info={'<section id="profession">'}
+        className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend pt-8"
       >
         <span>Full Stack Developer</span>
       </div>

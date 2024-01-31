@@ -24,7 +24,7 @@ svg#logo {
   opacity: 0;
   width: 0%;
   background-color: var(--text-color);
-  transition: 200ms ease;
+  transition: 400ms ease;
 }
 
 .__nav-underline-element:hover::after {

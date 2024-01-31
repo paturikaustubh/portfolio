@@ -20,7 +20,15 @@ body {
 
 * {
   cursor: none !important;
-  /* user-select: none; */
+  user-select: none;
+}
+
+button {
+  outline: 0;
+}
+
+button:focus-visible {
+  outline: 1;
 }
 
 @media (max-width: 768px) {
@@ -90,7 +98,11 @@ body.__dark-mode {
 }
 
 .__section-title {
-  @apply lg:text-8xl md:text-7xl text-6xl font-bold mb-8 overflow-hidden;
+  @apply lg:text-8xl md:text-7xl text-6xl font-bold mb-8 overflow-hidden inline-block;
+}
+
+.__section-desc {
+  @apply lg:text-5xl lg:leading-[4.5rem] md:text-4xl md:leading-[4rem] text-3xl leading-[3.5rem];
 }
 
 @keyframes fade-in {

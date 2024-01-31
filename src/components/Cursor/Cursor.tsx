@@ -4,6 +4,24 @@ import "./styles.css";
 export default function Cursor() {
   const [cursorCoords, setCursorCoords] = useState({ x: 0, y: 0 });
 
+  const mouseMoveListner = ({
+    clientX,
+    clientY,
+  }: {
+    clientX: number;
+    clientY: number;
+  }) => {
+    setCursorCoords({ x: clientX, y: clientY });
+  };
+
+  const handleScroll = () => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) {
+      cursor.style.scale = "1";
+      cursor.style.mixBlendMode = "";
+    }
+  };
+
   useEffect(() => {
     const bodyElement = document.body;
     const cursorElement =
@@ -31,9 +49,12 @@ export default function Cursor() {
       });
     });
 
-    bodyElement.addEventListener("mousemove", ({ clientX, clientY }) =>
-      setCursorCoords({ x: clientX, y: clientY })
-    );
+    bodyElement.addEventListener("mousemove", mouseMoveListner);
+    bodyElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      bodyElement.removeEventListener("mousemove", mouseMoveListner);
+    };
   }, []);
 
   return (
