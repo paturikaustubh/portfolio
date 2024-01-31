@@ -18,17 +18,14 @@ export default function Name() {
       gsap.from(chars, {
         scrollTrigger: {
           trigger: char,
-          // scrub: true,
           start: "top 80%",
           end: "bottom 40%",
-          // markers: true,
         },
-        scaleY: 0,
-        y: -10,
-        // delay: 1,
+        y: "100%",
         opacity: 0,
         transformOrigin: "left left",
         stagger: 0.02,
+        ease: "back.out",
       });
     });
 
@@ -44,7 +41,6 @@ export default function Name() {
           // scrub: true,
           start: "top 80%",
           end: "bottom 40%",
-          // markers: true,
         },
         opacity: 0,
         transformOrigin: "left left",
@@ -54,40 +50,49 @@ export default function Name() {
     });
   }, []);
   return (
-    <div className="overflow-hidden relative h-screen p-5 flex flex-col justify-center items-center gap-20 bg-transparent select-none">
+    <section className="overflow-hidden relative h-screen p-5 my-10 md:mb-0 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
       <svg
+        width="1186"
+        height="1186"
+        viewBox="0 0 1186 1186"
+        fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        version="1.0"
-        x="0px"
-        y="0px"
-        viewBox="0 0 100 125"
-        enableBackground="new 0 0 100 100"
-        className="absolute inset-0 m-auto lg:scale-[0.3] md:scale-50 scale-75 -z-10 fill-amber-700-translate-y-1/s4"
+        className="absolute w-5/6 sm:w-3/5 lg:w-2/5 pointer-events-none -z-20 opacity-100 scale-100"
       >
-        <path
-          className="fill-[#aba59a]"
-          d="M53.333,36.667V70H10v20h80V36.667H53.333z"
-        />
-        <path
-          className="fill-[#CCC8C0]"
-          d="M10,10v53.333h36.667V30H90V10H10z"
-        />
+        <circle
+          cx="593"
+          cy="593"
+          r="593"
+          fill="url(#paint0_linear_4949_267)"
+        ></circle>
+        <defs>
+          <linearGradient
+            id="paint0_linear_4949_267"
+            x1="593"
+            y1="0"
+            x2="593"
+            y2="1186"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#DDDDD5"></stop>
+            <stop offset="1" stopColor="#DDDDD5" stopOpacity="0"></stop>
+          </linearGradient>
+        </defs>
       </svg>
-      <section
+      <div
         id="full-name"
-        className="flex gap-4 justify-center items-center lg:text-9xl text-7xl md:flex-row flex-col font-semibold __animate-full-name __element-text __cursor-blend"
-        data-element-text-info={`<section id = "full-name">`}
+        className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl md:flex-row flex-col font-bold __animate-full-name __cursor-blend"
       >
-        <span>Kaustubh</span>
-        <span className="__stroke-only">Paturi</span>
-      </section>
-      <section
+        <span className="overflow-hidden">KAUSTUBH</span>
+        <span className="__stroke-only overflow-hidden">PATURI</span>
+      </div>
+      <div
         id="profession"
         className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend"
         data-element-text-info={'<section id="profession">'}
       >
         <span>Full Stack Developer</span>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

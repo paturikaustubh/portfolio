@@ -16,16 +16,17 @@ body {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
   transition: 300ms ease-in-out;
-  cursor: none !important;
 }
 
-a {
+* {
   cursor: none !important;
+  /* user-select: none; */
 }
 
-::selection {
-  background-color: var(--text-color);
-  color: var(--bg-color);
+@media (max-width: 768px) {
+  * {
+    cursor: default !important;
+  }
 }
 
 body.__dark-mode {
@@ -58,8 +59,6 @@ body.__dark-mode {
 
 .__element-text::after,
 .__element-text::before {
-  font-size: 0.1em;
-  font-weight: 200;
   position: absolute;
   top: 0;
   left: 0;
@@ -78,14 +77,36 @@ body.__dark-mode {
 
 .__element-text::after {
   content: attr(data-element-text-info);
+  font-size: 1rem;
+  font-weight: 200;
   transform: translateY(-65%);
   margin-inline: 1em;
   padding-inline: 5px;
   background-color: var(--bg-color);
 }
 
+.__section-padding {
+  @apply lg:p-16 md:p-12 p-8;
+}
+
+.__section-title {
+  @apply lg:text-8xl md:text-7xl text-6xl font-bold mb-8 overflow-hidden;
+}
+
 @keyframes fade-in {
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .__element-text::after {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .__element-text::after {
+    font-size: 0.1rem;
   }
 }

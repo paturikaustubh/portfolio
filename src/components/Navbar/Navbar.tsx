@@ -31,11 +31,25 @@ export default function Navbar() {
             </button>
           </section>
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
-            <Link to="#about-me" className={navMenuElementStyle}>
+            <Link
+              to="#about-me"
+              className={navMenuElementStyle}
+              onClick={() => {
+                const ele = document.getElementById("about-me");
+                ele?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               About Me
             </Link>
-            <Link to="#skills" className={navMenuElementStyle}>
-              Skills
+            <Link
+              to="#tech-stack"
+              className={navMenuElementStyle}
+              onClick={() => {
+                const ele = document.getElementById("tech-stack");
+                ele?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Tech Stack
             </Link>
             <Link to="#projects" className={navMenuElementStyle}>
               Projects
@@ -48,7 +62,12 @@ export default function Navbar() {
       </div>
 
       <nav className="flex justify-between items-center fixed top-0 lg:px-16 md:px-8 px-4 py-5 w-full">
-        <Link to={"/"}>
+        <Link
+          to={"/portfolio"}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <svg
             id="logo"
             xmlns="http://www.w3.org/2000/svg"
@@ -90,11 +109,25 @@ export default function Navbar() {
           </button>
         </div>
         <div className="navigation md:flex hidden items-center gap-8">
-          <Link to="#about-me" className="__nav-underline-element">
+          <Link
+            to="#about-me"
+            className="__nav-underline-element"
+            onClick={() => {
+              const ele = document.getElementById("about-me");
+              ele?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             About Me
           </Link>
-          <Link to="#skills" className="__nav-underline-element">
-            Skills
+          <Link
+            to="#tech-stack"
+            className="__nav-underline-element"
+            onClick={() => {
+              const ele = document.getElementById("tech-stack");
+              ele?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Tech Stack
           </Link>
           <Link to="#projects" className="__nav-underline-element">
             Projects

@@ -3,9 +3,14 @@
   position: fixed;
   z-index: 11;
   pointer-events: none;
-  cursor: none !important;
   border-radius: 50%;
   background-color: var(--text-color);
   transition: scale 300ms;
   /* transition: width 300ms; */
+}
+
+@media (max-width: 768px) {
+  .__custom-cursor {
+    display: none;
+  }
 }
