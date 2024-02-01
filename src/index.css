@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #e5e5e5;
+  --bg-color: #fffbeb;
   --text-color: #171717;
   --accent-color: #ea580c;
   --nav-menu-bg: rgba(212 212 212 / 0.8);
@@ -16,6 +16,12 @@ body {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
   transition: 300ms ease-in-out;
+}
+
+body.__dark-mode {
+  --bg-color: #171717;
+  --text-color: #fffbeb;
+  --nav-menu-bg: rgba(23 23 23 / 0.8);
 }
 
 * {
@@ -35,12 +41,6 @@ button:focus-visible {
   * {
     cursor: default !important;
   }
-}
-
-body.__dark-mode {
-  --bg-color: #171717;
-  --text-color: #fffbeb;
-  --nav-menu-bg: rgba(23 23 23 / 0.8);
 }
 
 ::-webkit-scrollbar {

@@ -27,7 +27,7 @@ export default function Accordion({
           start: "top 70%",
           // end: "bottom 50%",
           scrub: false,
-          markers: true,
+          // markers: true,
           // toggleActions: "play none none none",
         },
         x: "100%",
