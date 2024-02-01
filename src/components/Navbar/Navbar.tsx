@@ -3,7 +3,26 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 
 export default function Navbar() {
-  const navMenuElementStyle = "px-4 py-6 border border-x-0";
+  const navMenuElementStyle = "px-4 py-6 overflow-hidden border-t expand-bg";
+
+  const menuLinks = [
+    {
+      to: "about-me",
+      title: "About Me",
+    },
+    {
+      to: "tech-stack",
+      title: "Tech Stack",
+    },
+    {
+      to: "projects",
+      title: "Projects",
+    },
+    {
+      to: "contact",
+      title: "Contact",
+    },
+  ];
 
   return (
     <>
@@ -31,32 +50,27 @@ export default function Navbar() {
             </button>
           </section>
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
-            <Link
-              to="#about-me"
-              className={navMenuElementStyle}
-              onClick={() => {
-                const ele = document.getElementById("about-me");
-                ele?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              About Me
-            </Link>
-            <Link
-              to="#tech-stack"
-              className={navMenuElementStyle}
-              onClick={() => {
-                const ele = document.getElementById("tech-stack");
-                ele?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Tech Stack
-            </Link>
-            <Link to="#projects" className={navMenuElementStyle}>
-              Projects
-            </Link>
-            <Link to="#contact" className={navMenuElementStyle}>
-              Contact
-            </Link>
+            {menuLinks.map(({ to, title }, indx) => (
+              <Link
+                to={`#${to}`}
+                className={navMenuElementStyle}
+                onClick={() => {
+                  const navigationMenu =
+                    document.getElementById("navigation-menu");
+                  if (navigationMenu) {
+                    navigationMenu.style.height = "0";
+                    setTimeout(() => {
+                      navigationMenu.classList.remove("__show");
+                    }, 300);
+                  }
+                  const ele = document.getElementById(to);
+                  ele?.scrollIntoView({ behavior: "smooth" });
+                }}
+                key={indx}
+              >
+                {title}
+              </Link>
+            ))}
           </section>
         </div>
       </div>
@@ -109,6 +123,18 @@ export default function Navbar() {
           </button>
         </div>
         <div className="navigation md:flex hidden items-center gap-8">
+          {/* {menuLinks.map(({ to, title }, indx) => (
+            <Link
+              to={`#${to}`}
+              className="__nav-underline-element"
+              onClick={() => {
+                const ele = document.getElementById("about-me");
+                ele?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {title}
+            </Link>
+          ))} */}
           <Link
             to="#about-me"
             className="__nav-underline-element"

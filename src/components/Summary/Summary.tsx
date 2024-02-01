@@ -7,7 +7,9 @@ export default function Summary() {
       id="about-me"
     >
       <div id="summary" className="lg:w-3/4 w-full">
-        <h1 className="__section-title __cursor-blend">About Me</h1>
+        <h1 className="__section-title __cursor-blend flex md:flex-row flex-col">
+          About Me <span className="__hover-invert">👨🏻</span>
+        </h1>
         <span className="__fade-in h-full __section-desc __cursor-blend inline-block">
           A versatile Full-Stack Developer passionately dedicated to craft
           user-centric digital experiences while solving business challenges

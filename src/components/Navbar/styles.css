@@ -24,12 +24,13 @@ svg#logo {
   opacity: 0;
   width: 0%;
   background-color: var(--text-color);
-  transition: 400ms ease;
+  transition: 200ms ease;
 }
 
 .__nav-underline-element:hover::after {
   width: 100%;
   opacity: 1;
+  /* rotate: 0deg; */
 }
 
 #navigation-menu {
@@ -41,9 +42,6 @@ svg#logo {
 }
 
 .__nav-menu-element-list > a {
-  cursor: pointer;
-  opacity: 0.5;
-  transition: 300ms ease;
   transform: translateX(100%);
 }
 

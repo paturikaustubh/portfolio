@@ -94,7 +94,7 @@ button:focus-visible {
 }
 
 .__section-padding {
-  @apply lg:p-16 md:p-12 p-8;
+  @apply lg:p-16 md:p-12 p-2;
 }
 
 .__section-title {
@@ -102,7 +102,45 @@ button:focus-visible {
 }
 
 .__section-desc {
-  @apply lg:text-5xl lg:leading-[4.5rem] md:text-4xl md:leading-[4rem] text-3xl leading-[3.5rem];
+  @apply lg:text-4xl lg:leading-[4rem] text-3xl leading-[3rem];
+  /* font-size: clamp(1rem, 2rem, 3.5rem);
+  line-height: clamp(3.5rem, 2rem, 4.5rem); */
+}
+
+.expand-bg {
+  border-color: var(--text-color);
+  transition: color 300ms ease, border-radius 300ms ease;
+  color: var(--text-color);
+  position: relative;
+  z-index: 1;
+}
+
+.expand-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-color: var(--text-color);
+  transform: translateY(100%);
+  z-index: -1;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  rotate: 0deg;
+}
+
+.expand-bg:hover {
+  color: var(--bg-color);
+}
+
+.expand-bg:hover::after {
+  transform: translateY(0%);
+  rotate: 180deg;
+}
+
+@media (min-width: 1024px) {
+  .__hover-invert:hover {
+    filter: invert(1);
+    transition: 300ms ease;
+  }
 }
 
 @keyframes fade-in {
