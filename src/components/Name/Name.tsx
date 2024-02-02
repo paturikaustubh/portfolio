@@ -81,7 +81,7 @@ export default function Name() {
       </svg>
       <div
         id="full-name"
-        className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl md:flex-row flex-col font-bold __animate-full-name __cursor-blend"
+        className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl flex-col font-bold __animate-full-name __cursor-blend"
       >
         <span className="overflow-hidden">KAUSTUBH</span>
         <span className="__stroke-only overflow-hidden">PATURI</span>

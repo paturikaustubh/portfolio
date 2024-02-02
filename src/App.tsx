@@ -14,6 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 // gsap.registerPlugin(ScrollTrigger,1 ScrollSmoother);
 
 function App() {
+  const handleCursorColorChange = (color: "text" | "bg") => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) {
+      cursor.style.backgroundColor = `var(--${color}-color)`;
+    }
+  };
+
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time: any) {
@@ -42,10 +49,22 @@ function App() {
           trigger: darkElement,
           start: "top 60%",
           end: "bottom 40%",
-          onEnter: () => document.body.classList.add("__dark-mode"),
-          onEnterBack: () => document.body.classList.add("__dark-mode"),
-          onLeave: () => document.body.classList.remove("__dark-mode"),
-          onLeaveBack: () => document.body.classList.remove("__dark-mode"),
+          onEnter: () => {
+            document.body.classList.add("__dark-mode");
+            handleCursorColorChange("text");
+          },
+          onEnterBack: () => {
+            document.body.classList.add("__dark-mode");
+            handleCursorColorChange("text");
+          },
+          onLeave: () => {
+            document.body.classList.remove("__dark-mode");
+            handleCursorColorChange("bg");
+          },
+          onLeaveBack: () => {
+            document.body.classList.remove("__dark-mode");
+            handleCursorColorChange("bg");
+          },
         },
       });
     });

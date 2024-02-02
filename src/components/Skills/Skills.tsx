@@ -9,7 +9,7 @@ export default function Skills() {
     <section className="__section-padding h-screen" id="tech-stack">
       <div className="whitespace-nowraps">
         <span className="__section-title __cursor-blend flex md:flex-row flex-col">
-          Tech Stack <span className="__hover-invert">👨🏻‍💻</span>
+          Tech Stack <span className="z-[12]">👨🏻‍💻</span>
         </span>
       </div>
       <div className="tech-stack-info-grid w-full grid grid-cols-12 gap-y-8 md:gap-x-8 overflow-hidden">
