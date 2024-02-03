@@ -35,22 +35,22 @@ export default function Accordion({
 
   return (
     <div
-      className={`tech-stack-info-card expand-bg border-t translate-x-full overflow-hidden ${
+      className={`tech-stack-info-card expand-bg ${
+        activeIndx === indx - 1 && indx !== 1 ? "" : "border-t"
+      } translate-x-full transition-all duration-300 overflow-hidden ${
         borderB ? "border-b" : ""
       } ${activeIndx === indx ? "active rounded-lg" : "my-0"}`}
       onMouseMove={() => {
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
-        if (cursor && activeIndx === indx) {
-          cursor.style.backgroundColor = "var(--bg-color)";
-        } else if (cursor && activeIndx !== indx) {
-          cursor.style.backgroundColor = "var(--text-color)";
-        }
+        if (cursor) cursor.style.backgroundColor = "var(--bg-color)";
+      }}
+      onMouseEnter={() => {
+        const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
+        if (cursor) cursor.style.backgroundColor = "var(--bg-color)";
       }}
       onMouseLeave={() => {
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
-        if (cursor && activeIndx === indx) {
-          cursor.style.backgroundColor = "var(--text-color)";
-        }
+        if (cursor) cursor.style.backgroundColor = "var(--text-color)";
       }}
     >
       <button
@@ -60,24 +60,6 @@ export default function Accordion({
             if (prevVal !== indx) return indx;
             return 0;
           });
-          const cursor =
-            document.querySelector<HTMLElement>(".__custom-cursor");
-          if (cursor) {
-            const currentBgColor = cursor.style.backgroundColor;
-            if (currentBgColor === "var(--text-color)")
-              cursor.style.backgroundColor = "var(--bg-color)";
-            else cursor.style.backgroundColor = "var(--text-color)";
-          }
-        }}
-        onMouseEnter={() => {
-          const cursor =
-            document.querySelector<HTMLElement>(".__custom-cursor");
-          if (cursor) {
-            const currentBgColor = cursor.style.backgroundColor;
-            if (currentBgColor === "var(--text-color)")
-              cursor.style.backgroundColor = "var(--bg-color)";
-            else cursor.style.backgroundColor = "var(--text-color)";
-          }
         }}
       >
         <span>{title}</span>

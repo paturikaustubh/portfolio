@@ -57,7 +57,7 @@ export default function Name() {
         viewBox="0 0 1186 1186"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute w-5/6 sm:w-3/5 lg:w-2/5 pointer-events-none -z-20 opacity-100 scale-100"
+        className="absolute w-5/6 sm:w-3/5 lg:w-2/5 pointer-events-none opacity-30 scale-100"
       >
         <circle
           cx="593"
@@ -79,18 +79,20 @@ export default function Name() {
           </linearGradient>
         </defs>
       </svg>
-      <div
-        id="full-name"
-        className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl flex-col font-bold __animate-full-name __cursor-blend"
-      >
-        <span className="overflow-hidden">KAUSTUBH</span>
-        <span className="__stroke-only overflow-hidden">PATURI</span>
-      </div>
-      <div
-        id="profession"
-        className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend pt-8"
-      >
-        <span>Full Stack Developer</span>
+      <div className="flex flex-col justify-center items-center __sticky-situation">
+        <div
+          id="full-name"
+          className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl flex-col font-bold __animate-full-name __cursor-blend"
+        >
+          <span className="overflow-hidden">KAUSTUBH</span>
+          <span className="__stroke-only overflow-hidden">PATURI</span>
+        </div>
+        <div
+          id="profession"
+          className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend pt-8"
+        >
+          <span>Full Stack Developer</span>
+        </div>
       </div>
     </section>
   );

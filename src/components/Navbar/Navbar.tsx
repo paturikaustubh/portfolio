@@ -28,7 +28,7 @@ export default function Navbar() {
     <>
       <div
         id="navigation-menu"
-        className="fixed inset-0 overflow-hidden block md:hidden justify-between z-10"
+        className="fixed inset-0 overflow-hidden block md:hidden justify-between z-[21]"
       >
         <div className="flex flex-col justify-between h-full py-5">
           <section className="flex justify-between items-center text-4xl px-4 border-b pb-5">
@@ -75,7 +75,19 @@ export default function Navbar() {
         </div>
       </div>
 
-      <nav className="flex justify-between items-center fixed top-0 lg:px-16 md:px-8 px-4 py-5 w-full">
+      <nav
+        className="flex justify-between items-center fixed top-0 lg:px-16 md:px-8 px-4 py-5 w-full z-20"
+        onMouseEnter={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "22";
+        }}
+        onMouseLeave={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "12";
+        }}
+      >
         <Link
           to={"/portfolio"}
           onClick={() => {

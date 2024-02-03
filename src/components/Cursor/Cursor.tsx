@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "./styles.css";
 
 export default function Cursor() {
-  const [cursorCoords, setCursorCoords] = useState({ x: 0, y: 0 });
-
   const mouseMoveListner = ({
     clientX,
     clientY,
@@ -11,7 +9,14 @@ export default function Cursor() {
     clientX: number;
     clientY: number;
   }) => {
-    setCursorCoords({ x: clientX, y: clientY });
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    cursor?.animate(
+      {
+        left: `${clientX - 10}px`,
+        top: `${clientY - 10}px`,
+      },
+      { duration: 1500, fill: "forwards", easing: "ease-out" }
+    );
   };
 
   const handleScroll = () => {
@@ -33,9 +38,7 @@ export default function Cursor() {
       element.addEventListener("mouseenter", () => {
         if (cursorElement) {
           cursorElement.style.scale = "10";
-          const mode = document.body.className;
-          cursorElement.style.backgroundColor =
-            mode === "__dark-mode" ? "var(--text-color)" : "var(--bg-color)";
+          cursorElement.style.backgroundColor = "#fffbeb";
           cursorElement.style.mixBlendMode = "difference";
         }
       });
@@ -63,8 +66,6 @@ export default function Cursor() {
       style={{
         height: 20,
         width: 20,
-        top: `${cursorCoords.y - 10}px`,
-        left: `${cursorCoords.x - 10}px`,
       }}
     />
   );
