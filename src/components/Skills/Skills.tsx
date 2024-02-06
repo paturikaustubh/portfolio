@@ -6,7 +6,7 @@ export default function Skills() {
   const [accordianActiveIndx, setAccordionActiveIndx] = useState(0);
 
   return (
-    <section className="__section-padding h-screen" id="tech-stack">
+    <section className="__section-padding" id="tech-stack">
       <div className="whitespace-nowraps">
         <span className="__section-title __cursor-blend flex md:flex-row flex-col">
           Tech Stack <span className="z-[12]">👨🏻‍💻</span>

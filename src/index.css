@@ -8,7 +8,15 @@
   --bg-color: #e7e5e4;
   --text-color: #1c1917;
   --nav-menu-bg: #d4d4d4cc;
-  --accent-color: #ff4500;
+  --accent-color: #57534e;
+  --color1: 18, 113, 255;
+  --color2: 221, 74, 255;
+  --color3: 100, 220, 255;
+  --color4: 200, 50, 50;
+  --color5: 180, 180, 50;
+  --color-interactive: 140, 100, 255;
+  --circle-size: 60%;
+  --blending: hard-light;
 }
 
 body {
@@ -98,7 +106,7 @@ button:focus-visible {
 }
 
 .__section-title {
-  @apply lg:text-8xl md:text-7xl text-6xl font-bold mb-8 overflow-hidden inline-block;
+  @apply lg:text-8xl md:text-7xl py-3 text-6xl font-bold mb-8 overflow-hidden inline-block;
 }
 
 .__section-desc {
@@ -113,6 +121,7 @@ button:focus-visible {
   color: var(--text-color);
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .expand-bg::after {
@@ -129,6 +138,14 @@ button:focus-visible {
 
 .expand-bg:hover {
   color: var(--bg-color);
+}
+
+.__accent-text {
+  color: var(--accent-color) !important;
+}
+
+.__accent-bg {
+  background-color: var(--accent-color) !important;
 }
 
 .expand-bg:hover::after {

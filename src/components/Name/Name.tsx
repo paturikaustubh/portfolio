@@ -50,7 +50,7 @@ export default function Name() {
     });
   }, []);
   return (
-    <section className="overflow-hidden relative h-screen p-5 my-10 md:mb-0 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
+    <section className="overflow-hidden relative h-screen __section-padding flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
       <svg
         width="1186"
         height="1186"
@@ -91,7 +91,7 @@ export default function Name() {
           id="profession"
           className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend pt-8"
         >
-          <span>Full Stack Developer</span>
+          <span className="__accent-text">Full Stack Developer</span>
         </div>
       </div>
     </section>

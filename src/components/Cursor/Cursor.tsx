@@ -10,12 +10,22 @@ export default function Cursor() {
     clientY: number;
   }) => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    const projectImgSection = document.querySelector<HTMLImageElement>(
+      ".__projects-img-section"
+    );
     cursor?.animate(
       {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
       { duration: 900, fill: "forwards", delay: 50 }
+    );
+    projectImgSection?.animate(
+      {
+        left: `${clientX - 10}px`,
+        top: `${clientY - 10}px`,
+      },
+      { duration: 1600, fill: "forwards", delay: 80 }
     );
   };
 
