@@ -127,7 +127,7 @@ export default function Navbar() {
               const navigationMenu = document.getElementById("navigation-menu");
               if (navigationMenu) {
                 navigationMenu.classList.add("__show");
-                navigationMenu.style.height = "100svh";
+                navigationMenu.style.height = "100dvh";
               }
             }}
           >

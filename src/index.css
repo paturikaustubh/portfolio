@@ -5,10 +5,10 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #fffbeb;
-  --text-color: #171717;
-  --accent-color: #ea580c;
-  --nav-menu-bg: rgba(212 212 212 / 0.8);
+  --bg-color: #e7e5e4;
+  --text-color: #1c1917;
+  --nav-menu-bg: #d4d4d4cc;
+  --accent-color: #ff4500;
 }
 
 body {
@@ -19,8 +19,8 @@ body {
 }
 
 body.__dark-mode {
-  --bg-color: #171717;
-  --text-color: #fffbeb;
+  --bg-color: #1c1917;
+  --text-color: #e7e5e4;
   --nav-menu-bg: rgba(23 23 23 / 0.8);
 }
 
@@ -94,7 +94,7 @@ button:focus-visible {
 }
 
 .__section-padding {
-  @apply lg:p-16 md:p-12 p-2;
+  @apply lg:p-16 md:p-12 py-8 px-2;
 }
 
 .__section-title {

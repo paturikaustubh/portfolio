@@ -18,5 +18,7 @@
 
 .__tech-stack-list > li::before {
   content: "👉🏻";
+  position: relative;
   margin-right: 0.2em;
+  z-index: 12;
 }

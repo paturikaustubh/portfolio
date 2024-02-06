@@ -74,8 +74,8 @@ export default function Name() {
             y2="1186"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#DDDDD5"></stop>
-            <stop offset="1" stopColor="#DDDDD5" stopOpacity="0"></stop>
+            <stop stopColor="#aca6a6"></stop>
+            <stop offset="1" stopColor="#e7e5e4" stopOpacity="0"></stop>
           </linearGradient>
         </defs>
       </svg>

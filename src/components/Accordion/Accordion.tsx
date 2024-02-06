@@ -42,15 +42,17 @@ export default function Accordion({
       } ${activeIndx === indx ? "active rounded-lg" : "my-0"}`}
       onMouseMove={() => {
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
-        if (cursor) cursor.style.backgroundColor = "var(--bg-color)";
+        if (cursor) {
+          cursor.style.mixBlendMode = "difference";
+          cursor.style.backgroundColor = "#e7e5e4";
+        }
       }}
       onMouseEnter={() => {
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
-        if (cursor) cursor.style.backgroundColor = "var(--bg-color)";
-      }}
-      onMouseLeave={() => {
-        const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
-        if (cursor) cursor.style.backgroundColor = "var(--text-color)";
+        if (cursor) {
+          cursor.style.mixBlendMode = "difference";
+          cursor.style.backgroundColor = "#e7e5e4";
+        }
       }}
     >
       <button

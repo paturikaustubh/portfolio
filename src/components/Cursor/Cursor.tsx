@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./styles.css";
 
 export default function Cursor() {
@@ -15,7 +15,7 @@ export default function Cursor() {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
-      { duration: 1500, fill: "forwards", easing: "ease-out" }
+      { duration: 900, fill: "forwards", delay: 50 }
     );
   };
 
@@ -38,7 +38,7 @@ export default function Cursor() {
       element.addEventListener("mouseenter", () => {
         if (cursorElement) {
           cursorElement.style.scale = "10";
-          cursorElement.style.backgroundColor = "#fffbeb";
+          cursorElement.style.backgroundColor = "#e7e5e4";
           cursorElement.style.mixBlendMode = "difference";
         }
       });
