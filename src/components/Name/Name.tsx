@@ -50,7 +50,7 @@ export default function Name() {
     });
   }, []);
   return (
-    <section className="overflow-hidden relative h-screen __section-padding flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
+    <section className="overflow-hidden relative h-screen __section-padding md:mt-12 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
       <svg
         width="1186"
         height="1186"
@@ -82,7 +82,7 @@ export default function Name() {
       <div className="flex flex-col justify-center items-center __sticky-situation">
         <div
           id="full-name"
-          className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl flex-col font-bold __animate-full-name __cursor-blend"
+          className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-9xl md:text-8xl text-6xl font-bold __animate-full-name __cursor-blend"
         >
           <span className="overflow-hidden">KAUSTUBH</span>
           <span className="__stroke-only overflow-hidden">PATURI</span>

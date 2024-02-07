@@ -45,7 +45,7 @@ button:focus-visible {
   outline: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   * {
     cursor: default !important;
   }
@@ -106,13 +106,11 @@ button:focus-visible {
 }
 
 .__section-title {
-  @apply lg:text-8xl md:text-7xl py-3 text-6xl font-bold mb-8 overflow-hidden inline-block;
+  @apply lg:text-8xl md:text-7xl py-3 text-6xl font-bold lg:mb-8 md:mb-4 mb-2 overflow-hidden inline-block;
 }
 
 .__section-desc {
-  @apply lg:text-4xl lg:leading-[4rem] text-3xl leading-[3rem];
-  /* font-size: clamp(1rem, 2rem, 3.5rem);
-  line-height: clamp(3.5rem, 2rem, 4.5rem); */
+  @apply lg:text-4xl lg:leading-[4rem] md:text-3xl md:leading-[3rem] text-xl leading-[2rem];
 }
 
 .expand-bg {

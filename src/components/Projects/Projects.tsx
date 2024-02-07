@@ -29,23 +29,23 @@ export default function Projects() {
   ];
 
   return (
-    <section className="__section-padding __theme-change-dark">
+    <section className="__section-padding __theme-change-dark" id="projects">
       <span className="__cursor-blend">
         <span className="__section-title">
           Projects <span className="z-[12]">⚒️</span>
         </span>
       </span>
 
-      <div className="mt-8 flex flex-col items-center justify-center">
+      <div className="mt-8 lg:flex hidden flex-col items-center justify-center">
         <div
-          className="lg:flex hidden flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden h-[19.1rem] duration-300 __projects-img-section"
+          className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden h-[19.1rem] duration-300 __projects-img-section"
           style={{
             filter: "brightness(70%)",
             transform: `scale(${imgScale}) translate(-50%, -50%)`,
             transformOrigin: "left left",
           }}
         >
-          {details.map(({ img }, indx) => (
+          {details.map(({ img, title }, indx) => (
             <img
               key={indx}
               src={img}
@@ -53,6 +53,7 @@ export default function Projects() {
                 transform: `translateY(${activeProjectIndx * -100}%)`,
                 transition: "500ms",
               }}
+              alt={title}
             />
           ))}
         </div>
@@ -103,7 +104,7 @@ export default function Projects() {
                   document.querySelector<HTMLDivElement>(".__custom-sursor");
                 if (cursor) cursor.style.mixBlendMode = "";
               }}
-              className={`expand-bg font-light __section-desc px-6 hover:rounded-lg duration-300 border ${
+              className={`expand-bg font-light __section-desc px-6 hover:rounded-xl border ${
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
                   : mousePresent
@@ -111,13 +112,30 @@ export default function Projects() {
                   : ""
               }`}
               style={{
-                transition: "300ms",
+                transition:
+                  "scale 300ms, transform cubic-bezier(0.19, 1, 0.22, 1), 300ms",
               }}
             >
               view
             </button>
           </div>
         ))}
+      </div>
+
+      <div className="flex lg:hidden mt-4">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
+          {details.map(({ title, img }, indx) => (
+            <div className="flex flex-col gap-4" key={indx}>
+              <img src={img} alt={title} className="rounded-lg" />
+              <button className="md:text-3xl text-2xl flex items-center gap-2">
+                {title}
+                <span className="material-symbols-outlined md:text-2xl text-xl">
+                  open_in_new
+                </span>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
