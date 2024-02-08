@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 
 export default function Accordion({
   activeIndx,
@@ -19,23 +19,9 @@ export default function Accordion({
   description: ReactNode;
   borderB?: boolean;
 }) {
-  useEffect(() => {
-    gsap.utils.toArray(".tech-stack-info-card").forEach((element) => {
-      gsap.to(element as Element, {
-        x: "0%",
-        scrollTrigger: {
-          trigger: element as Element,
-          start: "top 70%",
-          end: "bottom 50%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-  }, []);
-
   return (
     <div
-      className={`tech-stack-info-card expand-bg ${
+      className={`tech-stack-info-card __slide-right-left expand-bg ${
         activeIndx === indx - 1 && indx !== 1 ? "" : "border-t"
       } translate-x-full transition-all duration-300 overflow-hidden ${
         borderB ? "border-b" : ""
@@ -58,7 +44,7 @@ export default function Accordion({
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
         if (cursor) {
           cursor.style.mixBlendMode = "";
-          cursor.style.backgroundColor = "#e7e5e4";
+          cursor.style.backgroundColor = "var(--text-color)";
         }
       }}
     >

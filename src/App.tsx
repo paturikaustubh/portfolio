@@ -22,6 +22,19 @@ function App() {
     }
     requestAnimationFrame(raf);
 
+    gsap.utils.toArray(".__slide-right-left").forEach((element) => {
+      gsap.to(element as Element, {
+        x: "0%",
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: element as Element,
+          start: "top 70%",
+          end: "bottom 50%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
     gsap.fromTo(
       "nav",
       {

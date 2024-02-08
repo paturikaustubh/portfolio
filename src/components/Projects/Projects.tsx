@@ -28,6 +28,16 @@ export default function Projects() {
     },
   ];
 
+  const cursorHoverColorChange = () => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) cursor.style.mixBlendMode = "difference";
+  };
+
+  const cursorLeaveColorChange = () => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) cursor.style.mixBlendMode = "";
+  };
+
   return (
     <section className="__section-padding __theme-change-dark" id="projects">
       <span className="__cursor-blend">
@@ -36,13 +46,14 @@ export default function Projects() {
         </span>
       </span>
 
-      <div className="mt-8 lg:flex hidden flex-col items-center justify-center">
+      <div className="mt-8 lg:flex hidden flex-col items-center justify-center overflow-hidden">
         <div
-          className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden h-[19.1rem] duration-300 __projects-img-section"
+          className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden duration-[600ms] __projects-img-section"
           style={{
             filter: "brightness(70%)",
-            transform: `scale(${imgScale}) translate(-50%, -50%)`,
-            transformOrigin: "left left",
+            transform: `translate(-50%, -50%)`,
+            height: `calc(${imgScale} * 19.1rem)`,
+            transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
           {details.map(({ img, title }, indx) => (
@@ -51,7 +62,7 @@ export default function Projects() {
               src={img}
               style={{
                 transform: `translateY(${activeProjectIndx * -100}%)`,
-                transition: "500ms",
+                transition: "1300ms cubic-bezier(0.19, 1, 0.22, 1)",
               }}
               alt={title}
             />
@@ -60,11 +71,18 @@ export default function Projects() {
         {details.map(({ title }, indx) => (
           <div
             key={indx}
-            className={`border-t lg:text-5xl md:text-4xl text-3xl p-9 w-full flex justify-between items-center px-12 z-[14] ${
+            className={`border-t lg:text-5xl duration-300s md:text-4xl text-3xl ${
+              mousePresent && indx !== activeProjectIndx
+                ? "p-8"
+                : !mousePresent
+                ? "p-8"
+                : "p-12"
+            } w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
               indx + 1 === details.length ? "border-b" : ""
             }`}
             style={{
               borderColor: "var(--text-color)",
+              transition: "padding 300ms ease",
             }}
             onMouseEnter={() => {
               setMousePresent(true);
@@ -94,16 +112,8 @@ export default function Projects() {
               {title}
             </span>
             <button
-              onMouseEnter={() => {
-                const cursor =
-                  document.querySelector<HTMLDivElement>(".__custom-sursor");
-                if (cursor) cursor.style.mixBlendMode = "difference";
-              }}
-              onMouseLeave={() => {
-                const cursor =
-                  document.querySelector<HTMLDivElement>(".__custom-sursor");
-                if (cursor) cursor.style.mixBlendMode = "";
-              }}
+              onMouseEnter={cursorHoverColorChange}
+              onMouseLeave={cursorLeaveColorChange}
               className={`expand-bg font-light __section-desc px-6 hover:rounded-xl border ${
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
@@ -112,8 +122,7 @@ export default function Projects() {
                   : ""
               }`}
               style={{
-                transition:
-                  "scale 300ms, transform cubic-bezier(0.19, 1, 0.22, 1), 300ms",
+                transition: "transform cubic-bezier(0.19, 1, 0.22, 1), 300ms",
               }}
             >
               view
@@ -136,6 +145,16 @@ export default function Projects() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="lg:mt-12 md:mt-8 mt-4 flex w-full justify-end items-center">
+        <button
+          className="rounded-lg __section-desc border md:px-10 px-8 py-2 expand-bg"
+          onMouseEnter={cursorHoverColorChange}
+          onMouseLeave={cursorLeaveColorChange}
+        >
+          More projects
+        </button>
       </div>
     </section>
   );
