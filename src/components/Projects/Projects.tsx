@@ -56,7 +56,7 @@ export default function Projects() {
             transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
-          {details.map(({ img, title }, indx) => (
+          {details.map(({ title }, indx) => (
             <img
               key={indx}
               src={"assets/projects/VBOSS.png"}
