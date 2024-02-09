@@ -59,7 +59,7 @@ export default function Projects() {
           {details.map(({ img, title }, indx) => (
             <img
               key={indx}
-              src={img}
+              src={"assets/projects/VBOSS.png"}
               style={{
                 transform: `translateY(${activeProjectIndx * -100}%)`,
                 transition: "1300ms cubic-bezier(0.19, 1, 0.22, 1)",
@@ -135,7 +135,11 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {details.map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
-              <img src={img} alt={title} className="rounded-lg" />
+              <img
+                src={img}
+                alt={title}
+                className="rounded-lg w-full __project-img"
+              />
               <button className="md:text-3xl text-2xl flex items-center gap-2">
                 {title}
                 <span className="material-symbols-outlined md:text-2xl text-xl">
@@ -149,11 +153,11 @@ export default function Projects() {
 
       <div className="lg:mt-12 md:mt-8 mt-4 flex w-full justify-end items-center">
         <button
-          className="rounded-lg __section-desc border md:px-10 px-8 py-2 expand-bg"
+          className="rounded-lg __section-desc border md:px-10 px-4 py-2 expand-bg"
           onMouseEnter={cursorHoverColorChange}
           onMouseLeave={cursorLeaveColorChange}
         >
-          More projects
+          All projects
         </button>
       </div>
     </section>

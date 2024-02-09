@@ -47,7 +47,7 @@ export default function Cursor() {
     textBlendElements.forEach((element) => {
       element.addEventListener("mouseenter", () => {
         if (cursorElement) {
-          cursorElement.style.scale = "10";
+          cursorElement.style.scale = "14";
           cursorElement.style.backgroundColor = "#e7e5e4";
           cursorElement.style.mixBlendMode = "difference";
         }

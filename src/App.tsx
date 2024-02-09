@@ -55,10 +55,22 @@ function App() {
           trigger: darkElement,
           start: "top 60%",
           end: "bottom 40%",
-          onEnter: () => document.body.classList.add("__dark-mode"),
-          onEnterBack: () => document.body.classList.add("__dark-mode"),
-          onLeave: () => document.body.classList.remove("__dark-mode"),
-          onLeaveBack: () => document.body.classList.remove("__dark-mode"),
+          onEnter: () => {
+            document.body.classList.add("__dark-mode");
+            document.body.style.transition = "300ms ease-in-out";
+          },
+          onEnterBack: () => {
+            document.body.classList.add("__dark-mode");
+            document.body.style.transition = "300ms ease-in-out";
+          },
+          onLeave: () => {
+            document.body.classList.remove("__dark-mode");
+            document.body.style.transition = "300ms ease-in-out";
+          },
+          onLeaveBack: () => {
+            document.body.classList.remove("__dark-mode");
+            document.body.style.transition = "300ms ease-in-out";
+          },
         },
       });
     });

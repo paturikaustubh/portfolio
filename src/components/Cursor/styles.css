@@ -6,6 +6,7 @@
   border-radius: 50%;
   background-color: var(--text-color);
   transition: scale 300ms;
+  top: 200vh;
   /* transition: width 300ms; */
 }
 

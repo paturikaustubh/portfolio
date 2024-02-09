@@ -11,11 +11,11 @@ export default function Name() {
   useEffect(() => {
     const textDropSplits = document.querySelectorAll(".__animate-full-name");
     textDropSplits.forEach((char) => {
-      const { chars } = new SplitType(char as TargetElement, {
+      const { chars: nameChars } = new SplitType(char as TargetElement, {
         types: "chars",
       });
 
-      gsap.from(chars, {
+      gsap.from(nameChars, {
         scrollTrigger: {
           trigger: char,
           start: "top 80%",
@@ -27,6 +27,18 @@ export default function Name() {
         stagger: 0.02,
         ease: "back.out",
       });
+    });
+
+    const { chars: bgChars } = new SplitType(".__name-bg", { types: "chars" });
+
+    gsap.to(bgChars, {
+      opacity: 1,
+      textShadow: "13px 5px 20px rgba(0 0 0 / 0.07)",
+      duration: 0.5,
+      ease: "power2.out",
+      stagger: 0.13,
+      delay: 0.5,
+      // backgroundColor: "var(--bg-color)",
     });
 
     const textFadeSplits = document.querySelectorAll(".__animate-profession");
@@ -51,45 +63,20 @@ export default function Name() {
   }, []);
   return (
     <section className="overflow-hidden relative h-screen __section-padding md:mt-12 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
-      <svg
-        width="1186"
-        height="1186"
-        viewBox="0 0 1186 1186"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute w-5/6 sm:w-3/5 lg:w-2/5 pointer-events-none opacity-30 scale-100"
-      >
-        <circle
-          cx="593"
-          cy="593"
-          r="593"
-          fill="url(#paint0_linear_4949_267)"
-        ></circle>
-        <defs>
-          <linearGradient
-            id="paint0_linear_4949_267"
-            x1="593"
-            y1="0"
-            x2="593"
-            y2="1186"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#aca6a6"></stop>
-            <stop offset="1" stopColor="#e7e5e4" stopOpacity="0"></stop>
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="flex flex-col justify-center items-center __sticky-situation">
+      <div className="absolute w-full h-full flex justify-center items-center pointer-events-none __name-bg">
+        hey!
+      </div>
+      <div className="flex flex-col justify-center items-center poin __sticky-situation">
         <div
           id="full-name"
-          className="flex gap-4 mx-4 justify-center items-center whitespace-nowrap flex-wrap lg:text-[7rem] md:text-8xl text-6xl font-bold __animate-full-name __cursor-blend"
+          className="flex gap-4 mx-4 py-1 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
         >
-          <span className="overflow-hidden">KAUSTUBH</span>
-          <span className="__stroke-only overflow-hidden">PATURI</span>
+          <span className="">KAUSTUBH</span>
+          <span className="__stroke-only">PATURI</span>
         </div>
         <div
           id="profession"
-          className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend pt-8"
+          className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend lg:mt-8 md:mt-4 mt-2"
         >
           <span className="__accent-text">Full Stack Developer</span>
         </div>
