@@ -1,8 +1,4 @@
 import { useState } from "react";
-import Carousel from "/assets/projects/Carousel.png";
-import Flikipedia from "/assets/projects/Flikipedia.png";
-import WokofFame from "/assets/projects/Wok of Fame.png";
-import VBOSS from "/assets/projects/VBOSS.png";
 
 export default function Projects() {
   const [activeProjectIndx, setActiveProjectIndx] = useState(0);
@@ -12,19 +8,19 @@ export default function Projects() {
   const details: { title: string; img: string }[] = [
     {
       title: "VBOSS",
-      img: VBOSS,
+      img: "VBOSS",
     },
     {
       title: "FlikiPedia",
-      img: Flikipedia,
+      img: "Flikipedia",
     },
     {
       title: "Wok of Fame",
-      img: WokofFame,
+      img: "Wok of Fame",
     },
     {
       title: "React Carousel",
-      img: Carousel,
+      img: "Carousel",
     },
   ];
 
@@ -56,10 +52,10 @@ export default function Projects() {
             transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
-          {details.map(({ title }, indx) => (
+          {details.map(({ img, title }, indx) => (
             <img
               key={indx}
-              src={"assets/projects/VBOSS.png"}
+              src={`assets/projects/${img}.png`}
               style={{
                 transform: `translateY(${activeProjectIndx * -100}%)`,
                 transition: "1300ms cubic-bezier(0.19, 1, 0.22, 1)",
@@ -136,7 +132,7 @@ export default function Projects() {
           {details.map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
               <img
-                src={img}
+                src={`assets/projects/${img}.png`}
                 alt={title}
                 className="rounded-lg w-full __project-img"
               />
