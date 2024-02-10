@@ -1,0 +1,15 @@
+.__projects-mobile {
+  display: flex;
+}
+.__projects-not-mobile {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .__projects-mobile {
+    display: none;
+  }
+  .__projects-not-mobile {
+    display: flex;
+  }
+}

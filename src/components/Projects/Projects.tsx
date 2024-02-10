@@ -4,6 +4,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+import "./styles.css";
+
 export default function Projects() {
   const [activeProjectIndx, setActiveProjectIndx] = useState(0);
   const [imgScale, setImgScale] = useState(0);
@@ -42,42 +44,44 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    imgRefs.current.forEach((img, index) => {
-      gsap.to(img, {
-        x: "0%",
-        scrollTrigger: {
-          trigger: img,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-          onEnter: () =>
-            gsap.to(titleRefs.current[index], {
-              x: "0%",
-              ease: "power1.out",
-              delay: 0.2,
-            }),
-          onLeaveBack: () =>
-            gsap.to(titleRefs.current[index], {
-              x: "100%",
-              ease: "power1.out",
-            }),
-        },
-        ease: "power1.out",
+    const gsapMatchMedia = gsap.matchMedia();
+
+    gsapMatchMedia.add("(max-width: 1024px)", () => {
+      imgRefs.current.forEach((img, index) => {
+        gsap.to(img, {
+          x: "0%",
+          scrollTrigger: {
+            trigger: img,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+            onEnter: () =>
+              gsap.to(titleRefs.current[index], {
+                x: "0%",
+                ease: "power1.out",
+                delay: 0.2,
+              }),
+            onLeaveBack: () =>
+              gsap.to(titleRefs.current[index], {
+                x: "100%",
+                ease: "power1.out",
+              }),
+            markers: true,
+          },
+          ease: "power1.out",
+        });
       });
     });
   }, []);
 
   return (
-    <section
-      className="__section-padding __theme-change-dark h-[300dvh]"
-      id="projects"
-    >
+    <section className="__section-padding __theme-change-dark" id="projects">
       <span className="__cursor-blend">
         <span className="__section-title">
           Projects <span className="z-[12]">⚒️</span>
         </span>
       </span>
 
-      <div className="mt-8 lg:flex hidden flex-col items-center justify-center overflow-hidden">
+      <div className="mt-8 flex-col items-center justify-center overflow-hidden __projects-not-mobile">
         <div
           className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden duration-[600ms] __projects-img-section"
           style={{
@@ -162,7 +166,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="flex lg:hidden mt-4">
+      <div className="mt-4 __projects-mobile">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {details.map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
