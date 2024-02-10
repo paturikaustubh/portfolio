@@ -48,7 +48,6 @@ export default function Projects() {
         scrollTrigger: {
           trigger: img,
           start: "top 70%",
-          markers: true,
           toggleActions: "play none none reverse",
           onEnter: () =>
             gsap.to(titleRefs.current[index], {
