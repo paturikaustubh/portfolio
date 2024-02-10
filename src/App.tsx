@@ -8,8 +8,9 @@ import Cursor from "./components/Cursor/Cursor";
 import Hero from "./Pages/Hero/Hero";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType, { TargetElement } from "split-type";
 gsap.registerPlugin(ScrollTrigger);
+
+import SplitType, { TargetElement } from "split-type";
 
 // gsap.registerPlugin(ScrollTrigger,1 ScrollSmoother);
 

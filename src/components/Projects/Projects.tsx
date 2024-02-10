@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const [activeProjectIndx, setActiveProjectIndx] = useState(0);
   const [imgScale, setImgScale] = useState(0);
   const [mousePresent, setMousePresent] = useState(false);
+
+  const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const titleRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const details: { title: string; img: string }[] = [
     {
@@ -34,8 +41,37 @@ export default function Projects() {
     if (cursor) cursor.style.mixBlendMode = "";
   };
 
+  useEffect(() => {
+    imgRefs.current.forEach((img, index) => {
+      gsap.to(img, {
+        x: "0%",
+        scrollTrigger: {
+          trigger: img,
+          start: "top 70%",
+          markers: true,
+          toggleActions: "play none none reverse",
+          onEnter: () =>
+            gsap.to(titleRefs.current[index], {
+              x: "0%",
+              ease: "power1.out",
+              delay: 0.2,
+            }),
+          onLeaveBack: () =>
+            gsap.to(titleRefs.current[index], {
+              x: "100%",
+              ease: "power1.out",
+            }),
+        },
+        ease: "power1.out",
+      });
+    });
+  }, []);
+
   return (
-    <section className="__section-padding __theme-change-dark" id="projects">
+    <section
+      className="__section-padding __theme-change-dark h-[300dvh]"
+      id="projects"
+    >
       <span className="__cursor-blend">
         <span className="__section-title">
           Projects <span className="z-[12]">⚒️</span>
@@ -131,17 +167,25 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {details.map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
-              <img
-                src={`assets/projects/${img}.png`}
-                alt={title}
-                className="rounded-lg w-full __project-img"
-              />
-              <button className="md:text-3xl text-2xl flex items-center gap-2">
-                {title}
-                <span className="material-symbols-outlined md:text-2xl text-xl">
-                  open_in_new
-                </span>
-              </button>
+              <div className="rounded-lg w-full overflow-hidden inline-block">
+                <img
+                  src={`assets/projects/${img}.png`}
+                  alt={title}
+                  className="translate-x-full __project-img-mobile"
+                  ref={(el) => (imgRefs.current[indx] = el)}
+                />
+              </div>
+              <div className="overflow-hidden w-fit">
+                <button
+                  className="md:text-3xl text-2xl flex items-center gap-2 __project-title-mobile translate-x-full"
+                  ref={(el) => (titleRefs.current[indx] = el)}
+                >
+                  {title}
+                  <span className="material-symbols-outlined md:text-2xl text-xl">
+                    open_in_new
+                  </span>
+                </button>
+              </div>
             </div>
           ))}
         </div>
