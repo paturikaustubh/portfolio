@@ -65,7 +65,6 @@ export default function Projects() {
                 x: "100%",
                 ease: "power1.out",
               }),
-            markers: true,
           },
           ease: "power1.out",
         });
