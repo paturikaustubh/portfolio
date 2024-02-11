@@ -10,7 +10,6 @@ export default function Projects() {
   const [activeProjectIndx, setActiveProjectIndx] = useState(0);
   const [imgScale, setImgScale] = useState(0);
   const [mousePresent, setMousePresent] = useState(false);
-
   const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
   const titleRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -79,7 +78,7 @@ export default function Projects() {
           Projects <span className="z-[12]">⚒️</span>
         </span>
       </span>
-
+      {/* ANCHOR LARGE SCREENS */}
       <div className="mt-8 flex-col items-center justify-center overflow-hidden __projects-not-mobile">
         <div
           className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden duration-[600ms] __projects-img-section"
@@ -133,6 +132,9 @@ export default function Projects() {
                 document.querySelector<HTMLDivElement>(".__custom-cursor");
               if (cursor) cursor.style.zIndex = "11";
             }}
+            onWheel={() => {
+              setActiveProjectIndx(indx);
+            }}
           >
             <span
               className={`font-semibold ${
@@ -165,6 +167,7 @@ export default function Projects() {
         ))}
       </div>
 
+      {/* ANCHOR not large screens */}
       <div className="mt-4 __projects-mobile">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {details.map(({ title, img }, indx) => (

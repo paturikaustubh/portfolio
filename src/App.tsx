@@ -86,13 +86,14 @@ function App() {
           trigger: sectionTitle,
           start: "top 80%",
           end: "bottom 40%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
-        y: "100%",
-        opacity: 0,
+        rotateY: "90deg",
         transformOrigin: "left left",
         stagger: 0.02,
-        ease: "back.out",
+        ease: "bounce.out",
+        duration: 0.8,
+        letterSpacing: "-15px",
       });
     });
 
