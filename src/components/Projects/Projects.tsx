@@ -5,32 +5,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import "./styles.css";
+import { projectsDetails } from "../../ProjectsDetails";
+import { Link } from "react-router-dom";
 
 export default function Projects() {
+  // ANCHOR STATES && REFS
   const [activeProjectIndx, setActiveProjectIndx] = useState(0);
   const [imgScale, setImgScale] = useState(0);
   const [mousePresent, setMousePresent] = useState(false);
   const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
   const titleRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const details: { title: string; img: string }[] = [
-    {
-      title: "VBOSS",
-      img: "VBOSS",
-    },
-    {
-      title: "FlikiPedia",
-      img: "Flikipedia",
-    },
-    {
-      title: "Wok of Fame",
-      img: "Wok of Fame",
-    },
-    {
-      title: "React Carousel",
-      img: "Carousel",
-    },
-  ];
 
   const cursorHoverColorChange = () => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -42,6 +26,7 @@ export default function Projects() {
     if (cursor) cursor.style.mixBlendMode = "";
   };
 
+  // ANCHOR EFFECTS
   useEffect(() => {
     const gsapMatchMedia = gsap.matchMedia();
 
@@ -71,6 +56,7 @@ export default function Projects() {
     });
   }, []);
 
+  // ANCHOR JSX
   return (
     <section className="__section-padding __theme-change-dark" id="projects">
       <span className="__cursor-blend">
@@ -89,7 +75,7 @@ export default function Projects() {
             transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
-          {details.map(({ img, title }, indx) => (
+          {projectsDetails.slice(0, 4).map(({ img, title }, indx) => (
             <img
               key={indx}
               src={`assets/projects/${img}.png`}
@@ -101,7 +87,7 @@ export default function Projects() {
             />
           ))}
         </div>
-        {details.map(({ title }, indx) => (
+        {projectsDetails.slice(0, 4).map(({ title }, indx) => (
           <div
             key={indx}
             className={`border-t lg:text-5xl duration-300s md:text-4xl text-3xl ${
@@ -111,7 +97,7 @@ export default function Projects() {
                 ? "p-8"
                 : "p-12"
             } w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
-              indx + 1 === details.length ? "border-b" : ""
+              indx + 1 === projectsDetails.length ? "border-b" : ""
             }`}
             style={{
               borderColor: "var(--text-color)",
@@ -170,7 +156,7 @@ export default function Projects() {
       {/* ANCHOR not large screens */}
       <div className="mt-4 __projects-mobile">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
-          {details.map(({ title, img }, indx) => (
+          {projectsDetails.slice(0, 4).map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
               <div className="rounded-lg w-full overflow-hidden inline-block">
                 <img
@@ -197,13 +183,14 @@ export default function Projects() {
       </div>
 
       <div className="lg:mt-12 md:mt-8 mt-4 flex w-full justify-end items-center">
-        <button
+        <Link
+          to={"projects"}
           className="rounded-lg __section-desc border md:px-10 px-4 py-2 expand-bg"
           onMouseEnter={cursorHoverColorChange}
           onMouseLeave={cursorLeaveColorChange}
         >
           All projects
-        </button>
+        </Link>
       </div>
     </section>
   );

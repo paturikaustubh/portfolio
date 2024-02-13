@@ -52,7 +52,7 @@ export default function Navbar() {
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
             {menuLinks.map(({ to, title }, indx) => (
               <Link
-                to={`#${to}`}
+                to={`/portfolio#${to}`}
                 className={navMenuElementStyle}
                 onClick={() => {
                   const navigationMenu =

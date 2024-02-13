@@ -1,7 +1,6 @@
 nav {
   z-index: 9;
   backdrop-filter: blur(8px);
-  /* background-color: rgba(var(--bg-color) 1); */
 }
 
 svg#logo {
@@ -25,13 +24,11 @@ svg#logo {
   width: 0%;
   background-color: var(--text-color);
   transition: 200ms ease, rotate 0ms;
-  /* rotate: 180deg; */
 }
 
 .__nav-underline-element:hover::after {
   width: 100%;
   opacity: 1;
-  /* rotate: 0deg; */
 }
 
 #navigation-menu {
