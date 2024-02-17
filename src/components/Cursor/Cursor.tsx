@@ -2,6 +2,21 @@ import { useEffect } from "react";
 import "./styles.css";
 
 export default function Cursor() {
+  // ANCHOR STATES && VARIABLES
+
+  // ANCHOR EFFECTS
+  useEffect(() => {
+    const bodyElement = document.body;
+
+    bodyElement.addEventListener("mousemove", mouseMoveListner);
+    bodyElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      bodyElement.removeEventListener("mousemove", mouseMoveListner);
+    };
+  }, []);
+
+  // ANCHOR FUNCTIONS
   const mouseMoveListner = ({
     clientX,
     clientY,
@@ -18,14 +33,14 @@ export default function Cursor() {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
-      { duration: 900, fill: "forwards", delay: 50 }
+      { duration: 500, fill: "forwards" }
     );
     projectImgSection?.animate(
       {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
-      { duration: 1600, fill: "forwards", delay: 80 }
+      { duration: 1600, fill: "forwards" }
     );
   };
 
@@ -36,39 +51,6 @@ export default function Cursor() {
       cursor.style.mixBlendMode = "";
     }
   };
-
-  useEffect(() => {
-    const bodyElement = document.body;
-    const cursorElement =
-      document.querySelector<HTMLDivElement>(".__custom-cursor");
-    const textBlendElements =
-      document.querySelectorAll<HTMLElement>(".__cursor-blend");
-
-    textBlendElements.forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "14";
-          cursorElement.style.backgroundColor = "#e7e5e4";
-          cursorElement.style.mixBlendMode = "difference";
-        }
-      });
-
-      element.addEventListener("mouseleave", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "1";
-          cursorElement.style.mixBlendMode = "";
-          cursorElement.style.backgroundColor = "var(--text-color)";
-        }
-      });
-    });
-
-    bodyElement.addEventListener("mousemove", mouseMoveListner);
-    bodyElement.addEventListener("scroll", handleScroll);
-
-    return () => {
-      bodyElement.removeEventListener("mousemove", mouseMoveListner);
-    };
-  }, []);
 
   return (
     <div

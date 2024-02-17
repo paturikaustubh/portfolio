@@ -49,7 +49,7 @@ export default function Accordion({
       }}
     >
       <button
-        className="tech-stack-info-title flex justify-between text-4xl items-center w-full font-semibold p-5"
+        className="flex justify-between items-center w-full font-semibold lg:text-4xl md:text-3xl sm:text-2xl text-xl overflow-hidden lg:p-5 md:p-4 p-3"
         onClick={() => {
           setActiveIndx((prevVal: number) => {
             if (prevVal !== indx) return indx;
@@ -93,7 +93,7 @@ export default function Accordion({
             : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-hidden __skills-desc">
           <div className="text-lg pb-5 px-5">{description}</div>
         </div>
       </div>

@@ -135,9 +135,10 @@ export default function Navbar() {
           </button>
         </div>
         <div className="navigation md:flex hidden items-center gap-8">
-          {/* {menuLinks.map(({ to, title }, indx) => (
+          {menuLinks.map(({ to, title }, indx) => (
             <Link
-              to={`#${to}`}
+              key={indx}
+              to={`/portfolio#${to}`}
               className="__nav-underline-element"
               onClick={() => {
                 const ele = document.getElementById("about-me");
@@ -146,33 +147,7 @@ export default function Navbar() {
             >
               {title}
             </Link>
-          ))} */}
-          <Link
-            to="#about-me"
-            className="__nav-underline-element"
-            onClick={() => {
-              const ele = document.getElementById("about-me");
-              ele?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            About Me
-          </Link>
-          <Link
-            to="#tech-stack"
-            className="__nav-underline-element"
-            onClick={() => {
-              const ele = document.getElementById("tech-stack");
-              ele?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Tech Stack
-          </Link>
-          <Link to="#projects" className="__nav-underline-element">
-            Projects
-          </Link>
-          <Link to="#contact" className="__nav-underline-element">
-            Contact
-          </Link>
+          ))}
         </div>
       </nav>
     </>

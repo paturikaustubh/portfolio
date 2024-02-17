@@ -22,3 +22,8 @@
   margin-right: 0.2em;
   z-index: 12;
 }
+
+.__skills-desc {
+  color: var(--bg-color);
+  transition: 300ms ease-in-out;
+}

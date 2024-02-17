@@ -11,6 +11,7 @@ svg#logo {
 .__nav-underline-element {
   cursor: pointer;
   position: relative;
+  overflow: visible;
 }
 
 .__nav-underline-element::after {
@@ -19,16 +20,16 @@ svg#logo {
   bottom: 0;
   left: 0;
   height: 2px;
-  transform: translateY(100%);
-  opacity: 0;
-  width: 0%;
+  transform: translateY(15%) scaleX(0);
+  width: 100%;
   background-color: var(--text-color);
-  transition: 200ms ease, rotate 0ms;
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .__nav-underline-element:hover::after {
-  width: 100%;
-  opacity: 1;
+  transform-origin: left;
+  transform: translateY(15%) scaleX(1);
 }
 
 #navigation-menu {

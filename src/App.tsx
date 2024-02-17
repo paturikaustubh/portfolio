@@ -1,16 +1,15 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import "./App.css";
-import Lenis from "@studio-freight/lenis";
+import { useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import { Suspense, lazy, useEffect } from "react";
-import Hero from "./Pages/Hero/Hero";
+import Lenis from "@studio-freight/lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const ProjectsList = lazy(() => import("./Pages/Projects/ProjectsList"));
-
-// gsap.registerPlugin(ScrollTrigger,1 ScrollSmoother);
+import "./App.css";
+import AnimatedRoutes from "./AnimatedRoutes";
+import Navbar from "./components/Navbar/Navbar";
+import Cursor from "./components/Cursor/Cursor";
 
 function App() {
   useEffect(() => {
@@ -24,12 +23,9 @@ function App() {
 
   return (
     <Router>
-      <Suspense>
-        <Routes>
-          <Route path="/portfolio" element={<Hero />} />
-          <Route path="/portfolio/projects" element={<ProjectsList />} />
-        </Routes>
-      </Suspense>
+      <Navbar />
+      <Cursor />
+      <AnimatedRoutes />
     </Router>
   );
 }

@@ -26,6 +26,7 @@ export default function Name() {
         transformOrigin: "left left",
         stagger: 0.02,
         ease: "back.out",
+        delay: 0.5,
       });
     });
 
@@ -37,7 +38,7 @@ export default function Name() {
       duration: 0.5,
       ease: "power2.out",
       stagger: 0.13,
-      delay: 0.5,
+      delay: 1,
       // backgroundColor: "var(--bg-color)",
     });
 
@@ -57,7 +58,7 @@ export default function Name() {
         opacity: 0,
         transformOrigin: "left left",
         stagger: 0.02,
-        delay: 0.5,
+        delay: 1,
       });
     });
   }, []);

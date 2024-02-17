@@ -97,7 +97,7 @@ export default function Projects() {
                 ? "p-8"
                 : "p-12"
             } w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
-              indx + 1 === projectsDetails.length ? "border-b" : ""
+              indx + 1 === 4 ? "border-b" : ""
             }`}
             style={{
               borderColor: "var(--text-color)",

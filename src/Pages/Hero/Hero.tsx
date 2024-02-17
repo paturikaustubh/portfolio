@@ -3,8 +3,6 @@ import Name from "../../components/Name/Name";
 import Projects from "../../components/Projects/Projects";
 import Skills from "../../components/Skills/Skills";
 import Summary from "../../components/Summary/Summary";
-import Navbar from "../../components/Navbar/Navbar";
-import Cursor from "../../components/Cursor/Cursor";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,9 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 import "./styles.css";
 import SplitType, { TargetElement } from "split-type";
+import { TransitionOverlay } from "../../Transition/transition";
 
 export default function Hero() {
+  // ANCHOR content animations  ||========================================================================
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     gsap.fromTo(
       "nav",
       {
@@ -23,7 +24,7 @@ export default function Hero() {
       },
       {
         y: 0,
-        delay: 0.5,
+        delay: 1.5,
         duration: 0.8,
       }
     );
@@ -106,19 +107,45 @@ export default function Hero() {
       });
     });
 
+    const cursorElement =
+      document.querySelector<HTMLDivElement>(".__custom-cursor");
+    const textBlendElements =
+      document.querySelectorAll<HTMLElement>(".__cursor-blend");
+
+    textBlendElements.forEach((element) => {
+      element.addEventListener("mouseenter", () => {
+        if (cursorElement) {
+          cursorElement.style.scale = "14";
+          cursorElement.style.backgroundColor = "#e7e5e4";
+          cursorElement.style.mixBlendMode = "difference";
+        }
+      });
+
+      element.addEventListener("mouseleave", () => {
+        if (cursorElement) {
+          cursorElement.style.scale = "1";
+          cursorElement.style.mixBlendMode = "";
+          cursorElement.style.backgroundColor = "var(--text-color)";
+        }
+      });
+    });
+
     return () => {
       ScrollTrigger.killAll();
     };
   }, []);
 
+  // ANCHOR JSX  ||========================================================================
   return (
-    <div>
-      <Cursor />
-      <Navbar />
-      <Name />
-      <Summary />
-      <Skills />
-      <Projects />
-    </div>
+    <>
+      <TransitionOverlay>
+        <>
+          <Name />
+          <Summary />
+          <Skills />
+          <Projects />
+        </>
+      </TransitionOverlay>
+    </>
   );
 }
