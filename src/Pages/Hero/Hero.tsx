@@ -16,6 +16,8 @@ export default function Hero() {
   // ANCHOR content animations  ||========================================================================
   useEffect(() => {
     window.scrollTo({ top: 0 });
+
+    // ANCHOR NAVBAR ANIMATION  ||========================================================================
     gsap.fromTo(
       "nav",
       {
@@ -29,6 +31,7 @@ export default function Hero() {
       }
     );
 
+    // ANCHOR RIGHT TO LEFT SLIDERS  ||========================================================================
     gsap.utils.toArray(".__slide-right-left").forEach((element) => {
       gsap.to(element as Element, {
         x: "0%",
@@ -42,6 +45,7 @@ export default function Hero() {
       });
     });
 
+    // ANCHOR MODE/THEME CHANGER  ||========================================================================
     const darkThemeElements = document.querySelectorAll(".__theme-change-dark");
     darkThemeElements.forEach((darkElement) => {
       gsap.to("body", {
@@ -69,6 +73,7 @@ export default function Hero() {
       });
     });
 
+    // ANCHOR SECTION TITLE ANIMATION  ||========================================================================
     const sectionTitles = document.querySelectorAll(".__section-title");
     sectionTitles.forEach((sectionTitle) => {
       const { chars } = new SplitType(sectionTitle as TargetElement, {
@@ -107,33 +112,40 @@ export default function Hero() {
       });
     });
 
-    const cursorElement =
-      document.querySelector<HTMLDivElement>(".__custom-cursor");
     const textBlendElements =
       document.querySelectorAll<HTMLElement>(".__cursor-blend");
 
     textBlendElements.forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "14";
-          cursorElement.style.backgroundColor = "#e7e5e4";
-          cursorElement.style.mixBlendMode = "difference";
-        }
-      });
+      element.addEventListener("mouseenter", handleMouseEnter);
 
-      element.addEventListener("mouseleave", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "1";
-          cursorElement.style.mixBlendMode = "";
-          cursorElement.style.backgroundColor = "var(--text-color)";
-        }
-      });
+      element.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
       ScrollTrigger.killAll();
     };
   }, []);
+
+  // ANCHOR FUNCTIONS  ||========================================================================
+  const handleMouseEnter = () => {
+    const cursorElement =
+      document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursorElement) {
+      cursorElement.style.scale = "14";
+      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.mixBlendMode = "difference";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const cursorElement =
+      document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursorElement) {
+      cursorElement.style.scale = "1";
+      cursorElement.style.mixBlendMode = "";
+      cursorElement.style.backgroundColor = "var(--text-color)";
+    }
+  };
 
   // ANCHOR JSX  ||========================================================================
   return (

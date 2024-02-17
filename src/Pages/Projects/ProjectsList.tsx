@@ -48,9 +48,6 @@ export default function ProjectsList() {
           ease: "power1.out",
         });
       });
-    });
-
-    gsapMatchMedia.add("(max-width: 1024px)", () => {
       titleRefs.current.forEach((title) => {
         gsap.to(title, {
           x: "0%",
@@ -70,28 +67,40 @@ export default function ProjectsList() {
     }
 
     textBlendElements.forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "14";
-          cursorElement.style.backgroundColor = "#e7e5e4";
-          cursorElement.style.mixBlendMode = "difference";
-        }
-      });
-
-      element.addEventListener("mouseleave", () => {
-        if (cursorElement) {
-          cursorElement.style.scale = "1";
-          cursorElement.style.mixBlendMode = "";
-          cursorElement.style.backgroundColor = "var(--text-color)";
-        }
-      });
+      element.addEventListener("mouseenter", handleMouseEnter);
+      element.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
+      textBlendElements.forEach((element) => {
+        element.removeEventListener("mouseenter", handleMouseEnter);
+        element.removeEventListener("mouseleave", handleMouseLeave);
+      });
       ScrollTrigger.killAll();
       document.body.classList.remove("__dark-mode");
     };
   }, []);
+
+  // ANCHOR FUNCTIONS  ||========================================================================
+  const handleMouseLeave = () => {
+    const cursorElement =
+      document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursorElement) {
+      cursorElement.style.scale = "1";
+      cursorElement.style.mixBlendMode = "";
+      cursorElement.style.backgroundColor = "var(--text-color)";
+    }
+  };
+
+  const handleMouseEnter = () => {
+    const cursorElement =
+      document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursorElement) {
+      cursorElement.style.scale = "14";
+      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.mixBlendMode = "difference";
+    }
+  };
 
   // ANCHOR JSX  ||====================||====================
   return (

@@ -8,7 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 import "./styles.css";
 
 export default function Name() {
+  // ANCHOR EFFECTS  ||========================================================================
   useEffect(() => {
+    // ANCHOR NAME ANIMATION  ||========================================================================
     const textDropSplits = document.querySelectorAll(".__animate-full-name");
     textDropSplits.forEach((char) => {
       const { chars: nameChars } = new SplitType(char as TargetElement, {
@@ -22,32 +24,33 @@ export default function Name() {
           end: "bottom 40%",
         },
         y: "100%",
-        opacity: 0,
+        // opacity: 0,
         transformOrigin: "left left",
-        stagger: 0.02,
-        ease: "back.out",
-        delay: 0.5,
+        stagger: 0.04,
+        ease: "circ.inOut",
+        delay: 0.8,
+        // duration: 0.5,
       });
     });
 
+    // ANCHOR NAME BG ANIMATION  ||========================================================================
     const { chars: bgChars } = new SplitType(".__name-bg", { types: "chars" });
-
     gsap.to(bgChars, {
       opacity: 1,
       textShadow: "13px 5px 20px rgba(0 0 0 / 0.07)",
       duration: 0.5,
       ease: "power2.out",
       stagger: 0.13,
-      delay: 1,
+      delay: 1.3,
       // backgroundColor: "var(--bg-color)",
     });
 
+    // ANCHOR PROFESSION ANIMATION  ||========================================================================
     const textFadeSplits = document.querySelectorAll(".__animate-profession");
     textFadeSplits.forEach((char) => {
       const { chars } = new SplitType(char as TargetElement, {
         types: "chars",
       });
-
       gsap.from(chars, {
         scrollTrigger: {
           trigger: char,
@@ -58,10 +61,12 @@ export default function Name() {
         opacity: 0,
         transformOrigin: "left left",
         stagger: 0.02,
-        delay: 1,
+        delay: 1.5,
       });
     });
   }, []);
+
+  // ANCHOR JSX  ||========================================================================
   return (
     <section className="overflow-hidden relative h-screen __section-padding md:mt-12 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
       <div className="absolute w-full h-full flex justify-center items-center pointer-events-none __name-bg">

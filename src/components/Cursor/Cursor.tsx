@@ -13,6 +13,7 @@ export default function Cursor() {
 
     return () => {
       bodyElement.removeEventListener("mousemove", mouseMoveListner);
+      bodyElement.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
