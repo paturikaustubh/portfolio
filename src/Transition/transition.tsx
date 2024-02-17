@@ -6,6 +6,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
 
   useLayoutEffect(() => {
     const locationArr = location.pathname.split("/");
+    console.log(locationArr);
     setLocationName(locationArr[locationArr.length - 1]);
   }, [location.pathname]);
 
@@ -77,7 +78,9 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
               className="inline-block"
             >
               {locationName.charAt(0).toUpperCase() + locationName.slice(1) ===
-              "Portfolio"
+                "Portfolio" ||
+              locationName.charAt(0).toUpperCase() + locationName.slice(1) ===
+                ""
                 ? "Welcome Home"
                 : locationName.charAt(0).toUpperCase() + locationName.slice(1)}
             </motion.span>
