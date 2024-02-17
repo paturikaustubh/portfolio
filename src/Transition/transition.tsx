@@ -5,8 +5,9 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
   const [locationName, setLocationName] = useState("");
 
   useLayoutEffect(() => {
-    const locationArr = location.pathname.split("/");
-    console.log(locationArr);
+    const locationArr = location.pathname
+      .split("/")
+      .filter((value) => value !== "");
     setLocationName(locationArr[locationArr.length - 1]);
   }, [location.pathname]);
 
