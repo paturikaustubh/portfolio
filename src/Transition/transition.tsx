@@ -7,8 +7,13 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
   useLayoutEffect(() => {
     const locationArr = location.pathname
       .split("/")
-      .filter((value) => value !== "");
-    setLocationName(locationArr[locationArr.length - 1]);
+      .filter((value: string) => value !== "");
+    setLocationName(
+      locationArr[locationArr.length - 1]
+        .split("-")
+        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ")
+    );
   }, [location.pathname]);
 
   const anim = (variants: Variants) => ({
@@ -79,9 +84,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
               className="inline-block"
             >
               {locationName.charAt(0).toUpperCase() + locationName.slice(1) ===
-                "Portfolio" ||
-              locationName.charAt(0).toUpperCase() + locationName.slice(1) ===
-                ""
+              "Portfolio"
                 ? "Welcome Home"
                 : locationName.charAt(0).toUpperCase() + locationName.slice(1)}
             </motion.span>
