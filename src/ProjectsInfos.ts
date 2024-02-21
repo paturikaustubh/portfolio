@@ -26,7 +26,7 @@ export const projectsInfos: {
   {
     title: "FlikiPedia",
     img: "Flikipedia",
-    desc: "FlikiPedia is an IMDb clone app where the users can view details about their favourite movie(s)/web series all at one place. All the data is fetched from TMDB (using their API endpoints for a reliable and genuine information.",
+    desc: "FlikiPedia is an IMDb clone app where the users can view details about their favourite movie(s)/web series all at one place. All the data is fetched from TMDB (using their API endpoints) for a reliable and genuine information.",
     to: "flikipedia",
     repoClient: "https://github.com/paturikaustubh/flikipedia",
     live: "https://paturikaustubh.github.io/flikipedia/",

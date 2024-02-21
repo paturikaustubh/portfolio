@@ -117,12 +117,15 @@ export default function Hero() {
 
     textBlendElements.forEach((element) => {
       element.addEventListener("mouseenter", handleMouseEnter);
-
       element.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
       ScrollTrigger.killAll();
+      textBlendElements.forEach((element) => {
+        element.removeEventListener("mouseenter", handleMouseEnter);
+        element.removeEventListener("mouseleave", handleMouseLeave);
+      });
     };
   }, []);
 
