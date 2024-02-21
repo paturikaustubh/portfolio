@@ -130,13 +130,11 @@ export default function ProjectDetails() {
             {projectDetails.desc}
           </div>
         </div>
-        <div className="z-[16]">
-          <img
-            src={`assets/projects/${projectDetails.img}.png`}
-            alt={projectDetails.title}
-            className="md:w-[80%] w-full mx-auto lg:mt-12"
-          />
-        </div>
+        <img
+          src={`assets/projects/${projectDetails.img}.png`}
+          alt={projectDetails.title}
+          className="md:w-[80%] w-full mx-auto lg:mt-12"
+        />
         <div className="mx-auto space-y-2">
           <div className="__section-desc">
             Repository link{projectDetails.repoServer && "s"}:
