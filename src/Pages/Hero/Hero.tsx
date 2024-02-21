@@ -52,7 +52,7 @@ export default function Hero() {
         scrollTrigger: {
           trigger: darkElement,
           start: "top 60%",
-          end: "bottom 40%",
+          end: "bottom 50%",
           onEnter: () => {
             document.body.classList.add("__dark-mode");
             document.body.style.transition = "300ms ease-in-out";
@@ -104,7 +104,7 @@ export default function Hero() {
         scrollTrigger: {
           trigger: char,
           scrub: 1,
-          start: "top 70%",
+          start: "top 80%",
           end: "bottom 50%",
         },
         opacity: 0.03,
@@ -125,6 +125,31 @@ export default function Hero() {
       ScrollTrigger.killAll();
     };
   }, []);
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+  //     if (cursor) {
+  //       const { top, left } = cursor.getBoundingClientRect();
+  //       const x = Math.floor(top);
+  //       const y = Math.floor(left);
+  //       const elementUnderCursor = document.elementFromPoint(x, y);
+  //       const elementsUnderCursor = document.elementsFromPoint(x, y);
+  //       console.log(elementsUnderCursor, elementUnderCursor, x, y);
+  //       // if (elementUnderCursor) {
+  //       //   if (elementUnderCursor.classList.contains("__project-row")) {
+  //       //     setMousePresent(true);
+  //       //     setImgScale(1);
+  //       //     if (cursor) cursor.style.zIndex = "15";
+  //       //   } else {
+  //       //     setMousePresent(false);
+  //       //     setImgScale(0);
+  //       //     if (cursor) cursor.style.zIndex = "11";
+  //       //   }
+  //       // }
+  //     }
+  //   });
+  // }, []);
 
   // ANCHOR FUNCTIONS  ||========================================================================
   const handleMouseEnter = () => {

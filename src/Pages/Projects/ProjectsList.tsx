@@ -1,8 +1,9 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { projectsDetails } from "../../ProjectsDetails";
+import { projectsInfos } from "../../ProjectsInfos";
 import { TransitionOverlay } from "../../Transition/transition";
+import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectsList() {
@@ -106,7 +107,7 @@ export default function ProjectsList() {
   return (
     <TransitionOverlay>
       <>
-        <section className="__theme-change-dark __section-padding lg:mt-4 mt-10">
+        <section className="__theme-change-dark __section-padding">
           {/* ANCHOR LARGE SCREENS */}
           <div className="lg:text-6xl md:text-5xl text-4xl pb-1 font-bold overflow-hidden inline-block">
             All Projects ⚒️
@@ -118,10 +119,10 @@ export default function ProjectsList() {
                 filter: "brightness(70%)",
                 transform: `translate(-50%, -50%)`,
                 height: `calc(${imgScale} * 19.1rem)`,
-                transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
+                transition: "550ms cubic-bezier(0.76, 0, 0.24, 1)",
               }}
             >
-              {projectsDetails.map(({ img, title }, indx) => (
+              {projectsInfos.map(({ img, title }, indx) => (
                 <img
                   key={indx}
                   src={`assets/projects/${img}.png`}
@@ -133,11 +134,11 @@ export default function ProjectsList() {
                 />
               ))}
             </div>
-            {projectsDetails.map(({ title }, indx) => (
+            {projectsInfos.map(({ title, to }, indx) => (
               <div
                 key={indx}
                 className={`border-t lg:text-4xl duration-300s md:text-3xl text-2xl p-6 w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
-                  indx + 1 === projectsDetails.length ? "border-b" : ""
+                  indx + 1 === projectsInfos.length ? "border-b" : ""
                 }`}
                 style={{
                   borderColor: "var(--text-color)",
@@ -173,7 +174,8 @@ export default function ProjectsList() {
                 >
                   {title}
                 </span>
-                <button
+                <Link
+                  to={to}
                   onMouseEnter={cursorHoverColorChange}
                   onMouseLeave={cursorLeaveColorChange}
                   className={`expand-bg font-light md:text-2xl duration-300s px-4 py-2 hover:rounded-md border ${
@@ -189,14 +191,14 @@ export default function ProjectsList() {
                   }}
                 >
                   view
-                </button>
+                </Link>
               </div>
             ))}
           </div>
           {/* ANCHOR not large screens */}
           <div className="mt-4 __projects-mobile">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-8">
-              {projectsDetails.map(({ title, img }, indx) => (
+              {projectsInfos.map(({ title, img }, indx) => (
                 <div className="flex flex-col gap-2" key={indx}>
                   <div className="rounded-lg w-full overflow-hidden inline-block">
                     <img

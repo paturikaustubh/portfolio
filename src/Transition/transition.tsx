@@ -1,5 +1,6 @@
 import { Variants, motion } from "framer-motion";
 import { useLayoutEffect, useState } from "react";
+import Navbar from "../components/Navbar/Navbar";
 
 export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
   const [locationName, setLocationName] = useState("");
@@ -49,6 +50,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
 
   return (
     <div className="page">
+      <Navbar />
       <div
         className="transition-container"
         style={{

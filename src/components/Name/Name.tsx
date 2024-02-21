@@ -27,9 +27,9 @@ export default function Name() {
         // opacity: 0,
         transformOrigin: "left left",
         stagger: 0.04,
-        ease: "circ.inOut",
+        ease: "back.out",
         delay: 0.8,
-        // duration: 0.5,
+        duration: 0.35,
       });
     });
 
@@ -68,7 +68,7 @@ export default function Name() {
 
   // ANCHOR JSX  ||========================================================================
   return (
-    <section className="overflow-hidden relative h-screen __section-padding md:mt-12 flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
+    <section className="overflow-hidden relative h-screen __section-padding flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
       <div className="absolute w-full h-full flex justify-center items-center pointer-events-none __name-bg">
         hey!
       </div>
@@ -77,8 +77,8 @@ export default function Name() {
           id="full-name"
           className="flex gap-4 mx-4 py-1 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
         >
-          <span className="">KAUSTUBH</span>
-          <span className="__stroke-only">PATURI</span>
+          <span className="overflow-hidden">KAUSTUBH</span>
+          <span className="__stroke-only overflow-hidden">PATURI</span>
         </div>
         <div
           id="profession"

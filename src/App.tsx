@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 import "./App.css";
 import AnimatedRoutes from "./AnimatedRoutes";
-import Navbar from "./components/Navbar/Navbar";
 import Cursor from "./components/Cursor/Cursor";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
       <Cursor />
       <AnimatedRoutes />
     </Router>

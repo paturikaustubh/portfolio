@@ -75,8 +75,9 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* ANCHOR NAVBAR */}
       <nav
-        className="flex justify-between items-center fixed top-0 lg:px-16 md:px-8 px-4 py-5 w-full z-20"
+        className="flex justify-between items-center sticky top-0 lg:px-16 md:px-8 px-4 py-5 w-full z-20"
         onMouseEnter={() => {
           const cursor =
             document.querySelector<HTMLDivElement>(".__custom-cursor");

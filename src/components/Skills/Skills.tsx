@@ -7,7 +7,7 @@ export default function Skills() {
 
   return (
     <section className="__section-padding" id="tech-stack">
-      <div className="whitespace-nowraps">
+      <div className="whitespace-nowrap">
         <span className="__section-title __cursor-blend flex md:flex-row flex-col">
           Tech Stack <span className="z-[12]">👨🏻‍💻</span>
         </span>

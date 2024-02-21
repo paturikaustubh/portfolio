@@ -9,11 +9,9 @@ export default function Cursor() {
     const bodyElement = document.body;
 
     bodyElement.addEventListener("mousemove", mouseMoveListner);
-    bodyElement.addEventListener("scroll", handleScroll);
 
     return () => {
       bodyElement.removeEventListener("mousemove", mouseMoveListner);
-      bodyElement.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -43,14 +41,6 @@ export default function Cursor() {
       },
       { duration: 1600, fill: "forwards" }
     );
-  };
-
-  const handleScroll = () => {
-    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
-    if (cursor) {
-      cursor.style.scale = "1";
-      cursor.style.mixBlendMode = "";
-    }
   };
 
   return (

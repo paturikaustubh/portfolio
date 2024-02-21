@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import "./styles.css";
-import { projectsDetails } from "../../ProjectsDetails";
+import { projectsInfos } from "../../ProjectsInfos";
 import { Link } from "react-router-dom";
 
 export default function Projects() {
@@ -72,10 +72,10 @@ export default function Projects() {
             filter: "brightness(70%)",
             transform: `translate(-50%, -50%)`,
             height: `calc(${imgScale} * 19.1rem)`,
-            transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
+            transition: "550ms cubic-bezier(0.76, 0, 0.24, 1)",
           }}
         >
-          {projectsDetails.slice(0, 4).map(({ img, title }, indx) => (
+          {projectsInfos.slice(0, 4).map(({ img, title }, indx) => (
             <img
               key={indx}
               src={`assets/projects/${img}.png`}
@@ -87,10 +87,10 @@ export default function Projects() {
             />
           ))}
         </div>
-        {projectsDetails.slice(0, 4).map(({ title }, indx) => (
+        {projectsInfos.slice(0, 4).map(({ title, to }, indx) => (
           <div
             key={indx}
-            className={`border-t lg:text-5xl duration-300s md:text-4xl text-3xl ${
+            className={`__project-row border-t lg:text-5xl duration-300s md:text-4xl text-3xl ${
               mousePresent && indx !== activeProjectIndx
                 ? "p-8"
                 : !mousePresent
@@ -133,7 +133,8 @@ export default function Projects() {
             >
               {title}
             </span>
-            <button
+            <Link
+              to={`projects/${to}`}
               onMouseEnter={cursorHoverColorChange}
               onMouseLeave={cursorLeaveColorChange}
               className={`expand-bg font-light __section-desc px-6 hover:rounded-xl border ${
@@ -148,7 +149,7 @@ export default function Projects() {
               }}
             >
               view
-            </button>
+            </Link>
           </div>
         ))}
       </div>
@@ -156,7 +157,7 @@ export default function Projects() {
       {/* ANCHOR not large screens */}
       <div className="mt-4 __projects-mobile">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
-          {projectsDetails.slice(0, 4).map(({ title, img }, indx) => (
+          {projectsInfos.slice(0, 4).map(({ title, img }, indx) => (
             <div className="flex flex-col gap-4" key={indx}>
               <div className="rounded-lg w-full overflow-hidden inline-block">
                 <img
