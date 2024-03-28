@@ -59,6 +59,7 @@ export default function Name() {
           end: "bottom 40%",
         },
         opacity: 0,
+        filter: "blur(8px)",
         transformOrigin: "left left",
         stagger: 0.02,
         delay: 1.5,

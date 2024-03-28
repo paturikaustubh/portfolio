@@ -52,7 +52,7 @@ export default function Navbar() {
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
             {menuLinks.map(({ to, title }, indx) => (
               <Link
-                to={`/portfolio#${to}`}
+                to={`/portfolio`}
                 className={navMenuElementStyle}
                 onClick={() => {
                   const navigationMenu =
@@ -139,10 +139,10 @@ export default function Navbar() {
           {menuLinks.map(({ to, title }, indx) => (
             <Link
               key={indx}
-              to={`/portfolio#${to}`}
+              to={`/portfolio`}
               className="__nav-underline-element"
               onClick={() => {
-                const ele = document.getElementById("about-me");
+                const ele = document.getElementById(to);
                 ele?.scrollIntoView({ behavior: "smooth" });
               }}
             >

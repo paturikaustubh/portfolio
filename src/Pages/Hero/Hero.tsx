@@ -105,10 +105,13 @@ export default function Hero() {
           trigger: char,
           scrub: 1,
           start: "top 80%",
-          end: "bottom 50%",
+          end: "bottom 70%",
+          toggleActions: "play none none reverse",
         },
         opacity: 0.03,
+        filter: "blur(8px)",
         stagger: 0.02,
+        duration: 1,
       });
     });
 

@@ -45,6 +45,7 @@ export default function ProjectDetails() {
       cursor.style.mixBlendMode = "";
       cursor.style.color = "var(--text-color)";
       cursor.style.scale = "1";
+      cursor.style.zIndex = "11";
     }
 
     const textBlendElements =
@@ -103,7 +104,7 @@ export default function ProjectDetails() {
   return (
     <TransitionOverlay>
       <section className="min-h-[100dvh] __section-padding lg:mt-8 mt-0 lg:space-y-10 md:space-y-8 sm:space-y-6 space-y-4">
-        <div className="flex justify-between md:items-center sm:flex-row flex-col overflow-hidden">
+        <div className="flex justify-between md:items-center overflow-hidden">
           <span
             className={`__section-title __cursor-blend`}
             style={{ margin: 0 }}
@@ -114,7 +115,7 @@ export default function ProjectDetails() {
             <Link
               to={projectDetails.live}
               target="_blank"
-              className={`expand-bg border rounded-md __section-desc lg:px-8 md:px-6 px-4 sm:mr-0 mr-auto h-fit my-auto flex items-center gap-4`}
+              className={`expand-bg border rounded-md __section-desc lg:px-8 md:px-6 px-4 sm:mr-0 h-fit my-auto flex items-center gap-4`}
               onMouseEnter={cursorHoverColorChange}
               onMouseLeave={cursorLeaveColorChange}
             >
