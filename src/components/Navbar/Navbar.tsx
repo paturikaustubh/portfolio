@@ -139,7 +139,7 @@ export default function Navbar() {
           {menuLinks.map(({ to, title }, indx) => (
             <Link
               key={indx}
-              to={`/portfolio`}
+              to={`/portfolio/`}
               className="__nav-underline-element"
               onClick={() => {
                 const ele = document.getElementById(to);
