@@ -90,7 +90,7 @@ export default function Navbar() {
         }}
       >
         <Link
-          to={"/portfolio"}
+          to={"/portfolio/"}
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}

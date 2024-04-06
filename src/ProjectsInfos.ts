@@ -34,7 +34,7 @@ export const projectsInfos: {
   {
     title: "Wok of Fame",
     img: "Wok of Fame",
-    desc: "This is a website for a restraunt Wok of Fame. Here the customers can order their favourite food item from the restraunt directly from the app, which will be home delivered to them. This application also allows the customers to reserve/pre-book a table for a specific date and time. They can also place an order for the items they'd want to have when they arrive at the restraunt.",
+    desc: "This is a website idea built for a restraunt Wok of Fame. Here the customers can order their favourite food item from the restraunt directly from the app, which will be home delivered to them. This application also allows the customers to reserve/pre-book a table for a specific date and time. They can also place an order for the items they'd want to have when they arrive at the restraunt.",
     to: "wok-of-fame",
     repoClient: "https://github.com/paturikaustubh/wok-of-fame",
     live: "https://paturikaustubh.github.io/wok-of-fame/",

@@ -26,6 +26,7 @@ export default function ProjectDetails() {
 
   // ANCHOR USELAYOUT EFFECT
   useLayoutEffect(() => {
+    window.scrollTo({ top: 0 });
     setProjectDetails(
       projectsInfos.filter(
         ({ title }) =>
@@ -132,9 +133,9 @@ export default function ProjectDetails() {
           </div>
         </div>
         <img
-          src={`assets/projects/${projectDetails.img}.png`}
+          src={`../assets/projects/${projectDetails.img}.png`}
           alt={projectDetails.title}
-          className="md:w-[80%] w-full mx-auto lg:mt-12"
+          className="md:w-[80%] w-full mx-auto lg:mt-12 rounded-md"
         />
         <div className="mx-auto space-y-2">
           <div className="__section-desc">
