@@ -29,7 +29,7 @@ export default function ProjectDetails() {
 
   // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
-    // window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0 });
     const projectFilteredArr = projectsInfos.filter(
       ({ title }) =>
         title.toLowerCase().split(" ").join("-") ===

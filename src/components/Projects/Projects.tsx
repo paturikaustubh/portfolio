@@ -157,8 +157,12 @@ export default function Projects() {
       {/* ANCHOR not large screens */}
       <div className="mt-4 __projects-mobile">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
-          {projectsInfos.slice(0, 4).map(({ title, img }, indx) => (
-            <div className="flex flex-col gap-4" key={indx}>
+          {projectsInfos.slice(0, 4).map(({ title, img, to }, indx) => (
+            <Link
+              to={`projects/${to}`}
+              className="flex flex-col gap-4"
+              key={indx}
+            >
               <div className="rounded-lg w-full overflow-hidden inline-block">
                 <img
                   src={`/portfolio/assets/projects/${img}/logo.png`}
@@ -178,7 +182,7 @@ export default function Projects() {
                   </span>
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
