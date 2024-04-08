@@ -23,7 +23,7 @@ export default function ProjectDetails() {
     to: "",
     live: "",
   });
-  const [projectIndx, setProjectIndx] = useState(0);
+  // const [projectIndx, setProjectIndx] = useState(0);
 
   const minLg = gsap.matchMedia();
 
@@ -36,7 +36,7 @@ export default function ProjectDetails() {
         projectName?.toLowerCase().toLowerCase().split(" ").join("-")
     );
     setProjectDetails(projectFilteredArr[0]);
-    setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
+    // setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
   }, []);
 
   minLg.add("(min-width: 1024px)", () => {
