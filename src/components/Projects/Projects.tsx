@@ -78,7 +78,7 @@ export default function Projects() {
           {projectsInfos.slice(0, 4).map(({ img, title }, indx) => (
             <img
               key={indx}
-              src={`assets/projects/${img}.png`}
+              src={`/portfolio/assets/projects/${img}/logo.png`}
               style={{
                 transform: `translateY(${activeProjectIndx * -100}%)`,
                 transition: "1300ms cubic-bezier(0.19, 1, 0.22, 1)",
@@ -161,7 +161,7 @@ export default function Projects() {
             <div className="flex flex-col gap-4" key={indx}>
               <div className="rounded-lg w-full overflow-hidden inline-block">
                 <img
-                  src={`assets/projects/${img}.png`}
+                  src={`/portfolio/assets/projects/${img}/logo.png`}
                   alt={title}
                   className="translate-x-full __project-img-mobile"
                   ref={(el) => (imgRefs.current[indx] = el)}

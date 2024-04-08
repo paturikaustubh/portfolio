@@ -7,6 +7,7 @@
   background-color: var(--text-color);
   transition: scale 300ms;
   top: 200vh;
+  border-color: var(--bg-color);
   /* transition: width 300ms; */
 }
 

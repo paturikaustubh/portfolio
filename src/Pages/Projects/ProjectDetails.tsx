@@ -1,7 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { TransitionOverlay } from "../../Transition/transition";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { projectsInfos } from "../../ProjectsInfos";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectDetails() {
   const { name: projectName } = useParams();
@@ -11,58 +15,94 @@ export default function ProjectDetails() {
     readonly img: string;
     readonly desc: string;
     readonly to: string;
-    readonly repoClient: string;
-    readonly repoServer?: string;
     readonly live?: string;
   }>({
     title: "",
     img: "",
     desc: "",
     to: "",
-    repoClient: "",
-    repoServer: "",
     live: "",
   });
+  const [projectIndx, setProjectIndx] = useState(0);
 
-  // ANCHOR USELAYOUT EFFECT
+  const minLg = gsap.matchMedia();
+
+  // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0 });
-    setProjectDetails(
-      projectsInfos.filter(
-        ({ title }) =>
-          title.toLowerCase().split(" ").join("-") ===
-          projectName?.toLowerCase().toLowerCase().split(" ").join("-")
-      )[0]
+    // window.scrollTo({ top: 0 });
+    const projectFilteredArr = projectsInfos.filter(
+      ({ title }) =>
+        title.toLowerCase().split(" ").join("-") ===
+        projectName?.toLowerCase().toLowerCase().split(" ").join("-")
     );
+    setProjectDetails(projectFilteredArr[0]);
+    setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
   }, []);
+
+  minLg.add("(min-width: 1024px)", () => {
+    const { pathname } = useLocation();
+    useEffect(() => {
+      const imgArr = document.querySelectorAll<HTMLImageElement>("img");
+      const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+      const video = document.querySelector<HTMLVideoElement>("video");
+      imgArr.forEach((img) => {
+        img.addEventListener("mouseenter", () => {
+          if (cursor) cursor.style.borderWidth = "2px";
+        });
+        video?.addEventListener("mouseenter", () => {
+          if (cursor) cursor.style.borderWidth = "2px";
+        });
+
+        img.addEventListener("mouseleave", () => {
+          if (cursor) cursor.style.borderWidth = "0";
+        });
+        video?.addEventListener("mouseleave", () => {
+          if (cursor) cursor.style.borderWidth = "0";
+        });
+      });
+    }, [pathname]);
+  });
 
   // ANCHOR USEEFFECT  ||========================================================================
   useEffect(() => {
     document.body.classList.remove("__dark-mode");
 
     // ANCHOR CURSOR  ||========================================================================
-    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
-    if (cursor) {
-      cursor.style.mixBlendMode = "";
-      cursor.style.color = "var(--text-color)";
-      cursor.style.scale = "1";
-      cursor.style.zIndex = "11";
-    }
 
-    const textBlendElements =
-      document.querySelectorAll<HTMLElement>(".__cursor-blend");
+    minLg.add("(min-width:1024px)", () => {
+      const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+      if (cursor) {
+        cursor.style.mixBlendMode = "";
+        cursor.style.color = "var(--text-color)";
+        cursor.style.scale = "1";
+        cursor.style.zIndex = "11";
+      }
 
-    textBlendElements.forEach((element) => {
-      element.addEventListener("mouseenter", handleMouseEnter);
-      element.addEventListener("mouseleave", handleMouseLeave);
-    });
+      const textBlendElements =
+        document.querySelectorAll<HTMLElement>(".__cursor-blend");
 
-    return () => {
       textBlendElements.forEach((element) => {
-        element.removeEventListener("mouseenter", handleMouseEnter);
-        element.removeEventListener("mouseleave", handleMouseLeave);
+        element.addEventListener("mouseenter", handleMouseEnter);
+        element.addEventListener("mouseleave", handleMouseLeave);
       });
-    };
+
+      gsap.to(".__parallax-img", {
+        scrollTrigger: {
+          trigger: ".__parallax-img",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+        translateY: "-25%",
+      });
+
+      return () => {
+        textBlendElements.forEach((element) => {
+          element.removeEventListener("mouseenter", handleMouseEnter);
+          element.removeEventListener("mouseleave", handleMouseLeave);
+        });
+      };
+    });
   }, []);
 
   // ANCHOR FUNCTIONS  ||========================================================================
@@ -71,6 +111,7 @@ export default function ProjectDetails() {
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "14";
+
       cursorElement.style.backgroundColor = "#e7e5e4";
       cursorElement.style.mixBlendMode = "difference";
     }
@@ -128,41 +169,41 @@ export default function ProjectDetails() {
           )}
         </div>
         <div className="grid grid-cols-12">
-          <div className="lg:text-xl lg:leading-[2rem] font-[500] md:text-lg md:leading-[1.5rem] text-base leading-[1.5rem] lg:col-span-8 md:col-span-10 col-span-12 w-fit __cursor-blend __project-desc">
+          <div className="lg:text-xl lg:leading-[2rem] font-[500] md:text-lg md:leading-[1.5rem] text-base leading-[1.5rem] lg:col-span-8 md:col-span-10 col-span-12 w-fit __cursor-blend">
             {projectDetails.desc}
           </div>
         </div>
         <img
-          src={`../assets/projects/${projectDetails.img}.png`}
+          src={`/portfolio/assets/projects/${projectDetails.img}/logo.png`}
           alt={projectDetails.title}
-          className="md:w-[80%] w-full mx-auto lg:mt-12 rounded-md"
+          className="md:w-[80%] w-full mx-auto lg:mt-12 rounded-md relative"
         />
-        <div className="mx-auto space-y-2">
-          <div className="__section-desc">
-            Repository link{projectDetails.repoServer && "s"}:
-          </div>
-          <div className="flex w-full justify-start gap-4 items-center">
-            <Link
-              to={projectDetails.repoClient}
-              className="expand-bg border px-4 py-2 rounded-md lg:text-2xl md:text-xl text-lg"
-              onMouseEnter={cursorHoverColorChange}
-              onMouseLeave={cursorLeaveColorChange}
-            >
-              Client
-            </Link>
-            {projectDetails.repoServer ? (
-              <Link
-                to={projectDetails.repoServer}
-                className="expand-bg border px-4 py-2 rounded-md lg:text-2xl md:text-xl text-lg"
-                onMouseEnter={cursorHoverColorChange}
-                onMouseLeave={cursorLeaveColorChange}
-              >
-                Server
-              </Link>
-            ) : (
-              <></>
-            )}
-          </div>
+
+        {/* ANCHOR RESPONSIVE IMAGES  ||========================================================== */}
+        <div className="flex md:flex-row flex-col gap-16 items-start justify-around __parallax-img">
+          <img
+            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-1.png`}
+            className="w-72 md:translate-y-1/4 mx-auto"
+          />
+          <img
+            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-2.png`}
+            className="w-72 md:translate-y-1/4 mx-auto"
+          />
+          <img
+            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-3.png`}
+            className="w-72 md:translate-y-1/4 mx-auto"
+          />
+        </div>
+
+        <div className="py-12">
+          <video
+            src={`/portfolio/assets/projects/${projectDetails.img}/sample.mp4`}
+            loop
+            muted
+            playsInline
+            autoPlay
+            className="h-[35rem] mx-auto"
+          />
         </div>
       </section>
     </TransitionOverlay>
