@@ -200,8 +200,12 @@ export default function ProjectsList() {
           {/* ANCHOR not large screens */}
           <div className="mt-4 __projects-mobile">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-8">
-              {projectsInfos.map(({ title, img }, indx) => (
-                <div className="flex flex-col gap-2" key={indx}>
+              {projectsInfos.map(({ title, img, to }, indx) => (
+                <Link
+                  to={`/portfolio/projects/${to}`}
+                  className="flex flex-col gap-2"
+                  key={indx}
+                >
                   <div className="rounded-lg w-full overflow-hidden inline-block">
                     <img
                       src={`/portfolio/assets/projects/${img}/logo.png`}
@@ -221,7 +225,7 @@ export default function ProjectsList() {
                       </span>
                     </button>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

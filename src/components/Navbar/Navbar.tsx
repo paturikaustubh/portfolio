@@ -7,12 +7,8 @@ export default function Navbar() {
 
   const menuLinks = [
     {
-      to: "about-me",
-      title: "About Me",
-    },
-    {
-      to: "tech-stack",
-      title: "Tech Stack",
+      to: "",
+      title: "Home",
     },
     {
       to: "projects",
@@ -52,7 +48,7 @@ export default function Navbar() {
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
             {menuLinks.map(({ to, title }, indx) => (
               <Link
-                to={`/portfolio`}
+                to={`/portfolio/${to}`}
                 className={navMenuElementStyle}
                 onClick={() => {
                   const navigationMenu =
@@ -63,8 +59,6 @@ export default function Navbar() {
                       navigationMenu.classList.remove("__show");
                     }, 300);
                   }
-                  const ele = document.getElementById(to);
-                  ele?.scrollIntoView({ behavior: "smooth" });
                 }}
                 key={indx}
               >
@@ -139,12 +133,8 @@ export default function Navbar() {
           {menuLinks.map(({ to, title }, indx) => (
             <Link
               key={indx}
-              to={`/portfolio/`}
+              to={`/portfolio/${to}`}
               className="__nav-underline-element"
-              onClick={() => {
-                const ele = document.getElementById(to);
-                ele?.scrollIntoView({ behavior: "smooth" });
-              }}
             >
               {title}
             </Link>

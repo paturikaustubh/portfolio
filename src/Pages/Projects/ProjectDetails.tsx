@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { projectsInfos } from "../../ProjectsInfos";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./detailsStyles.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,25 +24,29 @@ export default function ProjectDetails() {
     to: "",
     live: "",
   });
-  // const [projectIndx, setProjectIndx] = useState(0);
+  const [projectIndx, setProjectIndx] = useState(0);
+  const [showNextProjectImg, setShowNextProjectImg] = useState(false);
 
   const minLg = gsap.matchMedia();
 
+  const nextProjectDetails =
+    projectsInfos[
+      projectIndx + 1 === projectsInfos.length ? 0 : projectIndx + 1
+    ];
+
   // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0 });
+    // window.scrollTo({ top: 0 });
     const projectFilteredArr = projectsInfos.filter(
-      ({ title }) =>
-        title.toLowerCase().split(" ").join("-") ===
-        projectName?.toLowerCase().toLowerCase().split(" ").join("-")
+      ({ to }) => to === projectName
     );
     setProjectDetails(projectFilteredArr[0]);
-    // setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
+    setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
   }, []);
 
-  minLg.add("(min-width: 1024px)", () => {
-    const { pathname } = useLocation();
-    useEffect(() => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    minLg.add("(min-width: 1024px)", () => {
       const imgArr = document.querySelectorAll<HTMLImageElement>("img");
       const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
       const video = document.querySelector<HTMLVideoElement>("video");
@@ -60,8 +65,8 @@ export default function ProjectDetails() {
           if (cursor) cursor.style.borderWidth = "0";
         });
       });
-    }, [pathname]);
-  });
+    });
+  }, [pathname]);
 
   // ANCHOR USEEFFECT  ||========================================================================
   useEffect(() => {
@@ -145,7 +150,7 @@ export default function ProjectDetails() {
 
   return (
     <TransitionOverlay>
-      <section className="min-h-[100dvh] __section-padding lg:mt-8 mt-0 lg:space-y-10 md:space-y-8 sm:space-y-6 space-y-4">
+      <section className="min-h-[100dvh] __section-padding lg:mt-8 mt-0 lg:space-y-10 md:space-y-8 sm:space-y-6 space-y-4 overflow-hidden">
         <div className="flex justify-between md:items-center overflow-hidden">
           <span
             className={`__section-title __cursor-blend`}
@@ -195,6 +200,7 @@ export default function ProjectDetails() {
           />
         </div>
 
+        {/* ANCHOR VIDEO  ||========================================================== */}
         <div className="py-12">
           <video
             src={`/portfolio/assets/projects/${projectDetails.img}/sample.mp4`}
@@ -204,6 +210,43 @@ export default function ProjectDetails() {
             autoPlay
             className="h-[35rem] mx-auto"
           />
+        </div>
+
+        {/* ANCHOR NEXT PROJECT  ||========================================================== */}
+        <div className="lg:py-12 md:py-6 py-3 border-t border-neutral-600 lg:px-10 md:px-5 px-0 relative z-10">
+          <div className="flex md:flex-row flex-col gap-y-4 justify-between items-center">
+            <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
+              Next project
+            </span>
+            <Link
+              to={`/portfolio/projects/${nextProjectDetails.to}`}
+              className="lg:text-5xl md:text-4xl text-3xl __nav-underline-element"
+              onMouseEnter={() => setShowNextProjectImg(true)}
+              onMouseLeave={() => setShowNextProjectImg(false)}
+            >
+              {nextProjectDetails.title}
+            </Link>
+          </div>
+          <div
+            className={`absolute w-full top-0 -z-10 left-1/2 duration-300 -translate-x-1/2 next-project-img-hider`}
+          >
+            <img
+              src={`/portfolio/assets/projects/${nextProjectDetails.img}/logo.png`}
+              alt={nextProjectDetails.title}
+              className="opacity-0"
+            />
+          </div>
+          <div
+            className={`rounded-lg overflow-hidden absolute w-1/2 top-0 -z-20 left-1/2 duration-300 -translate-x-1/2 ${
+              showNextProjectImg ? "-translate-y-1/4" : "translate-y-0"
+            }`}
+          >
+            <img
+              src={`/portfolio/assets/projects/${nextProjectDetails.img}/logo.png`}
+              alt={nextProjectDetails.title}
+              className="w-full"
+            />
+          </div>
         </div>
       </section>
     </TransitionOverlay>
