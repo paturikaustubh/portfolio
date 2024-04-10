@@ -1,0 +1,11 @@
+footer:hover + .__custom-cursor {
+  background-color: #e7e5e4;
+}
+
+.me-circle,
+.them-circle {
+  width: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: white;
+}
