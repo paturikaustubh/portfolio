@@ -45,6 +45,7 @@ export default function Skills() {
                 <li>Express.Js</li>
                 <li>Node.Js</li>
                 <li>Flask (Python)</li>
+                <li>ASP.Net (C#)</li>
                 <li>Spring Boot (Java)</li>
               </ul>
             }

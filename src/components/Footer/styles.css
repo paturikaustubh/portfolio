@@ -1,11 +1,108 @@
+input,
+textarea {
+  background-color: transparent;
+  border: 2px solid rgb(82 82 82);
+  outline: 0;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+input:hover,
+textarea:hover {
+  @apply border-neutral-400;
+}
+
+input:focus,
+textarea:focus {
+  @apply border-neutral-200;
+}
+
+.input-label {
+  position: relative;
+}
+
+.input-label::before {
+  content: attr(data-label);
+  position: absolute;
+  top: -18%;
+  left: 15px;
+  font-size: 0.7em;
+  background-color: rgb(12 10 9);
+  padding-inline: 0.5em;
+  @apply text-neutral-400 duration-200;
+}
+
+.input-label::before:hover {
+  @apply text-neutral-200;
+}
+
+.input-label:focus-within::before {
+  @apply text-neutral-50;
+}
+
 footer:hover + .__custom-cursor {
   background-color: #e7e5e4;
 }
 
-.me-circle,
-.them-circle {
-  width: 20px;
+.connector-circle {
+  position: relative;
+  width: 15px;
   aspect-ratio: 1/1;
   border-radius: 50%;
   background-color: white;
+  opacity: 0.2;
+  filter: blur(4px) brightness(100%);
+}
+
+.circle-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+@keyframes connector-expand {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes connector-reset {
+  to {
+    width: 0px;
+  }
+}
+
+@keyframes connector-circle-reveal {
+  to {
+    scale: 1.4;
+    opacity: 1;
+    filter: brightness(200%);
+  }
+}
+
+@keyframes connector-circle-reveal-reset {
+  to {
+    scale: 1;
+    opacity: 0.2;
+    filter: blur(4px) brightness(100%);
+  }
+}
+
+@keyframes connector-circle-ripple {
+  to {
+    scale: 600%;
+    opacity: 0;
+    border-width: 0px;
+  }
+}
+
+@keyframes connector-circle-ripple-reset {
+  to {
+    scale: 1;
+    opacity: 100%;
+  }
 }

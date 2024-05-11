@@ -47,7 +47,7 @@ export default function Hero() {
 
     // ANCHOR MODE/THEME CHANGER  ||========================================================================
     const darkThemeElements = document.querySelectorAll(".__theme-change-dark");
-    darkThemeElements.forEach((darkElement) => {
+    darkThemeElements.forEach((darkElement, indx) => {
       gsap.to("body", {
         scrollTrigger: {
           trigger: darkElement,
@@ -62,8 +62,10 @@ export default function Hero() {
             document.body.style.transition = "300ms ease-in-out";
           },
           onLeave: () => {
-            document.body.classList.remove("__dark-mode");
-            document.body.style.transition = "300ms ease-in-out";
+            if (indx !== darkThemeElements.length - 1) {
+              document.body.classList.remove("__dark-mode");
+              document.body.style.transition = "300ms ease-in-out";
+            }
           },
           onLeaveBack: () => {
             document.body.classList.remove("__dark-mode");
