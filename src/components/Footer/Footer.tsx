@@ -113,7 +113,7 @@ export function Footer() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("sending...");
+    console.log("sending boi!!");
 
     addDoc(userMessagesRef, instantMsgDetails)
       .then(() => {
@@ -125,7 +125,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-stone-950 lg:p-12 md:p-6 p-3 text-[#E2E0DF] mt-auto">
+    <footer className="bg-stone-950 lg:p-12 md:p-6 p-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
       <div className="flex md:flex-row flex-col items-center gap-x-12 gap-y-6">
         <p className="lg:text-7xl md:text-6xl text-5xl font-bold">
           Let's connect!
