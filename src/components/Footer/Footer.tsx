@@ -113,6 +113,8 @@ export function Footer() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("sending...");
+
     addDoc(userMessagesRef, instantMsgDetails)
       .then(() => {
         console.log("Message added successfully!");
