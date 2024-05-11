@@ -9,6 +9,13 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+      AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
+      PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
+      STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
+      MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
+      APP_ID: ${{ secrets.VITE_APP_ID }}
 
     steps:
       - name: Checkout repo
@@ -20,25 +27,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Set API_KEY environment variable
-        run: echo "REACT_APP_API_KEY=${{ secrets.API_KEY }}" >> .env
-
-      - name: Set AUTH_DOMAIN environment variable
-        run: echo "REACT_APP_AUTH_DOMAIN=${{ secrets.AUTH_DOMAIN }}" >> .env
-
-      - name: Set PROJECT_ID environment variable
-        run: echo "REACT_APP_PROJECT_ID=${{ secrets.PROJECT_ID }}" >> .env
-
-      - name: Set STORAGE_BUCKET environment variable
-        run: echo "REACT_APP_STORAGE_BUCKET=${{ secrets.STORAGE_BUCKET }}" >> .env
-
-      - name: Set MESSAGING_SENDER_ID environment variable
-        run: echo "REACT_APP_MESSAGING_SENDER_ID=${{ secrets.MESSAGING_SENDER_ID }}" >> .env
-
-      - name: Set APP_ID environment variable
-        run: echo "REACT_APP_APP_ID=${{ secrets.APP_ID }}" >> .env
+        uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
