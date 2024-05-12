@@ -124,7 +124,8 @@ button:focus-visible {
   rotate: 0deg;
 }
 
-.expand-bg:hover {
+.expand-bg:hover,
+.expand-bg:focus {
   color: var(--bg-color);
 }
 
@@ -136,7 +137,8 @@ button:focus-visible {
   background-color: var(--accent-color) !important;
 }
 
-.expand-bg:hover::after {
+.expand-bg:hover::after,
+.expand-bg:focus::after {
   transform: translateY(0%);
   rotate: 180deg;
 }

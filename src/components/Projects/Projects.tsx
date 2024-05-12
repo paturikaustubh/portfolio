@@ -30,7 +30,7 @@ export default function Projects() {
   useEffect(() => {
     const gsapMatchMedia = gsap.matchMedia();
 
-    gsapMatchMedia.add("(max-width: 1024px)", () => {
+    gsapMatchMedia.add("(max-width: 768px)", () => {
       imgRefs.current.forEach((img, index) => {
         gsap.to(img, {
           x: "0%",

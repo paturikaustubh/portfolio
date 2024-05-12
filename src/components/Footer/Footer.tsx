@@ -146,54 +146,62 @@ export function Footer() {
           <form className="flex flex-col gap-3 mt-6" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
               <div className="flex items-center gap-1">
-                <span className="input-label grow" data-label="First Name">
+                <div className="input-label grow" data-label="First Name">
                   <input
                     required
                     name="firstName"
                     type="text"
                     className="p-2 rounded-l-md "
-                    placeholder="First Name"
+                    placeholder=""
                     value={instantMsgDetails.firstName}
                     onChange={handleInstantMsgDetailsChange}
                   />
-                </span>
-                <span className="input-label grow" data-label="Last Name">
+                </div>
+                <div className="input-label grow" data-label="Last Name">
                   <input
                     required
                     name="lastName"
                     type="text"
                     className="p-2 rounded-r-md"
-                    placeholder="Last Name"
+                    placeholder=""
                     value={instantMsgDetails.lastName}
                     onChange={handleInstantMsgDetailsChange}
                   />
-                </span>
+                </div>
               </div>
-              <span className="input-label grow" data-label="Email">
+              <div className="input-label grow" data-label="Email">
                 <input
                   required
                   type="email"
                   name="email"
                   className="p-2 rounded-md"
-                  placeholder="Email"
+                  placeholder=""
                   value={instantMsgDetails.email}
                   onChange={handleInstantMsgDetailsChange}
+                  autoComplete="off"
                 />
-              </span>
+              </div>
             </div>
 
             <div className="grow col-span-2">
-              <textarea
-                required
-                name="message"
-                className="rounded-md resize-y max-h-80 min-h-24 p-2"
-                placeholder="Message"
-                value={instantMsgDetails.message}
-                onChange={handleInstantMsgDetailsChange}
-              ></textarea>
+              <div
+                className="input-label"
+                data-label="Message"
+                data-message={`${instantMsgDetails.message.length}/500`}
+              >
+                <textarea
+                  required
+                  name="message"
+                  className="rounded-md h-52 resize-none p-2"
+                  placeholder=""
+                  value={instantMsgDetails.message}
+                  onChange={handleInstantMsgDetailsChange}
+                  maxLength={500}
+                />
+              </div>
             </div>
             <div className="ml-auto">
-              <button className="rounded-md px-3 py-1 text-2xl bg-neutral-200 text-neutral-800 font-semibold">
+              <button className="rounded-md px-3 py-1 text-2xl expand-bg font-semibold">
                 Send
               </button>
             </div>

@@ -7,6 +7,7 @@ textarea {
   width: 100%;
   cursor: pointer;
   transition-duration: 200ms;
+  transition-property: border;
 }
 
 input:hover,
@@ -26,24 +27,43 @@ textarea:focus {
 .input-label::before {
   content: attr(data-label);
   position: absolute;
-  top: -18%;
-  left: 15px;
-  font-size: 0.7em;
+  top: 0px;
+  transform: translateY(40%);
+  left: 1px;
+  padding-inline: 0.5em;
+  @apply text-neutral-400 duration-200;
+  pointer-events: none;
+}
+
+.input-label::after {
+  content: attr(data-message);
+  position: absolute;
+  bottom: -2px;
+  right: 15px;
+  font-size: 0.8em;
   background-color: rgb(12 10 9);
   padding-inline: 0.5em;
   @apply text-neutral-400 duration-200;
+  pointer-events: none;
 }
 
 .input-label::before:hover {
   @apply text-neutral-200;
 }
 
-.input-label:focus-within::before {
+.input-label:focus-within::before,
+.input-label:focus-within::after {
   @apply text-neutral-50;
 }
 
-footer:hover + .__custom-cursor {
-  background-color: #e7e5e4;
+.input-label:has(input:not(:placeholder-shown))::before,
+.input-label:focus-within::before,
+.input-label:has(textarea:not(:placeholder-shown))::before {
+  top: 0px;
+  transform: translateY(-42%);
+  left: 13px;
+  font-size: 0.7em;
+  background-color: rgb(12 10 9);
 }
 
 .connector-circle {
@@ -51,7 +71,7 @@ footer:hover + .__custom-cursor {
   width: 15px;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background-color: white;
+  background-color: #e7e5e4;
   opacity: 0.2;
   filter: blur(4px) brightness(100%);
 }
@@ -61,7 +81,7 @@ footer:hover + .__custom-cursor {
   inset: 0;
   border-radius: 50%;
   background-color: transparent;
-  border: 1px solid white;
+  border: 1px solid #e7e5e4;
 }
 
 @keyframes connector-expand {
