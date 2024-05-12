@@ -8,6 +8,9 @@ import { collection, addDoc } from "firebase/firestore";
 import db from "../../firebase";
 
 import "./styles.css";
+import Loading from "../LoadingScreen";
+import Alert from "../Alert";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   const userMessagesRef = collection(db, "userMessages");
@@ -44,7 +47,7 @@ export function Footer() {
             circleElement.forEach(
               (element) =>
                 (element.style.animation =
-                  "connector-circle-reveal 0.25s 0.35s ease-out forwards")
+                  "connector-circle-reveal 0.3s 0.35s cubic-bezier(.38,-0.01,.32,2.52) forwards")
             );
           }
           if (rippleEle)
@@ -112,22 +115,25 @@ export function Footer() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    Loading(true, "Sending message...");
     e.preventDefault();
 
     addDoc(userMessagesRef, instantMsgDetails)
       .then(() => {
-        console.log("Message added successfully!");
+        Alert("Message reached destination!", "success");
       })
       .catch((error) => {
+        Alert("Sorry, there was an error...", "error");
         console.error("Error adding message:", error);
-      });
+      })
+      .finally(() => Loading(false));
   };
 
   return (
     <footer className="bg-stone-950 lg:p-12 md:p-6 p-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
       <div className="flex md:flex-row flex-col items-center gap-x-12 gap-y-6">
-        <p className="lg:text-7xl md:text-6xl text-5xl font-bold">
-          Let's connect!
+        <p className="lg:text-7xl md:text-6xl text-4xl font-bold">
+          Let's connect! 🔗
         </p>
         <div className="flex items-center grow justify-between md:w-fit w-full md:px-0 px-6 ">
           <span className="connector-circle">
@@ -140,13 +146,15 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mt-14 grid lg:grid-cols-3 grid-cols-1 items-start">
-        <div className="lg:col-span-2">
-          <p className="text-4xl font-semibold">Send Instant Message</p>
+      <div className="mt-14 grid lg:grid-cols-5 grid-cols-1 items-start gap-x-12 gap-y-6">
+        <div className="lg:col-span-3">
+          <p className="md:text-4xl text-3xl font-semibold">
+            Send Instant Message
+          </p>
           <form className="flex flex-col gap-3 mt-6" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
               <div className="flex items-center gap-1">
-                <div className="input-label grow" data-label="First Name">
+                <span className="input-label grow" data-label="First Name">
                   <input
                     required
                     name="firstName"
@@ -156,8 +164,8 @@ export function Footer() {
                     value={instantMsgDetails.firstName}
                     onChange={handleInstantMsgDetailsChange}
                   />
-                </div>
-                <div className="input-label grow" data-label="Last Name">
+                </span>
+                <span className="input-label grow" data-label="Last Name">
                   <input
                     required
                     name="lastName"
@@ -167,9 +175,9 @@ export function Footer() {
                     value={instantMsgDetails.lastName}
                     onChange={handleInstantMsgDetailsChange}
                   />
-                </div>
+                </span>
               </div>
-              <div className="input-label grow" data-label="Email">
+              <span className="input-label grow" data-label="Email">
                 <input
                   required
                   type="email"
@@ -180,7 +188,7 @@ export function Footer() {
                   onChange={handleInstantMsgDetailsChange}
                   autoComplete="off"
                 />
-              </div>
+              </span>
             </div>
 
             <div className="grow col-span-2">
@@ -201,11 +209,70 @@ export function Footer() {
               </div>
             </div>
             <div className="ml-auto">
-              <button className="rounded-md px-3 py-1 text-2xl expand-bg font-semibold">
+              <button className="rounded-md px-3 py-1 text-2xl expand-bg font-semibold border-2">
                 Send
               </button>
             </div>
           </form>
+        </div>
+
+        <div className="lg:col-span-2 self-stretch">
+          <p className="text-4xl font-semibold">Find me on socials</p>
+          <div className="flex flex-col items-center justify-center mt-12 gap-3 text-xl">
+            <div className="social-link">
+              <span>GitHub</span>
+              <Link
+                target="_blank"
+                to={"https://github.com/paturikaustubh"}
+                className="text-white"
+              >
+                paturikaustubh
+              </Link>
+            </div>
+            <div className="social-link">
+              <span>LinkedIn</span>
+              <Link
+                target="_blank"
+                to={"https://www.linkedin.com/in/kaustubhpaturi/"}
+                className="text-blue-400"
+              >
+                kaustubhpaturi
+              </Link>
+            </div>
+            <div className="social-link">
+              <span>Facebook</span>
+              <Link
+                target="_blank"
+                to={"https://www.facebook.com/kaustubh.paturi.5/"}
+                className="text-blue-500"
+              >
+                kaustubh.paturi.5
+              </Link>
+            </div>
+            <div className="social-link">
+              <span>X (Twitter)</span>
+              <Link
+                target="_blank"
+                to={"https://twitter.com/kaustub18850193"}
+                className="text-white"
+              >
+                kaustub18850193
+              </Link>
+            </div>
+            <div className="social-link">
+              <span>Instagram</span>
+              <Link
+                target="_blank"
+                to={"https://www.instagram.com/not_sardonian/"}
+                className="text-pink-600"
+              >
+                not_sardonian
+              </Link>
+            </div>
+            {/* <span>Facebook</span>
+            <span>X (Twitter)</span>
+            <span>Instagram</span> */}
+          </div>
         </div>
       </div>
     </footer>

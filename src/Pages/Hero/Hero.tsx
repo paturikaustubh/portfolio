@@ -39,9 +39,17 @@ export default function Hero() {
     const sectionTitles = document.querySelectorAll(".__section-title");
     const fadeInText = document.querySelectorAll(".__fade-in");
     const darkThemeElements = document.querySelectorAll(".__theme-change-dark");
+    const textBlendElements =
+      document.querySelectorAll<HTMLElement>(".__cursor-blend");
 
     // ANCHOR LARGE SCREEN ANIMS  ||========================================================================
     gsapMatchMedia.add("(min-width: 768px)", () => {
+      // ANCHOR CURSOR SIZING  ||========================================================================
+      textBlendElements.forEach((element) => {
+        element.addEventListener("mouseenter", handleMouseEnter);
+        element.addEventListener("mouseleave", handleMouseLeave);
+      });
+
       // ANCHOR RIGHT TO LEFT SLIDERS  ||========================================================================
       gsap.utils.toArray(".__slide-right-left").forEach((element) => {
         gsap.to(element as Element, {
@@ -203,14 +211,6 @@ export default function Hero() {
           duration: 0.5,
         });
       });
-    });
-
-    const textBlendElements =
-      document.querySelectorAll<HTMLElement>(".__cursor-blend");
-
-    textBlendElements.forEach((element) => {
-      element.addEventListener("mouseenter", handleMouseEnter);
-      element.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {

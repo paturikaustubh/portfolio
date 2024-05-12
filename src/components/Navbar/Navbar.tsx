@@ -14,10 +14,6 @@ export default function Navbar() {
       to: "projects",
       title: "Projects",
     },
-    {
-      to: "contact",
-      title: "Contact",
-    },
   ];
 
   return (

@@ -167,3 +167,30 @@ button:focus-visible {
     font-size: 0.1rem;
   }
 }
+
+@keyframes show-alert {
+  from {
+    transform: translateY(-300%);
+  }
+}
+@keyframes hide-alert {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes loading-animation {
+  to {
+    rotate: 360deg;
+  }
+}

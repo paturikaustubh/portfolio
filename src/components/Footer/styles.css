@@ -76,12 +76,38 @@ textarea:focus {
   filter: blur(4px) brightness(100%);
 }
 
+@media (max-width: 768px) {
+  .connector-circle {
+    width: 12px;
+  }
+}
+
 .circle-ripple {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background-color: transparent;
   border: 1px solid #e7e5e4;
+}
+
+.social-link {
+  @apply h-7 overflow-hidden flex flex-col justify-start items-center p-4;
+}
+
+.social-link > span,
+.social-link > a {
+  transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 500;
+  transform: translateY(-1rem);
+}
+
+.social-link > a {
+  text-decoration: underline;
+}
+
+.social-link:hover > span,
+.social-link:hover > a {
+  transform: translateY(calc(-100% - 1rem));
 }
 
 @keyframes connector-expand {

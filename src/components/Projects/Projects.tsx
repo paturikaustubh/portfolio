@@ -30,7 +30,37 @@ export default function Projects() {
   useEffect(() => {
     const gsapMatchMedia = gsap.matchMedia();
 
+    gsapMatchMedia.add("(min-width: 768px)", () => {
+      // Get the __custom-cursor element
+      const customCursor = document.querySelector(".__custom-cursor");
+
+      // Get all elements with class name "__project-row"
+      const projectRows = Array.from(
+        document.querySelectorAll(".__project-row")
+      );
+
+      if (customCursor)
+        window.addEventListener("scroll", () => {
+          const elementsUnderCursor = document.elementsFromPoint(
+            customCursor.getBoundingClientRect().x,
+            customCursor.getBoundingClientRect().y
+          );
+
+          const isHoveringProjectRow = elementsUnderCursor.some((element) => {
+            return projectRows.includes(element);
+          });
+
+          if (isHoveringProjectRow) {
+            setImgScale(1);
+            return;
+          }
+          setImgScale(0);
+          return;
+        });
+    });
+
     gsapMatchMedia.add("(max-width: 768px)", () => {
+      // GSAP ANIMATIONS ||================================================================
       imgRefs.current.forEach((img, index) => {
         gsap.to(img, {
           x: "0%",
@@ -137,7 +167,7 @@ export default function Projects() {
               to={`projects/${to}`}
               onMouseEnter={cursorHoverColorChange}
               onMouseLeave={cursorLeaveColorChange}
-              className={`expand-bg font-light __section-desc px-6 hover:rounded-xl border ${
+              className={`expand-bg font-light __section-desc px-6 hover:rounded-xl border-2 ${
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
                   : mousePresent
@@ -190,7 +220,7 @@ export default function Projects() {
       <div className="lg:mt-12 md:mt-8 mt-4 flex w-full justify-end items-center">
         <Link
           to={"projects"}
-          className="rounded-lg __section-desc border md:px-10 px-4 py-2 expand-bg"
+          className="rounded-lg __section-desc border-2 md:px-10 px-4 py-2 expand-bg"
           onMouseEnter={cursorHoverColorChange}
           onMouseLeave={cursorLeaveColorChange}
         >
