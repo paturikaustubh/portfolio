@@ -214,7 +214,7 @@ export default function ProjectDetails() {
             muted
             playsInline
             autoPlay
-            className="h-[35rem] mx-auto border-2 border-neutral-700"
+            className="max-h-[35rem] mx-auto border-2 border-neutral-700"
           />
         </div>
 
