@@ -31,7 +31,7 @@ textarea:focus {
   transform: translateY(40%);
   left: 1px;
   padding-inline: 0.5em;
-  @apply text-neutral-400 duration-200;
+  @apply text-neutral-500 duration-200;
   pointer-events: none;
 }
 
@@ -47,23 +47,18 @@ textarea:focus {
   pointer-events: none;
 }
 
-.input-label::before:hover {
-  @apply text-neutral-200;
-}
-
-.input-label:focus-within::before,
 .input-label:focus-within::after {
   @apply text-neutral-50;
 }
 
 .input-label:has(input:not(:placeholder-shown))::before,
-.input-label:focus-within::before,
 .input-label:has(textarea:not(:placeholder-shown))::before {
   top: 0px;
   transform: translateY(-42%);
-  left: 13px;
+  left: 12px;
   font-size: 0.7em;
   background-color: rgb(12 10 9);
+  @apply text-neutral-50;
 }
 
 .connector-circle {

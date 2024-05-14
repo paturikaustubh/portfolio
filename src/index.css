@@ -129,18 +129,50 @@ button:focus-visible {
   color: var(--bg-color);
 }
 
+.expand-bg:hover::after,
+.expand-bg:focus::after {
+  transform: translateY(0%);
+  rotate: 180deg;
+}
+
+.inst-msg-send {
+  border-color: #e7e5e4;
+  transition: color 300ms ease, border-radius 300ms ease;
+  color: #e7e5e4;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.inst-msg-send::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-color: #e7e5e4;
+  transform: translateY(100%);
+  z-index: -1;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  rotate: 0deg;
+}
+
+.inst-msg-send:hover,
+.inst-msg-send:focus {
+  color: #1c1917;
+}
+
+.inst-msg-send:hover::after,
+.inst-msg-send:focus::after {
+  transform: translateY(0%);
+  rotate: 180deg;
+}
+
 .__accent-text {
   color: var(--accent-color) !important;
 }
 
 .__accent-bg {
   background-color: var(--accent-color) !important;
-}
-
-.expand-bg:hover::after,
-.expand-bg:focus::after {
-  transform: translateY(0%);
-  rotate: 180deg;
 }
 
 @media (min-width: 1024px) {

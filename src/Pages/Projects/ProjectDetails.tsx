@@ -46,10 +46,11 @@ export default function ProjectDetails() {
 
   const { pathname } = useLocation();
   useEffect(() => {
+    window.scrollTo({ top: 0 });
+    const imgArr = document.querySelectorAll<HTMLImageElement>("img");
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    const video = document.querySelector<HTMLVideoElement>("video");
     minLg.add("(min-width: 1024px)", () => {
-      const imgArr = document.querySelectorAll<HTMLImageElement>("img");
-      const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
-      const video = document.querySelector<HTMLVideoElement>("video");
       imgArr.forEach((img) => {
         img.addEventListener("mouseenter", () => {
           if (cursor) cursor.style.borderWidth = "2px";
@@ -66,6 +67,11 @@ export default function ProjectDetails() {
         });
       });
     });
+
+    return () => {
+      if (cursor) cursor.style.borderWidth = "0";
+      handleMouseLeave();
+    };
   }, [pathname]);
 
   // ANCHOR USEEFFECT  ||========================================================================
@@ -91,15 +97,15 @@ export default function ProjectDetails() {
         element.addEventListener("mouseleave", handleMouseLeave);
       });
 
-      gsap.to(".__parallax-img", {
-        scrollTrigger: {
-          trigger: ".__parallax-img",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-        translateY: "-25%",
-      });
+      // gsap.to(".__parallax-img", {
+      //   scrollTrigger: {
+      //     trigger: ".__parallax-img",
+      //     start: "top bottom",
+      //     end: "bottom top",
+      //     scrub: true,
+      //   },
+      //   translateY: "-25%",
+      // });
 
       return () => {
         textBlendElements.forEach((element) => {
@@ -181,22 +187,22 @@ export default function ProjectDetails() {
         <img
           src={`/portfolio/assets/projects/${projectDetails.img}/logo.png`}
           alt={projectDetails.title}
-          className="md:w-[80%] w-full mx-auto lg:mt-12 rounded-md relative"
+          className="md:w-[80%] w-full mx-auto lg:mt-12 rounded-md relative border-2 border-neutral-700"
         />
 
         {/* ANCHOR RESPONSIVE IMAGES  ||========================================================== */}
-        <div className="flex md:flex-row flex-col gap-16 items-start justify-around __parallax-img">
+        <div className="flex md:flex-row flex-col gap-16 items-start justify-around">
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-1.png`}
-            className="w-72 md:translate-y-1/4 mx-auto"
+            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
           />
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-2.png`}
-            className="w-72 md:translate-y-1/4 mx-auto"
+            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
           />
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-3.png`}
-            className="w-72 md:translate-y-1/4 mx-auto"
+            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
           />
         </div>
 
@@ -208,7 +214,7 @@ export default function ProjectDetails() {
             muted
             playsInline
             autoPlay
-            className="h-[35rem] mx-auto"
+            className="h-[35rem] mx-auto border-2 border-neutral-700"
           />
         </div>
 

@@ -27,7 +27,7 @@ export function Footer() {
     tl.to(".connector", {
       scrollTrigger: {
         trigger: ".connector",
-        start: "top bottom",
+        start: "top 95%",
         end: "bottom top",
         scrub: true,
         toggleActions: "play none none none",
@@ -130,7 +130,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-stone-950 lg:p-12 md:p-6 p-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
+    <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
       <div className="flex md:flex-row flex-col items-center gap-x-12 gap-y-6">
         <p className="lg:text-7xl md:text-6xl text-4xl font-bold">
           Let's connect! 🔗
@@ -209,7 +209,7 @@ export function Footer() {
               </div>
             </div>
             <div className="ml-auto">
-              <button className="rounded-md px-3 py-1 text-2xl expand-bg font-semibold border-2">
+              <button className="rounded-md px-3 py-1 text-2xl inst-msg-send font-semibold border-2">
                 Send
               </button>
             </div>
@@ -217,7 +217,9 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-2 self-stretch">
-          <p className="text-4xl font-semibold">Find me on socials</p>
+          <p className="text-4xl font-semibold text-center">
+            Find me on socials
+          </p>
           <div className="flex flex-col items-center justify-center mt-12 gap-3 text-xl">
             <div className="social-link">
               <span>GitHub</span>
@@ -274,6 +276,13 @@ export function Footer() {
             <span>Instagram</span> */}
           </div>
         </div>
+      </div>
+
+      <div className="mt-24 text-center flex flex-col gap-4 mb-2">
+        <p className="text-neutral-300 ">Nothing great ever came that easy.</p>
+        <p className="opacity-40 font-semibold text-sm">
+          Made with ❤️ from Kaustubh Paturi
+        </p>
       </div>
     </footer>
   );

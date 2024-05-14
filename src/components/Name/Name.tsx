@@ -28,7 +28,7 @@ export default function Name() {
         transformOrigin: "left left",
         stagger: 0.04,
         ease: "back.out",
-        delay: 0.8,
+        delay: 0.7,
         duration: 0.35,
       });
     });
@@ -41,7 +41,7 @@ export default function Name() {
       duration: 0.5,
       ease: "power2.out",
       stagger: 0.13,
-      delay: 1.3,
+      delay: 1.8,
       // backgroundColor: "var(--bg-color)",
     });
 
@@ -61,8 +61,9 @@ export default function Name() {
         opacity: 0,
         filter: "blur(8px)",
         transformOrigin: "left left",
+        scaleY: 1.2,
         stagger: 0.02,
-        delay: 1.5,
+        delay: 1.3,
       });
     });
   }, []);
@@ -76,7 +77,7 @@ export default function Name() {
       <div className="flex flex-col justify-center items-center poin __sticky-situation">
         <div
           id="full-name"
-          className="flex gap-4 mx-4 py-1 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
+          className="flex gap-4 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
         >
           <span className="overflow-hidden">KAUSTUBH</span>
           <span className="__stroke-only overflow-hidden">PATURI</span>

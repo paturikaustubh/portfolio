@@ -5,10 +5,14 @@ import "./styles.css";
 export default function Navbar() {
   const navMenuElementStyle = "px-4 py-6 overflow-hidden border-t expand-bg";
 
-  const menuLinks = [
+  const menuLinks: { to: string; title: string }[] = [
     {
       to: "",
       title: "Home",
+    },
+    {
+      to: "https://drive.google.com/file/d/1MfsXpNlgKppnHvmwcpzISwZCl99xdEj5/view?usp=drive_link",
+      title: "Resume",
     },
     {
       to: "projects",
@@ -44,7 +48,8 @@ export default function Navbar() {
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
             {menuLinks.map(({ to, title }, indx) => (
               <Link
-                to={`/portfolio/${to}`}
+                to={title !== "Resume" ? `/portfolio/${to}` : to}
+                target={title === "Resume" ? "_blank" : "_self"}
                 className={navMenuElementStyle}
                 onClick={() => {
                   const navigationMenu =
@@ -129,7 +134,8 @@ export default function Navbar() {
           {menuLinks.map(({ to, title }, indx) => (
             <Link
               key={indx}
-              to={`/portfolio/${to}`}
+              to={title !== "Resume" ? `/portfolio/${to}` : to}
+              target={title === "Resume" ? "_blank" : "_self"}
               className="__nav-underline-element"
             >
               {title}

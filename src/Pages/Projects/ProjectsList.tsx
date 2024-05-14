@@ -40,6 +40,32 @@ export default function ProjectsList() {
         duration: 1,
         delay: 0.5,
       });
+      // Get the __custom-cursor element
+      const customCursor = document.querySelector(".__custom-cursor");
+
+      // Get all elements with class name "__project-row"
+      const projectRows = Array.from(
+        document.querySelectorAll(".__project-row")
+      );
+
+      if (customCursor)
+        window.addEventListener("scroll", () => {
+          const elementsUnderCursor = document.elementsFromPoint(
+            customCursor.getBoundingClientRect().x,
+            customCursor.getBoundingClientRect().y
+          );
+
+          const isHoveringProjectRow = elementsUnderCursor.some((element) => {
+            return projectRows.includes(element);
+          });
+
+          if (isHoveringProjectRow) {
+            setImgScale(1);
+            return;
+          }
+          setImgScale(0);
+          return;
+        });
     });
 
     gsapMatchMedia.add("(max-width: 1024px)", () => {

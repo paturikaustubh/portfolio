@@ -30,7 +30,7 @@ export default function Projects() {
   useEffect(() => {
     const gsapMatchMedia = gsap.matchMedia();
 
-    gsapMatchMedia.add("(min-width: 768px)", () => {
+    gsapMatchMedia.add("(min-width: 1024px)", () => {
       // Get the __custom-cursor element
       const customCursor = document.querySelector(".__custom-cursor");
 
@@ -51,15 +51,21 @@ export default function Projects() {
           });
 
           if (isHoveringProjectRow) {
+            const cursor =
+              document.querySelector<HTMLDivElement>(".__custom-cursor");
+            if (cursor) cursor.style.zIndex = "15";
             setImgScale(1);
             return;
           }
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "11";
           setImgScale(0);
           return;
         });
     });
 
-    gsapMatchMedia.add("(max-width: 768px)", () => {
+    gsapMatchMedia.add("(max-width: 1024px)", () => {
       // GSAP ANIMATIONS ||================================================================
       imgRefs.current.forEach((img, index) => {
         gsap.to(img, {

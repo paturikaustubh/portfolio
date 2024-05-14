@@ -68,8 +68,8 @@ export default function Hero() {
         gsap.to("body", {
           scrollTrigger: {
             trigger: darkElement,
-            start: "top 60%",
-            end: "bottom 50%",
+            start: "top 80%",
+            end: "bottom 70%",
             onEnter: () => {
               document.body.classList.add("__dark-mode");
               document.body.style.transition = "300ms ease-in-out";
@@ -125,6 +125,7 @@ export default function Hero() {
           },
           opacity: 0.03,
           filter: "blur(8px)",
+          // scale: 1.5,
           stagger: 0.02,
           duration: 1,
         });
