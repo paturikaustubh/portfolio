@@ -243,7 +243,7 @@ export default function ProjectDetails() {
             />
           </div>
           <div
-            className={`rounded-lg overflow-hidden absolute w-1/2 top-0 -z-20 left-1/2 duration-300 -translate-x-1/2 ${
+            className={`rounded-lg overflow-hidden absolute md:w-1/2 w-3/4 top-0 -z-20 left-1/2 duration-300 -translate-x-1/2 ${
               showNextProjectImg ? "-translate-y-1/4" : "translate-y-0"
             }`}
           >
