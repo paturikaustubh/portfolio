@@ -56,13 +56,33 @@ export default function ProjectsList() {
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
-            return projectRows.includes(element);
+            const isPresent = projectRows.includes(element);
+            if (isPresent) {
+              const parentElement = element.parentNode as ParentNode;
+              const children = Array.from(parentElement.children);
+              const childIndex = children.indexOf(element);
+              setActiveProjectIndx(childIndex - 1);
+              setMousePresent(true);
+            } else {
+              setMousePresent(false);
+            }
+            return isPresent;
           });
 
           if (isHoveringProjectRow) {
+            const cursor =
+              document.querySelector<HTMLDivElement>(".__custom-cursor");
+            if (cursor) {
+              cursor.style.zIndex = "15";
+              cursor.style.scale = "1";
+              cursor.style.mixBlendMode = "normal";
+            }
             setImgScale(1);
             return;
           }
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "11";
           setImgScale(0);
           return;
         });
@@ -167,7 +187,7 @@ export default function ProjectsList() {
                 key={indx}
                 className={`border-t lg:text-4xl duration-300s md:text-3xl text-2xl p-6 w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
                   indx + 1 === projectsInfos.length ? "border-b" : ""
-                }`}
+                } __project-row`}
                 style={{
                   borderColor: "var(--text-color)",
                   transition: "padding 300ms ease",

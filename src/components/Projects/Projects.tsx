@@ -47,13 +47,27 @@ export default function Projects() {
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
-            return projectRows.includes(element);
+            const isPresent = projectRows.includes(element);
+            if (isPresent) {
+              const parentElement = element.parentNode as ParentNode;
+              const children = Array.from(parentElement.children);
+              const childIndex = children.indexOf(element);
+              setActiveProjectIndx(childIndex - 1);
+              setMousePresent(true);
+            } else {
+              setMousePresent(false);
+            }
+            return isPresent;
           });
 
           if (isHoveringProjectRow) {
             const cursor =
               document.querySelector<HTMLDivElement>(".__custom-cursor");
-            if (cursor) cursor.style.zIndex = "15";
+            if (cursor) {
+              cursor.style.zIndex = "15";
+              cursor.style.scale = "1";
+              cursor.style.mixBlendMode = "normal";
+            }
             setImgScale(1);
             return;
           }

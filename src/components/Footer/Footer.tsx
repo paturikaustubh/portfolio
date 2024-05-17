@@ -129,6 +129,16 @@ export function Footer() {
       .finally(() => Loading(false));
   };
 
+  const handleSocialMediaLinkHover = () => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) cursor.classList.add("animate-pulse-fast");
+  };
+
+  const handleSocialMediaLinkBlur = () => {
+    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
+    if (cursor) cursor.classList.remove("animate-pulse-fast");
+  };
+
   return (
     <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
       <div className="flex md:flex-row flex-col items-center gap-x-12 gap-y-6">
@@ -209,7 +219,23 @@ export function Footer() {
               </div>
             </div>
             <div className="ml-auto">
-              <button className="rounded-md px-3 py-1 text-2xl inst-msg-send font-semibold border-2">
+              <button
+                className="rounded-md px-3 py-1 text-2xl inst-msg-send font-semibold border-2"
+                onMouseEnter={() => {
+                  const cursor =
+                    document.querySelector<HTMLDivElement>(".__custom-cursor");
+                  if (cursor) {
+                    cursor.style.mixBlendMode = "difference";
+                  }
+                }}
+                onMouseLeave={() => {
+                  const cursor =
+                    document.querySelector<HTMLDivElement>(".__custom-cursor");
+                  if (cursor) {
+                    cursor.style.mixBlendMode = "";
+                  }
+                }}
+              >
                 Send
               </button>
             </div>
@@ -227,6 +253,8 @@ export function Footer() {
                 target="_blank"
                 to={"https://github.com/paturikaustubh"}
                 className="text-white"
+                onMouseEnter={handleSocialMediaLinkHover}
+                onMouseLeave={handleSocialMediaLinkBlur}
               >
                 paturikaustubh
               </Link>
@@ -237,6 +265,8 @@ export function Footer() {
                 target="_blank"
                 to={"https://www.linkedin.com/in/kaustubhpaturi/"}
                 className="text-blue-400"
+                onMouseEnter={handleSocialMediaLinkHover}
+                onMouseLeave={handleSocialMediaLinkBlur}
               >
                 kaustubhpaturi
               </Link>
@@ -247,6 +277,8 @@ export function Footer() {
                 target="_blank"
                 to={"https://www.facebook.com/kaustubh.paturi.5/"}
                 className="text-blue-500"
+                onMouseEnter={handleSocialMediaLinkHover}
+                onMouseLeave={handleSocialMediaLinkBlur}
               >
                 kaustubh.paturi.5
               </Link>
@@ -257,6 +289,8 @@ export function Footer() {
                 target="_blank"
                 to={"https://twitter.com/kaustub18850193"}
                 className="text-white"
+                onMouseEnter={handleSocialMediaLinkHover}
+                onMouseLeave={handleSocialMediaLinkBlur}
               >
                 kaustub18850193
               </Link>
@@ -267,6 +301,8 @@ export function Footer() {
                 target="_blank"
                 to={"https://www.instagram.com/not_sardonian/"}
                 className="text-pink-600"
+                onMouseEnter={handleSocialMediaLinkHover}
+                onMouseLeave={handleSocialMediaLinkBlur}
               >
                 not_sardonian
               </Link>
@@ -279,9 +315,9 @@ export function Footer() {
       </div>
 
       <div className="mt-24 text-center flex flex-col gap-4 mb-2">
-        <p className="text-neutral-300 ">Nothing great ever came that easy.</p>
+        <p className="text-neutral-300 ">Nothing great ever came that easy</p>
         <p className="opacity-40 font-semibold text-sm">
-          Made with ❤️ from Kaustubh Paturi
+          Made with ❤️ by Kaustubh Paturi
         </p>
       </div>
     </footer>
