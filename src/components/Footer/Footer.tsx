@@ -120,6 +120,12 @@ export function Footer() {
 
     addDoc(userMessagesRef, instantMsgDetails)
       .then(() => {
+        setInstantMsgDetails({
+          firstName: "",
+          lastName: "",
+          email: "",
+          message: "",
+        });
         Alert("Message reached destination!", "success");
       })
       .catch((error) => {
