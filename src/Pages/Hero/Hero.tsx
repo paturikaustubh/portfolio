@@ -19,8 +19,6 @@ export default function Hero() {
 
     // gsapMatchMedia.add("(max-width: 1024px)", () => {});
 
-    window.scrollTo({ top: 0 });
-
     // ANCHOR NAVBAR ANIMATION  ||========================================================================
     gsap.fromTo(
       "nav",
@@ -141,7 +139,7 @@ export default function Hero() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: element as Element,
-            start: "top 90%",
+            start: "top 80%",
             end: "bottom 50%",
             toggleActions: "play none none none",
           },
@@ -202,12 +200,11 @@ export default function Hero() {
           scrollTrigger: {
             trigger: char,
             scrub: false,
-            start: "top 90%",
+            start: "top 80%",
             end: "bottom 75%",
             toggleActions: "play none none none",
           },
           opacity: 0.03,
-          filter: "blur(8px)",
           stagger: 0.02,
           duration: 0.5,
         });
@@ -240,7 +237,7 @@ export default function Hero() {
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "1";
-
+      cursorElement.style.zIndex = "11";
       cursorElement.style.mixBlendMode = "";
       cursorElement.style.backgroundColor = "var(--text-color)";
     }

@@ -73,7 +73,10 @@ export default function Projects() {
           }
           const cursor =
             document.querySelector<HTMLDivElement>(".__custom-cursor");
-          if (cursor) cursor.style.zIndex = "11";
+          if (cursor && mousePresent)
+            setTimeout(() => {
+              cursor.style.zIndex = "11";
+            }, 400);
           setImgScale(0);
           return;
         });
@@ -115,7 +118,27 @@ export default function Projects() {
         </span>
       </span>
       {/* ANCHOR LARGE SCREENS */}
-      <div className="mt-8 flex-col items-center justify-center overflow-hidden __projects-not-mobile">
+      <div
+        className="mt-8 flex-col items-center justify-center overflow-hidden __projects-not-mobile"
+        onMouseEnter={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "15";
+        }}
+        onMouseMove={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) cursor.style.zIndex = "15";
+        }}
+        onMouseLeave={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor && mousePresent)
+            setTimeout(() => {
+              cursor.style.zIndex = "11";
+            }, 400);
+        }}
+      >
         <div
           className="rounded-lg origin-top-left flex-col fixed z-[13] -translate-x-1/2 -translate-y-1/2 w-[34rem] items-center overflow-hidden duration-[600ms] __projects-img-section"
           style={{
@@ -157,19 +180,10 @@ export default function Projects() {
               setMousePresent(true);
               setActiveProjectIndx(indx);
               setImgScale(1);
-              const cursor =
-                document.querySelector<HTMLDivElement>(".__custom-cursor");
-              if (cursor) cursor.style.zIndex = "15";
             }}
             onMouseLeave={() => {
               setMousePresent(false);
               setImgScale(0);
-              const cursor =
-                document.querySelector<HTMLDivElement>(".__custom-cursor");
-              if (cursor) cursor.style.zIndex = "11";
-            }}
-            onWheel={() => {
-              setActiveProjectIndx(indx);
             }}
           >
             <span

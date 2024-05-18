@@ -36,7 +36,6 @@ export default function ProjectDetails() {
 
   // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
-    // window.scrollTo({ top: 0 });
     const projectFilteredArr = projectsInfos.filter(
       ({ to }) => to === projectName
     );
@@ -46,7 +45,6 @@ export default function ProjectDetails() {
 
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0 });
     const imgArr = document.querySelectorAll<HTMLImageElement>("img");
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     const video = document.querySelector<HTMLVideoElement>("video");

@@ -15,6 +15,9 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ")
     );
+    setTimeout(() => {
+      window.scrollTo({ top: 0 });
+    }, 800);
   }, [location.pathname]);
 
   const anim = (variants: Variants) => ({

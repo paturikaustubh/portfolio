@@ -10,6 +10,7 @@ import "./styles.css";
 export default function Name() {
   // ANCHOR EFFECTS  ||========================================================================
   useEffect(() => {
+    const gsapMatchMedia = gsap.matchMedia();
     // ANCHOR NAME ANIMATION  ||========================================================================
     const textDropSplits = document.querySelectorAll(".__animate-full-name");
     textDropSplits.forEach((char) => {
@@ -47,23 +48,46 @@ export default function Name() {
 
     // ANCHOR PROFESSION ANIMATION  ||========================================================================
     const textFadeSplits = document.querySelectorAll(".__animate-profession");
-    textFadeSplits.forEach((char) => {
-      const { chars } = new SplitType(char as TargetElement, {
-        types: "chars",
+    gsapMatchMedia.add("(min-width: 768px)", () => {
+      textFadeSplits.forEach((char) => {
+        const { chars } = new SplitType(char as TargetElement, {
+          types: "chars",
+        });
+        gsap.from(chars, {
+          scrollTrigger: {
+            trigger: char,
+            // scrub: true,
+            start: "top 80%",
+            end: "bottom 40%",
+          },
+          opacity: 0,
+          filter: "blur(8px)",
+          transformOrigin: "left left",
+          scaleY: 1.2,
+          stagger: 0.02,
+          delay: 1.3,
+        });
       });
-      gsap.from(chars, {
-        scrollTrigger: {
-          trigger: char,
-          // scrub: true,
-          start: "top 80%",
-          end: "bottom 40%",
-        },
-        opacity: 0,
-        filter: "blur(8px)",
-        transformOrigin: "left left",
-        scaleY: 1.2,
-        stagger: 0.02,
-        delay: 1.3,
+    });
+
+    gsapMatchMedia.add("(max-width: 768px)", () => {
+      textFadeSplits.forEach((char) => {
+        const { chars } = new SplitType(char as TargetElement, {
+          types: "chars",
+        });
+        gsap.from(chars, {
+          scrollTrigger: {
+            trigger: char,
+            // scrub: true,
+            start: "top 80%",
+            end: "bottom 40%",
+          },
+          opacity: 0,
+          transformOrigin: "left left",
+          scaleY: 1.2,
+          stagger: 0.02,
+          delay: 1.3,
+        });
       });
     });
   }, []);

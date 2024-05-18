@@ -84,12 +84,7 @@ export default function Navbar() {
           if (cursor) cursor.style.zIndex = "12";
         }}
       >
-        <Link
-          to={"/portfolio/"}
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
+        <Link to={"/portfolio/"}>
           <svg
             id="logo"
             xmlns="http://www.w3.org/2000/svg"

@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 import "./App.css";
 import AnimatedRoutes from "./AnimatedRoutes";
 import Cursor from "./components/Cursor/Cursor";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <Cursor />
       <AnimatedRoutes />
+      <Footer />
     </Router>
   );
 }
