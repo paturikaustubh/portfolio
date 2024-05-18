@@ -116,35 +116,54 @@ export function Footer() {
     setInstantMsgDetails({ ...instantMsgDetails, [name]: value });
   };
 
+  const getIntoFocus = (id: "firstName" | "lastName" | "email" | "message") => {
+    const element = document.getElementById(id);
+    if (element) element.focus();
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     Loading(true, "Sending message...");
     e.preventDefault();
-
     const { firstName, lastName, email, message } = instantMsgDetails;
-    const finalValues = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      email: email.trim(),
-      message: message.trim(),
-      timestamp: dayjs().format("DD MMM, YY (hh:mm A)"),
-    };
 
-    addDoc(userMessagesRef, finalValues)
-      .then(() => {
-        setInstantMsgDetails({
-          firstName: "",
-          lastName: "",
-          email: "",
-          message: "",
-          timestamp: "",
-        });
-        Alert("Message reached destination!", "success");
-      })
-      .catch((error) => {
-        Alert("Sorry, there was an error...", "error");
-        console.error("Error adding message:", error);
-      })
-      .finally(() => Loading(false));
+    if (firstName.trim().length === 0) {
+      getIntoFocus("firstName");
+      Alert("First name cannot be empty", "error");
+    } else if (email.trim().length === 0) {
+      getIntoFocus("email");
+      Alert("Email cannot be empty", "error");
+    } else if (message.trim().length === 0) {
+      getIntoFocus("message");
+      Alert("Message cannot be empty", "error");
+    } else {
+      const finalValues = {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        message: message.trim(),
+        timestamp: dayjs().format("DD MMM, YY (hh:mm A)"),
+      };
+
+      addDoc(userMessagesRef, finalValues)
+        .then(() => {
+          setInstantMsgDetails({
+            firstName: "",
+            lastName: "",
+            email: "",
+            message: "",
+            timestamp: "",
+          });
+          Alert("Message reached destination!", "success");
+        })
+        .catch((error) => {
+          Alert("Sorry, there was an error...", "error");
+          console.error("Error adding message:", error);
+        })
+        .finally(() => Loading(false));
+      return;
+    }
+    Loading(false);
+    return;
   };
 
   const handleSocialMediaLinkHover = () => {
@@ -184,6 +203,7 @@ export function Footer() {
               <div className="flex items-center gap-1">
                 <span className="input-label grow" data-label="First Name">
                   <input
+                    id="firstName"
                     required
                     name="firstName"
                     type="text"
@@ -195,6 +215,7 @@ export function Footer() {
                 </span>
                 <span className="input-label grow" data-label="Last Name">
                   <input
+                    id="lastName"
                     required
                     name="lastName"
                     type="text"
@@ -207,6 +228,7 @@ export function Footer() {
               </div>
               <span className="input-label grow" data-label="Email">
                 <input
+                  id="email"
                   required
                   type="email"
                   name="email"
@@ -226,6 +248,7 @@ export function Footer() {
                 data-message={`${instantMsgDetails.message.length}/500`}
               >
                 <textarea
+                  id="message"
                   required
                   name="message"
                   className="rounded-md h-52 resize-none p-2"

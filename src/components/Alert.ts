@@ -7,7 +7,7 @@ export default function Alert(
 
   if (open) {
     const alertDiv = document.createElement("div");
-    alertDiv.className = `px-4 py-2 flex items-center overflow-x-hidden md:text-base text-sm w-fit rounded-md ${
+    alertDiv.className = `px-4 py-2 flex items-center md:text-base text-sm w-fit min-h-fit rounded-md ${
       severity === "info"
         ? "bg-blue-50 text-blue-800"
         : severity === "error"
