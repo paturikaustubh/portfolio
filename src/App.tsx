@@ -25,7 +25,6 @@ function App() {
     <Router>
       <Cursor />
       <AnimatedRoutes />
-      <Footer />
     </Router>
   );
 }
