@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import db from "../../firebase";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-import { collection, addDoc } from "firebase/firestore";
-import db from "../../firebase";
+import dayjs from "dayjs";
 
 import "./styles.css";
 import Loading from "../LoadingScreen";
@@ -20,6 +21,7 @@ export function Footer() {
     lastName: "",
     email: "",
     message: "",
+    timestamp: "",
   });
 
   const tl = gsap.timeline();
@@ -118,13 +120,23 @@ export function Footer() {
     Loading(true, "Sending message...");
     e.preventDefault();
 
-    addDoc(userMessagesRef, instantMsgDetails)
+    const { firstName, lastName, email, message } = instantMsgDetails;
+    const finalValues = {
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.trim(),
+      message: message.trim(),
+      timestamp: dayjs().format("DD MMM, YY (hh:mm A)"),
+    };
+
+    addDoc(userMessagesRef, finalValues)
       .then(() => {
         setInstantMsgDetails({
           firstName: "",
           lastName: "",
           email: "",
           message: "",
+          timestamp: "",
         });
         Alert("Message reached destination!", "success");
       })
