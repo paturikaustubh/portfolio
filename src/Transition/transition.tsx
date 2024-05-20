@@ -1,6 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import { useLayoutEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
+import { Footer } from "../components/Footer/Footer";
 
 export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
   const [locationName, setLocationName] = useState("");
@@ -97,6 +98,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
         </motion.div>
       </div>
       {children}
+      <Footer />
     </div>
   );
 };
