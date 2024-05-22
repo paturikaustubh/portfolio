@@ -12,6 +12,7 @@ import "./styles.css";
 import Loading from "../LoadingScreen";
 import Alert from "../Alert";
 import { Link } from "react-router-dom";
+import SplitType from "split-type";
 
 export function Footer() {
   const userMessagesRef = collection(db, "userMessages");
@@ -25,6 +26,7 @@ export function Footer() {
   });
 
   const tl = gsap.timeline();
+  const gsapMatchMedia = gsap.matchMedia();
   useEffect(() => {
     tl.to(".connector", {
       scrollTrigger: {
@@ -105,6 +107,44 @@ export function Footer() {
         }
       });
     }
+
+    // ANCHOR FOOTER NAME ANIMATION ||========================================================================
+    gsapMatchMedia.add("(min-width: 1024px)", () => {
+      const footerNameElement =
+        document.querySelector<HTMLParagraphElement>(".footer-name");
+
+      if (footerNameElement) {
+        const splitChars = new SplitType(footerNameElement, {
+          types: "chars",
+        }).chars;
+
+        splitChars?.forEach((char, indx) => {
+          char.addEventListener("mouseenter", () => {
+            char.style.fontWeight = "800";
+            const children = footerNameElement.childNodes;
+
+            const firstPSibling = children[indx + 1] as HTMLDivElement;
+            const secondPSibling = children[indx + 2] as HTMLDivElement;
+
+            const firstNSibling = children[indx - 1] as HTMLDivElement;
+            const secondNSibling = children[indx - 2] as HTMLDivElement;
+
+            if (firstPSibling) firstPSibling.style.fontWeight = "500";
+            if (secondPSibling) secondPSibling.style.fontWeight = "200";
+            if (firstNSibling) firstNSibling.style.fontWeight = "500";
+            if (secondNSibling) secondNSibling.style.fontWeight = "200";
+          });
+          char.addEventListener("mouseleave", () => {
+            char.style.fontWeight = "100";
+            const children =
+              footerNameElement.childNodes as NodeListOf<HTMLDivElement>;
+            children.forEach((child) => {
+              child.style.fontWeight = "100";
+            });
+          });
+        });
+      }
+    });
   }, []);
 
   const handleInstantMsgDetailsChange = (
@@ -348,18 +388,14 @@ export function Footer() {
                 not_sardonian
               </Link>
             </div>
-            {/* <span>Facebook</span>
-            <span>X (Twitter)</span>
-            <span>Instagram</span> */}
           </div>
         </div>
       </div>
 
-      <div className="mt-24 text-center flex flex-col gap-4 mb-2">
+      <p className="footer-name mt-8 mb-16">KaustubhPaturi</p>
+
+      <div className="text-center flex flex-col gap-4 mb-4">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
-        <p className="opacity-40 font-semibold text-sm">
-          Made with ❤️ by Kaustubh Paturi
-        </p>
       </div>
     </footer>
   );

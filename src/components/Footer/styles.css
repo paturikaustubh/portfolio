@@ -105,6 +105,17 @@ textarea:focus {
   transform: translateY(calc(-100% - 1rem));
 }
 
+.footer-name {
+  --font-size: 11.5vw;
+  font-size: clamp(var(--font-size), var(--font-size), var(--font-size));
+  font-weight: 100;
+  margin-right: auto;
+}
+
+.footer-name > * {
+  transition: 200ms;
+}
+
 @keyframes connector-expand {
   to {
     width: 100%;
