@@ -11,12 +11,12 @@ export default function Navbar() {
       title: "Home",
     },
     {
-      to: "https://drive.google.com/file/d/1MfsXpNlgKppnHvmwcpzISwZCl99xdEj5/view?usp=drive_link",
-      title: "Resume",
-    },
-    {
       to: "projects",
       title: "Projects",
+    },
+    {
+      to: "https://drive.google.com/file/d/1MfsXpNlgKppnHvmwcpzISwZCl99xdEj5/view?usp=drive_link",
+      title: "Resume",
     },
   ];
 

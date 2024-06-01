@@ -24,7 +24,7 @@ export default function Skills() {
             activeIndx={accordianActiveIndx}
             setActiveIndx={setAccordionActiveIndx}
             indx={1}
-            title="Front End"
+            title="Frontend"
             description={
               <ul className="__tech-stack-list">
                 <li>React.Js</li>
@@ -39,7 +39,7 @@ export default function Skills() {
             activeIndx={accordianActiveIndx}
             setActiveIndx={setAccordionActiveIndx}
             indx={2}
-            title="Back End"
+            title="Backend"
             description={
               <ul className="__tech-stack-list">
                 <li>Express.Js</li>
@@ -60,6 +60,19 @@ export default function Skills() {
                 <li>MySQL</li>
                 <li>Google Firebase</li>
                 <li>MongoDB</li>
+              </ul>
+            }
+          />
+          <Accordion
+            activeIndx={accordianActiveIndx}
+            setActiveIndx={setAccordionActiveIndx}
+            indx={4}
+            title="Gen AI"
+            description={
+              <ul className="__tech-stack-list">
+                <li>LangChain</li>
+                <li>OpenAI</li>
+                <li>Google Gemini</li>
               </ul>
             }
             borderB={true}

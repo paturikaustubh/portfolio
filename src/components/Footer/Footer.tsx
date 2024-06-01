@@ -392,7 +392,25 @@ export function Footer() {
         </div>
       </div>
 
-      <p className="footer-name mt-8 mb-16">KaustubhPaturi</p>
+      <p
+        className="footer-name mt-8 mb-16"
+        onMouseEnter={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) {
+            cursor.style.mixBlendMode = "difference";
+          }
+        }}
+        onMouseLeave={() => {
+          const cursor =
+            document.querySelector<HTMLDivElement>(".__custom-cursor");
+          if (cursor) {
+            cursor.style.mixBlendMode = "";
+          }
+        }}
+      >
+        KaustubhPaturi
+      </p>
 
       <div className="text-center flex flex-col gap-4 mb-4">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
