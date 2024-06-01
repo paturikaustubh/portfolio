@@ -158,3 +158,15 @@ textarea:focus {
     opacity: 100%;
   }
 }
+
+@keyframes social-link-pulse {
+  0% {
+    background-color: rgba(231, 229, 228, 1);
+  }
+  50% {
+    background-color: rgba(231, 229, 228, 0.5);
+  }
+  100% {
+    background-color: rgba(231, 229, 228, 1);
+  }
+}

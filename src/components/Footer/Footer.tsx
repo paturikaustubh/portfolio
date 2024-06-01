@@ -209,11 +209,13 @@ export function Footer() {
   const handleSocialMediaLinkHover = () => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursor) cursor.classList.add("animate-pulse-fast");
+    if (cursor) cursor.style.backdropFilter = "blur(1.5px)";
   };
 
   const handleSocialMediaLinkBlur = () => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursor) cursor.classList.remove("animate-pulse-fast");
+    if (cursor) cursor.style.backdropFilter = "";
   };
 
   return (

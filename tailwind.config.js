@@ -5,7 +5,7 @@ export default {
     extend: {
       animation: {
         "pulse-fast":
-          "pulse 0.8s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);",
+          "social-link-pulse 1s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275)",
       },
     },
   },

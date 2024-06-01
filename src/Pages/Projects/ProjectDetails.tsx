@@ -26,8 +26,15 @@ export default function ProjectDetails() {
   });
   const [projectIndx, setProjectIndx] = useState(0);
   const [showNextProjectImg, setShowNextProjectImg] = useState(false);
+  const [showPrevProjectImg, setShowPrevProjectImg] = useState(false);
+  const [previewImgPath, setPreviewImgPath] = useState("");
 
   const minLg = gsap.matchMedia();
+
+  const prevProjectDetails =
+    projectsInfos[
+      projectIndx - 1 < 0 ? projectsInfos.length - 1 : projectIndx - 1
+    ];
 
   const nextProjectDetails =
     projectsInfos[
@@ -217,37 +224,89 @@ export default function ProjectDetails() {
         </div>
 
         {/* ANCHOR NEXT PROJECT  ||========================================================== */}
-        <div className="lg:py-12 md:py-6 py-3 border-t border-neutral-600 lg:px-10 md:px-5 px-0 relative z-10">
+        <div className="lg:py-12 md:py-6 py-3 border-t-2 border-neutral-600 lg:px-10 md:px-5 px-0 relative z-10">
           <div className="flex md:flex-row flex-col gap-y-4 justify-between items-center">
-            <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
-              Next project
-            </span>
-            <Link
-              to={`/portfolio/projects/${nextProjectDetails.to}`}
-              className="lg:text-5xl md:text-4xl text-3xl __nav-underline-element"
-              onMouseEnter={() => setShowNextProjectImg(true)}
+            <div
+              className="project-link"
+              onMouseEnter={() => {
+                setShowPrevProjectImg(true);
+                setPreviewImgPath(prevProjectDetails.img);
+              }}
+              onMouseLeave={() => setShowPrevProjectImg(false)}
+            >
+              <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
+                Previous project
+              </span>
+              <Link
+                to={`/portfolio/projects/${prevProjectDetails.to}`}
+                className="lg:text-6xl md:text-4xl text-2xl __nav-underline-element"
+                onMouseEnter={() => {
+                  cursorHoverColorChange();
+                }}
+                onMouseLeave={() => {
+                  cursorLeaveColorChange();
+                }}
+              >
+                {prevProjectDetails.title}
+              </Link>
+            </div>
+            <div
+              className="project-link"
+              onMouseEnter={() => {
+                setShowNextProjectImg(true);
+                setPreviewImgPath(nextProjectDetails.img);
+              }}
               onMouseLeave={() => setShowNextProjectImg(false)}
             >
-              {nextProjectDetails.title}
-            </Link>
+              <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
+                Next project
+              </span>
+              <Link
+                to={`/portfolio/projects/${nextProjectDetails.to}`}
+                className="lg:text-6xl md:text-4xl text-2xl __nav-underline-element"
+                onMouseEnter={() => {
+                  cursorHoverColorChange();
+                }}
+                onMouseLeave={() => {
+                  cursorLeaveColorChange();
+                }}
+              >
+                {nextProjectDetails.title}
+              </Link>
+            </div>
           </div>
+
           <div
             className={`absolute w-full top-0 -z-10 left-1/2 duration-300 -translate-x-1/2 next-project-img-hider`}
           >
             <img
-              src={`/portfolio/assets/projects/${nextProjectDetails.img}/logo.png`}
-              alt={nextProjectDetails.title}
+              src={`/portfolio/assets/projects/${
+                showNextProjectImg
+                  ? nextProjectDetails.img
+                  : prevProjectDetails.img
+              }/logo.png`}
+              alt={
+                showNextProjectImg
+                  ? nextProjectDetails.title
+                  : prevProjectDetails.title
+              }
               className="opacity-0"
             />
           </div>
           <div
-            className={`rounded-lg overflow-hidden absolute md:w-1/2 w-3/4 top-0 -z-20 left-1/2 duration-300 -translate-x-1/2 ${
-              showNextProjectImg ? "-translate-y-1/4" : "translate-y-0"
+            className={`rounded-lg overflow-hidden absolute md:w-1/2 w-3/4 top-0 -z-20 left-1/2 duration-300 -translate-x-1/2 border-2 border-neutral-700 ${
+              showNextProjectImg || showPrevProjectImg
+                ? "-translate-y-1/4"
+                : "translate-y-0"
             }`}
           >
             <img
-              src={`/portfolio/assets/projects/${nextProjectDetails.img}/logo.png`}
-              alt={nextProjectDetails.title}
+              src={`/portfolio/assets/projects/${previewImgPath}/logo.png`}
+              alt={
+                showNextProjectImg
+                  ? nextProjectDetails.title
+                  : prevProjectDetails.title
+              }
               className="w-full"
             />
           </div>
