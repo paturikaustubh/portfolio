@@ -110,7 +110,7 @@ export default function Name() {
           id="profession"
           className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend lg:mt-8 md:mt-4 mt-2"
         >
-          <span className="__accent-text">Full Stack Developer</span>
+          <span className="__accent-text">Application Developer</span>
         </div>
       </div>
     </section>

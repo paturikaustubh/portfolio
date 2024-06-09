@@ -416,6 +416,10 @@ export function Footer() {
 
       <div className="text-center flex flex-col gap-4 mb-4">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
+        <div className="flex flex-col">
+          <p className="text-neutral-700">© 2024 Kaustubh Paturi</p>
+          <p className="text-neutral-700">All rights reserved</p>
+        </div>
       </div>
     </footer>
   );

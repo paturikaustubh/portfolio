@@ -54,7 +54,20 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  @apply w-[10px] h-2 duration-300;
+}
+.hide-scroll::-webkit-scrollbar {
+  @apply hidden;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neutral-600 hover:cursor-default;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-400 rounded-sm hover:cursor-default;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-500 rounded-sm w-4;
 }
 
 .__element-text {
