@@ -8,17 +8,17 @@ export default function Skills() {
   return (
     <section className="__section-padding" id="tech-stack">
       <div className="whitespace-nowrap">
-        <span className="__section-title __cursor-blend flex md:flex-row flex-col">
+        <span className="flex flex-col __section-title __cursor-blend md:flex-row">
           Tech Stack <span className="z-[12]">👨🏻‍💻</span>
         </span>
       </div>
-      <div className="tech-stack-info-grid w-full grid grid-cols-12 gap-y-8 md:gap-x-8 overflow-hidden">
-        <div className="lg:col-span-8 col-span-12 __section-desc __cursor-blend __fade-in">
+      <div className="grid w-full grid-cols-12 tech-stack-info-grid gap-y-8 md:gap-x-8">
+        <div className="col-span-12 lg:col-span-8 __section-desc __cursor-blend __fade-in">
           Over the time, I’ve picked up a bunch of cool tech skills. They’ve
           been my sidekicks in creating some awesome stuff and continue to fuel
           my coding adventures.
         </div>
-        <div className="lg:col-span-4 col-span-12 flex flex-col">
+        <div className="flex flex-col col-span-12 overflow-hidden lg:col-span-4">
           {/* ACCORDION */}
           <Accordion
             activeIndx={accordianActiveIndx}

@@ -6,7 +6,6 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const locArr = pathname.split("/").filter((value) => value !== "");
-  console.log(locArr);
 
   const navMenuElementStyle = "px-4 py-6 overflow-hidden border-t expand-bg";
 
@@ -32,10 +31,10 @@ export default function Navbar() {
         className="fixed inset-0 overflow-hidden block md:hidden justify-between z-[21]"
       >
         <div className="flex flex-col justify-between h-full py-5">
-          <section className="flex justify-between items-center text-4xl px-4 border-b pb-5">
+          <section className="flex items-center justify-between px-4 pb-5 text-4xl border-b">
             <span>Menu</span>
             <button
-              className="material-symbols-outlined border-0 outline-0"
+              className="border-0 material-symbols-outlined outline-0"
               onClick={() => {
                 const navigationMenu =
                   document.getElementById("navigation-menu");
@@ -77,7 +76,7 @@ export default function Navbar() {
 
       {/* ANCHOR NAVBAR */}
       <nav
-        className="flex justify-between items-center sticky top-0 lg:px-16 md:px-8 px-4 py-5 w-full z-20"
+        className="sticky top-0 z-20 flex items-center justify-between w-full px-4 py-5 lg:px-16 md:px-8"
         onMouseEnter={() => {
           const cursor =
             document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -128,7 +127,7 @@ export default function Navbar() {
         </div>
         <div className="flex md:hidden">
           <button
-            className="material-symbols-outlined border-0 outline-0"
+            className="border-0 material-symbols-outlined outline-0"
             onClick={() => {
               const navigationMenu = document.getElementById("navigation-menu");
               if (navigationMenu) {
@@ -140,7 +139,7 @@ export default function Navbar() {
             menu
           </button>
         </div>
-        <div className="navigation md:flex hidden items-center gap-8">
+        <div className="items-center hidden gap-8 navigation md:flex">
           {menuLinks.map(({ to, title }, indx) => (
             <Link
               key={indx}

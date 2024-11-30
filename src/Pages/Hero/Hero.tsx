@@ -115,16 +115,15 @@ export default function Hero() {
         });
         gsap.from(words, {
           scrollTrigger: {
-            trigger: char,
+            trigger: words,
             scrub: 1,
             start: "top 90%",
-            end: "bottom 70%",
+            end: "bottom 65%",
             toggleActions: "play none none reverse",
           },
           opacity: 0.03,
           filter: "blur(8px)",
-          // scale: 1.5,
-          stagger: 0.02,
+          stagger: 0.04,
           duration: 1,
         });
       });
