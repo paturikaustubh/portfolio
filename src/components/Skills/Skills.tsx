@@ -46,21 +46,21 @@ export default function Skills() {
   }, []);
 
   useEffect(() => {
-    const gsapMatchMedia = gsap.matchMedia();
-    gsap.utils.toArray(".__slide-right-left").forEach((element) => {
-      gsap.to(element as Element, {
-        x: "0%",
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: element as Element,
-          start: "top 80%",
-          end: "bottom 50%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-
     if (Boolean(techStackList)) {
+      const gsapMatchMedia = gsap.matchMedia();
+      gsap.utils.toArray(".__slide-right-left").forEach((element) => {
+        gsap.to(element as Element, {
+          x: "0%",
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: element as Element,
+            start: "top 80%",
+            end: "bottom 50%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
       gsapMatchMedia.add("(max-width: 768px)", () => {
         const darkThemeElements = document.querySelectorAll(
           ".__theme-change-dark"
