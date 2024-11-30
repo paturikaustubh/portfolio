@@ -13,7 +13,7 @@
 }
 
 .__tech-stack-list {
-  @apply grid sm:grid-cols-2 grid-cols-1 gap-y-4 gap-x-2;
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2;
 }
 
 .__tech-stack-list > li::before {
@@ -21,6 +21,10 @@
   position: relative;
   margin-right: 0.2em;
   z-index: 12;
+}
+
+.__dark-mode .__tech-stack-list > li::before {
+  content: "👉🏾";
 }
 
 .__skills-desc {
