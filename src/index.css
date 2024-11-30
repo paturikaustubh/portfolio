@@ -27,7 +27,7 @@ body {
   transition: 00ms ease-in-out;
 }
 
-body.__dark-mode {
+*.__dark-mode {
   --bg-color: #1c1917;
   --text-color: #e7e5e4;
   --nav-menu-bg: rgba(23 23 23 / 0.8);
@@ -54,20 +54,20 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar {
-  @apply w-[10px] h-2 duration-300;
+  @apply w-[11px] h-2 duration-300;
 }
 .hide-scroll::-webkit-scrollbar {
   @apply hidden;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-600 hover:cursor-default;
+  @apply bg-neutral-300 hover:cursor-default;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-400 rounded-sm hover:cursor-default;
+  @apply bg-neutral-600 rounded-sm hover:cursor-default;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-500 rounded-sm w-4;
+  @apply bg-neutral-800 rounded-sm w-4;
 }
 
 .__element-text {

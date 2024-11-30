@@ -49,7 +49,7 @@ export default function Accordion({
       }}
     >
       <button
-        className="flex justify-between items-center w-full font-semibold lg:text-4xl md:text-3xl sm:text-2xl text-xl overflow-hidden lg:p-5 md:p-4 p-3"
+        className="flex items-center justify-between w-full p-3 overflow-hidden text-xl font-semibold lg:text-4xl md:text-3xl sm:text-2xl lg:p-5 md:p-4"
         onClick={() => {
           setActiveIndx((prevVal: number) => {
             if (prevVal !== indx) return indx;
@@ -60,7 +60,7 @@ export default function Accordion({
         <span>{title}</span>
         <span>
           <svg
-            className="shrink-0 ml-8 accordion-expand-indicator"
+            className="ml-8 shrink-0 accordion-expand-indicator"
             width="16"
             height="16"
             xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ export default function Accordion({
         }`}
       >
         <div className="overflow-hidden __skills-desc">
-          <div className="text-lg pb-5 px-5">{description}</div>
+          <div className="px-5 pb-5 text-lg">{description}</div>
         </div>
       </div>
     </div>
