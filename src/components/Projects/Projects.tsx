@@ -119,7 +119,7 @@ export default function Projects() {
       </span>
       {/* ANCHOR LARGE SCREENS */}
       <div
-        className="mt-8 flex-col items-center justify-center overflow-hidden __projects-not-mobile"
+        className="flex-col items-center justify-center mt-8 overflow-hidden __projects-not-mobile"
         onMouseEnter={() => {
           const cursor =
             document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -220,14 +220,14 @@ export default function Projects() {
 
       {/* ANCHOR not large screens */}
       <div className="mt-4 __projects-mobile">
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {projectsInfos.slice(0, 4).map(({ title, img, to }, indx) => (
             <Link
               to={`projects/${to}`}
               className="flex flex-col gap-4"
               key={indx}
             >
-              <div className="rounded-lg w-full overflow-hidden inline-block">
+              <div className="inline-block w-full overflow-hidden rounded-lg">
                 <img
                   src={`/portfolio/assets/projects/${img}/logo.png`}
                   alt={title}
@@ -237,11 +237,11 @@ export default function Projects() {
               </div>
               <div className="overflow-hidden w-fit">
                 <button
-                  className="md:text-3xl text-2xl flex items-center gap-2 __project-title-mobile translate-x-full"
+                  className="flex items-center gap-2 text-2xl translate-x-full md:text-3xl __project-title-mobile"
                   ref={(el) => (titleRefs.current[indx] = el)}
                 >
                   {title}
-                  <span className="material-symbols-outlined md:text-2xl text-xl">
+                  <span className="text-xl material-symbols-outlined md:text-2xl">
                     open_in_new
                   </span>
                 </button>
@@ -251,10 +251,10 @@ export default function Projects() {
         </div>
       </div>
 
-      <div className="lg:mt-12 md:mt-8 mt-4 flex w-full justify-end items-center">
+      <div className="flex items-center justify-end w-full mt-4 lg:mt-12 md:mt-8">
         <Link
           to={"projects"}
-          className="rounded-lg __section-desc border-2 md:px-10 px-4 py-2 expand-bg"
+          className="px-4 py-2 border-2 rounded-lg __section-desc md:px-10 expand-bg"
           onMouseEnter={cursorHoverColorChange}
           onMouseLeave={cursorLeaveColorChange}
         >
