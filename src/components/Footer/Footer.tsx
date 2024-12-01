@@ -7,23 +7,38 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+// import emailjs from "emailjs-com";
 
 import "./styles.css";
 import Loading from "../LoadingScreen";
 import Alert from "../Alert";
 import { Link } from "react-router-dom";
 import SplitType from "split-type";
+// import EmailTemplate from "../EmailTemplate/EmailTemplate";
+
+dayjs.extend(utc);
+
+interface MessageSubmitForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+  timestamp: string;
+}
 
 export function Footer() {
   const userMessagesRef = collection(db, "userMessages");
 
-  const [instantMsgDetails, setInstantMsgDetails] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-    timestamp: "",
-  });
+  const [instantMsgDetails, setInstantMsgDetails] = useState<MessageSubmitForm>(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      message: "",
+      timestamp: "",
+    }
+  );
 
   const tl = gsap.timeline();
   const gsapMatchMedia = gsap.matchMedia();
@@ -168,24 +183,24 @@ export function Footer() {
 
     if (firstName.trim().length === 0) {
       getIntoFocus("firstName");
-      Alert("First name cannot be empty", "error");
+      Alert("First name cannot be empty", "warning");
     } else if (email.trim().length === 0) {
       getIntoFocus("email");
-      Alert("Email cannot be empty", "error");
+      Alert("Email cannot be empty", "warning");
     } else if (message.trim().length === 0) {
       getIntoFocus("message");
-      Alert("Message cannot be empty", "error");
+      Alert("Message cannot be empty", "warning");
     } else {
       const finalValues = {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim(),
         message: message.trim(),
-        timestamp: dayjs().format("DD MMM, YY (hh:mm A)"),
+        timestamp: dayjs.utc().format("DD MMM, YY (hh:mm A)"),
       };
 
       addDoc(userMessagesRef, finalValues)
-        .then(() => {
+        .then(async () => {
           setInstantMsgDetails({
             firstName: "",
             lastName: "",
@@ -193,6 +208,14 @@ export function Footer() {
             message: "",
             timestamp: "",
           });
+          // await emailjs.send(
+          //   import.meta.env.REACT_APP_EMAIL_SERVICE_ID as string,
+          //   import.meta.env.REACT_APP_EMAIL_TEMPLATE_ID as string,
+          //   {
+          //     subject: `New portfolio message from ${finalValues.firstName} ${finalValues.lastName} 👀`,
+          //     message: "Hello",
+          //   }
+          // );
           Alert("Message reached destination!", "success");
         })
         .catch((error) => {
@@ -220,11 +243,11 @@ export function Footer() {
 
   return (
     <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
-      <div className="flex md:flex-row flex-col items-center gap-x-12 gap-y-6">
-        <p className="lg:text-7xl md:text-6xl text-4xl font-bold">
+      <div className="flex flex-col items-center md:flex-row gap-x-12 gap-y-6">
+        <p className="text-4xl font-bold lg:text-7xl md:text-6xl">
           Let's connect! 🔗
         </p>
-        <div className="flex items-center grow justify-between md:w-fit w-full md:px-0 px-6 ">
+        <div className="flex items-center justify-between w-full px-6 grow md:w-fit md:px-0 ">
           <span className="connector-circle">
             <span className="circle-ripple" />
           </span>
@@ -235,13 +258,13 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mt-14 grid lg:grid-cols-5 grid-cols-1 items-start gap-x-12 gap-y-6">
+      <div className="grid items-start grid-cols-1 mt-14 lg:grid-cols-5 gap-x-12 gap-y-6">
         <div className="lg:col-span-3">
-          <p className="md:text-4xl text-3xl font-semibold">
+          <p className="text-3xl font-semibold md:text-4xl">
             Send Instant Message
           </p>
           <form className="flex flex-col gap-3 mt-6" onSubmit={handleSubmit}>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <div className="flex items-center gap-1">
                 <span className="input-label grow" data-label="First Name">
                   <input
@@ -283,7 +306,7 @@ export function Footer() {
               </span>
             </div>
 
-            <div className="grow col-span-2">
+            <div className="col-span-2 grow">
               <div
                 className="input-label"
                 data-label="Message"
@@ -293,7 +316,7 @@ export function Footer() {
                   id="message"
                   required
                   name="message"
-                  className="rounded-md h-52 resize-none p-2"
+                  className="p-2 rounded-md resize-none h-52"
                   placeholder=""
                   value={instantMsgDetails.message}
                   onChange={handleInstantMsgDetailsChange}
@@ -303,7 +326,7 @@ export function Footer() {
             </div>
             <div className="ml-auto">
               <button
-                className="rounded-md px-3 py-1 text-2xl inst-msg-send font-semibold border-2"
+                className="px-3 py-1 text-2xl font-semibold border-2 rounded-md inst-msg-send"
                 onMouseEnter={() => {
                   const cursor =
                     document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -325,11 +348,11 @@ export function Footer() {
           </form>
         </div>
 
-        <div className="lg:col-span-2 self-stretch">
+        <div className="self-stretch lg:col-span-2">
           <p className="text-4xl font-semibold text-center">
             Find me on socials
           </p>
-          <div className="flex flex-col items-center justify-center mt-12 gap-3 text-xl">
+          <div className="flex flex-col items-center justify-center gap-3 mt-12 text-xl">
             <div className="social-link">
               <span>GitHub</span>
               <Link
@@ -395,7 +418,7 @@ export function Footer() {
       </div>
 
       <p
-        className="footer-name mt-8 mb-16"
+        className="mt-8 mb-16 footer-name"
         onMouseEnter={() => {
           const cursor =
             document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -414,7 +437,7 @@ export function Footer() {
         KaustubhPaturi
       </p>
 
-      <div className="text-center flex flex-col gap-4 mb-4">
+      <div className="flex flex-col gap-4 mb-4 text-center">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
         <div className="flex flex-col">
           <p className="text-neutral-700">© 2024 Kaustubh Paturi</p>

@@ -1,0 +1,58 @@
+.email-container {
+  background-color: white;
+  padding: 0.5em;
+}
+
+.email-content {
+  background-color: #e5e5e5;
+  padding: 0.5em;
+  color: black;
+  border-radius: 0.35em;
+}
+
+.email-title {
+  font-weight: 800;
+  font-size: x-large;
+  margin: 0;
+}
+
+.email-sub-title {
+  font-size: small;
+  color: grey;
+}
+
+.body {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.body .message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  /* line-height: 1.8em; */
+}
+
+.body .button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.redirect-button {
+  background-color: rgb(0, 0, 255);
+  color: white;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  width: fit-content;
+  border-radius: 0.5em;
+  margin-inline: auto;
+  cursor: pointer !important;
+  transition: 200ms ease-in-out;
+}
+
+.redirect-button:hover {
+  background-color: rgb(0, 0, 180);
+}
