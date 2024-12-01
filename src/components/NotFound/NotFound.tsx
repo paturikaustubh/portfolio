@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { TransitionOverlay } from "../../Transition/transition";
 
 import "./styles.css";
-import { Link } from "react-router-dom";
 
 export default function NotFound() {
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function NotFound() {
     if (cursorElement) {
       cursorElement.style.scale = "14";
 
-      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };
@@ -49,19 +48,6 @@ export default function NotFound() {
       cursorElement.style.mixBlendMode = "";
       cursorElement.style.backgroundColor = "var(--text-color)";
     }
-  };
-  const cursorHoverColorChange = () => {
-    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
-    if (cursor) cursor.style.mixBlendMode = "difference";
-    if (!document.body.classList.contains("__dark-mode") && cursor)
-      cursor.style.backgroundColor = "var(--bg-color)";
-  };
-
-  const cursorLeaveColorChange = () => {
-    const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
-    if (cursor) cursor.style.mixBlendMode = "";
-    if (!document.body.classList.contains("__dark-mode") && cursor)
-      cursor.style.backgroundColor = "var(--text-color)";
   };
 
   return (

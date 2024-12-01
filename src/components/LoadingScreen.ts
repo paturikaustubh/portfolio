@@ -1,7 +1,7 @@
 export default function Loading(
   open: boolean,
   message = "Loading Data...",
-  id?: string
+  id?: string,
 ) {
   if (open) {
     const rootEle = document.getElementById("root");

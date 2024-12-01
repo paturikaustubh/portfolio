@@ -36,14 +36,14 @@ export default function Projects() {
 
       // Get all elements with class name "__project-row"
       const projectRows = Array.from(
-        document.querySelectorAll(".__project-row")
+        document.querySelectorAll(".__project-row"),
       );
 
       if (customCursor)
         window.addEventListener("scroll", () => {
           const elementsUnderCursor = document.elementsFromPoint(
             customCursor.getBoundingClientRect().x,
-            customCursor.getBoundingClientRect().y
+            customCursor.getBoundingClientRect().y,
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
@@ -167,8 +167,8 @@ export default function Projects() {
               mousePresent && indx !== activeProjectIndx
                 ? "p-8"
                 : !mousePresent
-                ? "p-8"
-                : "p-12"
+                  ? "p-8"
+                  : "p-12"
             } w-full flex justify-between items-center z-[14] translate-x-full __slide-right-left overflow-hidden ${
               indx + 1 === 4 ? "border-b" : ""
             }`}
@@ -191,8 +191,8 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? ` brightness-100 translate-x-5`
                   : mousePresent
-                  ? " brightness-[0.3]"
-                  : ""
+                    ? " brightness-[0.3]"
+                    : ""
               } duration-300`}
             >
               {title}
@@ -205,8 +205,8 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
                   : mousePresent
-                  ? "brightness-[0.3]"
-                  : ""
+                    ? "brightness-[0.3]"
+                    : ""
               }`}
               style={{
                 transition: "transform cubic-bezier(0.19, 1, 0.22, 1), 300ms",

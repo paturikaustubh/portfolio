@@ -118,7 +118,9 @@ button:focus-visible {
 
 .expand-bg {
   border-color: var(--text-color);
-  transition: color 300ms ease, border-radius 300ms ease;
+  transition:
+    color 300ms ease,
+    border-radius 300ms ease;
   color: var(--text-color);
   position: relative;
   z-index: 1;
@@ -151,7 +153,9 @@ button:focus-visible {
 
 .inst-msg-send {
   border-color: #e7e5e4;
-  transition: color 300ms ease, border-radius 300ms ease;
+  transition:
+    color 300ms ease,
+    border-radius 300ms ease;
   color: #e7e5e4;
   position: relative;
   z-index: 1;

@@ -14,7 +14,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
       locationArr[locationArr.length - 1]
         .split("-")
         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")
+        .join(" "),
     );
     setTimeout(() => {
       window.scrollTo({ top: 0 });

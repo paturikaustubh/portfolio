@@ -34,7 +34,7 @@ export default function Hero() {
         y: 0,
         delay: 1.5,
         duration: 0.8,
-      }
+      },
     );
 
     // ANCHOR SECTION TITLE ANIMATION  ||========================================================================
@@ -176,7 +176,7 @@ export default function Hero() {
     if (cursorElement) {
       cursorElement.style.scale = "14";
 
-      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };

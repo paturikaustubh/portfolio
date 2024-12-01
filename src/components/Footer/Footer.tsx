@@ -37,7 +37,7 @@ export function Footer() {
       email: "",
       message: "",
       timestamp: "",
-    }
+    },
   );
 
   const tl = gsap.timeline();
@@ -66,14 +66,14 @@ export function Footer() {
             circleElement.forEach(
               (element) =>
                 (element.style.animation =
-                  "connector-circle-reveal 0.3s 0.35s cubic-bezier(.38,-0.01,.32,2.52) forwards")
+                  "connector-circle-reveal 0.3s 0.35s cubic-bezier(.38,-0.01,.32,2.52) forwards"),
             );
           }
           if (rippleEle)
             rippleEle.forEach(
               (element) =>
                 (element.style.animation =
-                  "connector-circle-ripple 0.7s 0.4s cubic-bezier(0.34, 0.82, 0.36, 0.98) forwards")
+                  "connector-circle-ripple 0.7s 0.4s cubic-bezier(0.34, 0.82, 0.36, 0.98) forwards"),
             );
         },
         onLeaveBack: () => {
@@ -92,14 +92,14 @@ export function Footer() {
             circleElement.forEach(
               (element) =>
                 (element.style.animation =
-                  "connector-circle-reveal-reset 0S ease-out forwards")
+                  "connector-circle-reveal-reset 0S ease-out forwards"),
             );
           }
           if (rippleEle)
             rippleEle.forEach(
               (element) =>
                 (element.style.animation =
-                  "connector-circle-ripple-reset 0s cubic-bezier(0.34, 0.82, 0.36, 0.98) forwards")
+                  "connector-circle-ripple-reset 0s cubic-bezier(0.34, 0.82, 0.36, 0.98) forwards"),
             );
         },
       },
@@ -111,7 +111,7 @@ export function Footer() {
         const cursorElement =
           document.querySelector<HTMLDivElement>(".__custom-cursor");
         if (cursorElement) {
-          cursorElement.style.backgroundColor = "#e7e5e4";
+          cursorElement.style.backgroundColor = "#E7E5E4";
         }
       });
       footer.addEventListener("mouseleave", () => {
@@ -165,7 +165,7 @@ export function Footer() {
   const handleInstantMsgDetailsChange = (
     event:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
     setInstantMsgDetails({ ...instantMsgDetails, [name]: value });

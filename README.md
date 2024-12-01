@@ -5,6 +5,7 @@
 Here is my portfolio where you can know more about me. You can also get a glimpse of what I use to build my applications and all my recent projects.
 
 ### Here is the tech stack I used to build my portfolio.
+
 - ReactJs (v18.2.0)
 - GSAP (v3.12.5)
 - Framer Motion (v11.0.5)

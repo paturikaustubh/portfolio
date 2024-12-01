@@ -25,21 +25,21 @@ export default function Cursor() {
   }) => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     const projectImgSection = document.querySelector<HTMLImageElement>(
-      ".__projects-img-section"
+      ".__projects-img-section",
     );
     cursor?.animate(
       {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
-      { duration: 500, fill: "forwards" }
+      { duration: 500, fill: "forwards" },
     );
     projectImgSection?.animate(
       {
         left: `${clientX - 10}px`,
         top: `${clientY - 10}px`,
       },
-      { duration: 1600, fill: "forwards" }
+      { duration: 1600, fill: "forwards" },
     );
   };
 
