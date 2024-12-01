@@ -16,6 +16,10 @@ export default function Hero() {
   // ANCHOR content animations  ||========================================================================
   useEffect(() => {
     const gsapMatchMedia = gsap.matchMedia();
+    const body = document.body;
+
+    if (body.classList.contains("__dark-mode"))
+      body.classList.remove("__dark-mode");
 
     // gsapMatchMedia.add("(max-width: 1024px)", () => {});
 

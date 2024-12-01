@@ -54,7 +54,7 @@ export default function Skills() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: element as Element,
-            start: "top 80%",
+            start: "top 78%",
             end: "bottom 50%",
             toggleActions: "play none none reverse",
           },
