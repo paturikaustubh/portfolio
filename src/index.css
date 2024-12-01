@@ -64,10 +64,10 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-600 rounded-sm hover:cursor-default;
+  @apply rounded-sm bg-neutral-600 hover:cursor-default;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-800 rounded-sm w-4;
+  @apply w-4 rounded-sm bg-neutral-800;
 }
 
 .__element-text {
@@ -104,12 +104,12 @@ button:focus-visible {
 }
 
 .__section-padding {
-  @apply lg:px-16 md:px-8 px-4 pb-8 md:pb-16 lg:pb-24 pt-2 md:pt-4 lg:pt-6;
+  @apply px-4 pt-2 pb-8 lg:px-16 md:px-8 md:pb-16 lg:pb-24 md:pt-4 lg:pt-6;
 }
 
 .__section-title {
   font-family: "Poppins", sans-serif;
-  @apply lg:text-8xl md:text-6xl py-3 sm:text-5xl text-4xl font-bold lg:mb-8 md:mb-4 mb-2 overflow-hidden inline-block;
+  @apply inline-block py-3 mb-2 overflow-hidden text-4xl font-bold lg:text-8xl md:text-6xl sm:text-5xl lg:mb-8 md:mb-4;
 }
 
 .__section-desc {
@@ -118,7 +118,9 @@ button:focus-visible {
 
 .expand-bg {
   border-color: var(--text-color);
-  transition: color 300ms ease, border-radius 300ms ease;
+  transition:
+    color 300ms ease,
+    border-radius 300ms ease;
   color: var(--text-color);
   position: relative;
   z-index: 1;
@@ -135,6 +137,7 @@ button:focus-visible {
   z-index: -1;
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   rotate: 0deg;
+  overflow: hidden;
 }
 
 .expand-bg:hover,
@@ -150,7 +153,9 @@ button:focus-visible {
 
 .inst-msg-send {
   border-color: #e7e5e4;
-  transition: color 300ms ease, border-radius 300ms ease;
+  transition:
+    color 300ms ease,
+    border-radius 300ms ease;
   color: #e7e5e4;
   position: relative;
   z-index: 1;

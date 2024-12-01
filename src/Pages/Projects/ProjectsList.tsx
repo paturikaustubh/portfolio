@@ -43,14 +43,14 @@ export default function ProjectsList() {
 
       // Get all elements with class name "__project-row"
       const projectRows = Array.from(
-        document.querySelectorAll(".__project-row")
+        document.querySelectorAll(".__project-row"),
       );
 
       if (customCursor)
         window.addEventListener("scroll", () => {
           const elementsUnderCursor = document.elementsFromPoint(
             customCursor.getBoundingClientRect().x,
-            customCursor.getBoundingClientRect().y
+            customCursor.getBoundingClientRect().y,
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
@@ -147,7 +147,7 @@ export default function ProjectsList() {
     if (cursorElement) {
       cursorElement.style.scale = "14";
 
-      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };
@@ -228,8 +228,8 @@ export default function ProjectsList() {
                     mousePresent && indx === activeProjectIndx
                       ? ` brightness-100 translate-x-5`
                       : mousePresent
-                      ? " brightness-[0.3]"
-                      : ""
+                        ? " brightness-[0.3]"
+                        : ""
                   } duration-300`}
                 >
                   {title}
@@ -242,8 +242,8 @@ export default function ProjectsList() {
                     mousePresent && indx === activeProjectIndx
                       ? `brightness-100 -translate-x-5`
                       : mousePresent
-                      ? "brightness-[0.3]"
-                      : ""
+                        ? "brightness-[0.3]"
+                        : ""
                   }`}
                   style={{
                     transition:

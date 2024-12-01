@@ -44,7 +44,7 @@ export default function ProjectDetails() {
   // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
     const projectFilteredArr = projectsInfos.filter(
-      ({ to }) => to === projectName
+      ({ to }) => to === projectName,
     );
     setProjectDetails(projectFilteredArr[0]);
     setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
@@ -128,7 +128,7 @@ export default function ProjectDetails() {
     if (cursorElement) {
       cursorElement.style.scale = "14";
 
-      cursorElement.style.backgroundColor = "#e7e5e4";
+      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };

@@ -14,7 +14,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
       locationArr[locationArr.length - 1]
         .split("-")
         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")
+        .join(" "),
     );
     setTimeout(() => {
       window.scrollTo({ top: 0 });
@@ -82,7 +82,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
                 alignItems: "center",
               }}
             >
-              <div className="lg:text-6xl text-4xl px-2 translate-y-0 text-stone-200 py-1 font-bold inline-block overflow-hidden opacity-100">
+              <div className="inline-block px-2 py-1 overflow-hidden text-4xl font-bold translate-y-0 opacity-100 lg:text-6xl text-stone-200">
                 <motion.span
                   initial={{ y: "100%" }}
                   animate={{

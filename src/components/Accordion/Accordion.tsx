@@ -30,14 +30,14 @@ export default function Accordion({
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
         if (cursor) {
           cursor.style.mixBlendMode = "difference";
-          cursor.style.backgroundColor = "#e7e5e4";
+          cursor.style.backgroundColor = "#E7E5E4";
         }
       }}
       onMouseEnter={() => {
         const cursor = document.querySelector<HTMLElement>(".__custom-cursor");
         if (cursor) {
           cursor.style.mixBlendMode = "difference";
-          cursor.style.backgroundColor = "#e7e5e4";
+          cursor.style.backgroundColor = "#E7E5E4";
         }
       }}
       onMouseLeave={() => {

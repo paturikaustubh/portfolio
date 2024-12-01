@@ -1,0 +1,57 @@
+.not-found {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 100dvh;
+}
+
+.not-found .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: relative; */
+  width: 100%;
+  height: fit-content;
+}
+
+.not-found .title > span {
+  position: absolute;
+}
+
+.not-found .title .number {
+  font-size: 20dvw;
+  font-weight: 900;
+  mix-blend-mode: difference;
+  background-color: white;
+  color: transparent;
+  background-clip: text;
+  z-index: 10;
+}
+
+.not-found .title .text {
+  font-size: 5dvw;
+  font-weight: 300;
+  transform: translate(25%, 100%);
+  color: #595959;
+}
+
+body.__dark-mode .not-found .title .text {
+  color: rgb(139, 139, 139);
+}
+
+.not-found .button-container {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.not-found .button-container a {
+  margin-bottom: 2em;
+  padding: 0.5em 1em;
+  font-size: 1.3dvw;
+}

@@ -94,21 +94,21 @@ export default function Name() {
 
   // ANCHOR JSX  ||========================================================================
   return (
-    <section className="overflow-hidden relative h-screen __section-padding flex flex-col justify-center items-center lg:gap-6 md:gap-14 gap-12 bg-transparent select-none">
-      <div className="absolute w-full h-full flex justify-center items-center pointer-events-none __name-bg">
+    <section className="relative flex flex-col items-center justify-center h-screen gap-12 overflow-hidden bg-transparent select-none __section-padding lg:gap-6 md:gap-14">
+      <div className="absolute flex items-center justify-center w-full h-full pointer-events-none __name-bg">
         hey!
       </div>
-      <div className="flex flex-col justify-center items-center poin __sticky-situation">
+      <div className="flex flex-col items-center justify-center poin __sticky-situation">
         <div
           id="full-name"
           className="flex gap-4 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
         >
           <span className="overflow-hidden">KAUSTUBH</span>
-          <span className="__stroke-only overflow-hidden">PATURI</span>
+          <span className="overflow-hidden __stroke-only">PATURI</span>
         </div>
         <div
           id="profession"
-          className="lg:text-4xl md:text-2xl text-xl __animate-profession font-light __cursor-blend lg:mt-8 md:mt-4 mt-2"
+          className="mt-2 text-xl font-light lg:text-4xl md:text-2xl __animate-profession __cursor-blend lg:mt-8 md:mt-4"
         >
           <span className="__accent-text">Application Developer</span>
         </div>

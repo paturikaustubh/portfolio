@@ -1,7 +1,7 @@
 export default function Loading(
   open: boolean,
   message = "Loading Data...",
-  id?: string
+  id?: string,
 ) {
   if (open) {
     const rootEle = document.getElementById("root");
@@ -9,7 +9,7 @@ export default function Loading(
     // CREATE CONTAINER
     const loadingContainer = document.createElement("div");
     loadingContainer.className =
-      "fixed inset-0 w-full h-full flex justify-center items-center z-50 loading-container";
+      "fixed inset-0 z-50 flex items-center justify-center w-full h-full loading-container";
     loadingContainer.style.backgroundColor = "rgba(0 0 0 / 0.8)";
     loadingContainer.style.backdropFilter = "blur(5px)";
     loadingContainer.style.animation = "fade-in 150ms ease-in-out forwards";
@@ -17,7 +17,7 @@ export default function Loading(
     // CREATE CONTENT
     const loadingContent = document.createElement("div");
     loadingContent.className =
-      "absolute flex items-center lg:gap-4 md:gap-3 gap-2 text-white lg:text-5xl md:text-4xl text-3xl";
+      "absolute flex items-center gap-2 text-3xl text-white lg:gap-4 md:gap-3 lg:text-5xl md:text-4xl";
 
     // CREATE ANIMATION
     const loadingAnimation = document.createElement("span");

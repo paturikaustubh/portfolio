@@ -1,7 +1,7 @@
 export default function Alert(
   message: string,
   severity: "info" | "error" | "success" | "warning",
-  open: boolean = true
+  open: boolean = true,
 ) {
   const alertContainer = document.getElementById("alert-container");
 
@@ -11,10 +11,10 @@ export default function Alert(
       severity === "info"
         ? "bg-blue-50 text-blue-800"
         : severity === "error"
-        ? "bg-red-50 text-red-800"
-        : severity === "success"
-        ? "bg-green-50 text-green-800"
-        : "bg-yellow-50 text-yellow-500"
+          ? "bg-red-50 text-red-800"
+          : severity === "success"
+            ? "bg-green-50 text-green-800"
+            : "bg-yellow-50 text-yellow-500"
     }`;
     alertDiv.style.animation =
       "show-alert 350ms ease-out, hide-alert 350ms 3500ms ease-in forwards";

@@ -8,7 +8,8 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@firebase/auth": "^1.7.2",
@@ -16,6 +17,8 @@
     "@firebase/storage": "^0.12.4",
     "@studio-freight/lenis": "^1.0.33",
     "dayjs": "^1.11.11",
+    "dayjs-plugin-utc": "^0.1.2",
+    "emailjs-com": "^3.2.0",
     "firebase": "^10.11.1",
     "framer-motion": "^11.0.5",
     "gsap": "^3.12.5",
@@ -36,6 +39,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.33",
+    "prettier": "^3.4.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
