@@ -30,14 +30,14 @@ export default function Summary() {
           with innovation.
         </span>
       </div>
-      <Link
+      {/* <Link
         to={"about-me"}
         onMouseEnter={cursorHoverColorChange}
         onMouseLeave={cursorLeaveColorChange}
         className="px-4 py-2 ml-auto border-2 rounded-lg __section-desc md:px-10 expand-bg"
       >
         Tell me more
-      </Link>
+      </Link> */}
     </section>
   );
 }
