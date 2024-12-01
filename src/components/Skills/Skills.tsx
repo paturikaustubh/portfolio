@@ -84,7 +84,6 @@ export default function Skills() {
               trigger: darkElement,
               start: "top 70%",
               end: "bottom 80%",
-              markers: true,
               onEnter: () => {
                 document.body.classList.add("__dark-mode");
                 document.body.style.transition = "300ms ease-in-out";
