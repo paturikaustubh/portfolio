@@ -1,3 +1,7 @@
+footer {
+  clear: both;
+}
+
 input,
 textarea {
   background-color: transparent;

@@ -44,7 +44,7 @@ export default function ProjectDetails() {
   // ANCHOR USELAYOUT EFFECT  ||========================================================================
   useLayoutEffect(() => {
     const projectFilteredArr = projectsInfos.filter(
-      ({ to }) => to === projectName,
+      ({ to }) => to === projectName
     );
     setProjectDetails(projectFilteredArr[0]);
     setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
@@ -162,13 +162,13 @@ export default function ProjectDetails() {
   return (
     <TransitionOverlay>
       <section className="min-h-[100dvh] __section-padding lg:mt-8 mt-0 lg:space-y-10 md:space-y-8 sm:space-y-6 space-y-4 overflow-hidden">
-        <div className="flex justify-between md:items-center overflow-hidden">
-          <span
+        <div className="flex justify-between overflow-hidden md:items-center">
+          <h1
             className={`__section-title __cursor-blend`}
             style={{ margin: 0 }}
           >
             {projectDetails.title}
-          </span>
+          </h1>
           {projectDetails.live ? (
             <Link
               to={projectDetails.live}
@@ -196,18 +196,18 @@ export default function ProjectDetails() {
         />
 
         {/* ANCHOR RESPONSIVE IMAGES  ||========================================================== */}
-        <div className="flex md:flex-row flex-col gap-16 items-start justify-around">
+        <div className="flex flex-col items-start justify-around gap-16 md:flex-row">
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-1.png`}
-            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
+            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
           />
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-2.png`}
-            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
+            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
           />
           <img
             src={`/portfolio/assets/projects/${projectDetails.img}/responsive-3.png`}
-            className="w-72 mx-auto border-2 border-neutral-700 rounded-md"
+            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
           />
         </div>
 
@@ -224,8 +224,8 @@ export default function ProjectDetails() {
         </div>
 
         {/* ANCHOR NEXT PROJECT  ||========================================================== */}
-        <div className="lg:py-12 md:py-6 py-3 border-t-2 border-neutral-600 lg:px-10 md:px-5 px-0 relative z-10">
-          <div className="flex md:flex-row flex-col gap-y-4 justify-between items-center">
+        <div className="relative z-10 px-0 py-3 border-t-2 lg:py-12 md:py-6 border-neutral-600 lg:px-10 md:px-5">
+          <div className="flex flex-col items-center justify-between md:flex-row gap-y-4">
             <div
               className="project-link"
               onMouseEnter={() => {
@@ -234,12 +234,12 @@ export default function ProjectDetails() {
               }}
               onMouseLeave={() => setShowPrevProjectImg(false)}
             >
-              <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
+              <span className="text-2xl font-semibold lg:text-6xl md:text-4xl">
                 Previous project
               </span>
               <Link
                 to={`/portfolio/projects/${prevProjectDetails.to}`}
-                className="lg:text-6xl md:text-4xl text-2xl __nav-underline-element"
+                className="text-2xl lg:text-6xl md:text-4xl __nav-underline-element"
                 onMouseEnter={() => {
                   cursorHoverColorChange();
                 }}
@@ -258,12 +258,12 @@ export default function ProjectDetails() {
               }}
               onMouseLeave={() => setShowNextProjectImg(false)}
             >
-              <span className="lg:text-6xl md:text-4xl text-2xl font-semibold">
+              <span className="text-2xl font-semibold lg:text-6xl md:text-4xl">
                 Next project
               </span>
               <Link
                 to={`/portfolio/projects/${nextProjectDetails.to}`}
-                className="lg:text-6xl md:text-4xl text-2xl __nav-underline-element"
+                className="text-2xl lg:text-6xl md:text-4xl __nav-underline-element"
                 onMouseEnter={() => {
                   cursorHoverColorChange();
                 }}

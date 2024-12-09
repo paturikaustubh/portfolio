@@ -36,14 +36,14 @@ export default function Projects() {
 
       // Get all elements with class name "__project-row"
       const projectRows = Array.from(
-        document.querySelectorAll(".__project-row"),
+        document.querySelectorAll(".__project-row")
       );
 
       if (customCursor)
         window.addEventListener("scroll", () => {
           const elementsUnderCursor = document.elementsFromPoint(
             customCursor.getBoundingClientRect().x,
-            customCursor.getBoundingClientRect().y,
+            customCursor.getBoundingClientRect().y
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
@@ -144,8 +144,10 @@ export default function Projects() {
           style={{
             filter: "brightness(70%)",
             transform: `translate(-50%, -50%)`,
-            height: `calc(${imgScale} * 19.1rem)`,
-            transition: "550ms cubic-bezier(0.76, 0, 0.24, 1)",
+            height: `calc(${imgScale} * 19.1rem`,
+            overflow: "hidden",
+            transition:
+              "height 550ms cubic-bezier(0.76, 0, 0.24, 1), scale 1300ms cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
           {projectsInfos.slice(0, 4).map(({ img, title }, indx) => (

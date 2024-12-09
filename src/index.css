@@ -104,7 +104,7 @@ button:focus-visible {
 }
 
 .__section-padding {
-  @apply px-4 pt-2 pb-8 lg:px-16 md:px-8 md:pb-16 lg:pb-24 md:pt-4 lg:pt-6;
+  @apply px-4 py-12 lg:px-16 md:px-8;
 }
 
 .__section-title {
@@ -112,8 +112,19 @@ button:focus-visible {
   @apply inline-block py-3 mb-2 overflow-hidden text-4xl font-bold lg:text-8xl md:text-6xl sm:text-5xl lg:mb-8 md:mb-4;
 }
 
+.__section-title .fun-text {
+  font-size: small;
+  color: var(--bg-color);
+  font-weight: 300;
+}
+
 .__section-desc {
   @apply lg:text-4xl lg:leading-[4rem] font-[500] md:text-2xl md:leading-[3rem] sm:text-xl text-base sm:leading-[2rem] leading-[1.7rem];
+}
+
+.text-emoji {
+  position: relative;
+  z-index: 12;
 }
 
 .expand-bg {
