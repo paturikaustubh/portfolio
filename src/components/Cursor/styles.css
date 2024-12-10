@@ -13,6 +13,14 @@
   /* transition: width 300ms; */
 }
 
+.__custom-cursor.animate-pulse-fast {
+  backdrop-filter: blur(15px) !important;
+  background-color: var(--text-color) !important;
+  scale: 1 !important;
+  z-index: 11 !important;
+  mix-blend-mode: unset !important;
+}
+
 @media (max-width: 1024px) {
   .__custom-cursor {
     display: none;

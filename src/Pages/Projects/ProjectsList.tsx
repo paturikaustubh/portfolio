@@ -43,14 +43,14 @@ export default function ProjectsList() {
 
       // Get all elements with class name "__project-row"
       const projectRows = Array.from(
-        document.querySelectorAll(".__project-row"),
+        document.querySelectorAll(".__project-row")
       );
 
       if (customCursor)
         window.addEventListener("scroll", () => {
           const elementsUnderCursor = document.elementsFromPoint(
             customCursor.getBoundingClientRect().x,
-            customCursor.getBoundingClientRect().y,
+            customCursor.getBoundingClientRect().y
           );
 
           const isHoveringProjectRow = elementsUnderCursor.some((element) => {
@@ -158,11 +158,11 @@ export default function ProjectsList() {
       <>
         <section className="__theme-change-dark __section-padding">
           {/* ANCHOR LARGE SCREENS */}
-          <div className="lg:text-6xl md:text-5xl text-4xl pb-1 font-bold overflow-hidden inline-block">
+          <h1 className="inline-block pb-1 overflow-hidden font-bold __section-title">
             All Projects ⚒️
-          </div>
+          </h1>
           <div
-            className="mt-6 flex-col items-center justify-center overflow-hidden __projects-not-mobile"
+            className="flex-col items-center justify-center mt-6 overflow-hidden __projects-not-mobile"
             onMouseEnter={() => {
               const cursor =
                 document.querySelector<HTMLDivElement>(".__custom-cursor");
@@ -188,7 +188,8 @@ export default function ProjectsList() {
                 filter: "brightness(70%)",
                 transform: `translate(-50%, -50%)`,
                 height: `calc(${imgScale} * 19.1rem)`,
-                transition: "550ms cubic-bezier(0.76, 0, 0.24, 1)",
+                transition:
+                  "550ms height cubic-bezier(0.76, 0, 0.24, 1), 1300ms scale cubic-bezier(0.19, 1, 0.22, 1)",
               }}
             >
               {projectsInfos.map(({ img, title }, indx) => (
@@ -257,14 +258,14 @@ export default function ProjectsList() {
           </div>
           {/* ANCHOR not large screens */}
           <div className="mt-4 __projects-mobile">
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-8">
               {projectsInfos.map(({ title, img, to }, indx) => (
                 <Link
                   to={`/portfolio/projects/${to}`}
                   className="flex flex-col gap-2"
                   key={indx}
                 >
-                  <div className="rounded-lg w-full overflow-hidden inline-block">
+                  <div className="inline-block w-full overflow-hidden rounded-lg">
                     <img
                       src={`/portfolio/assets/projects/${img}/logo.png`}
                       alt={title}
@@ -274,11 +275,11 @@ export default function ProjectsList() {
                   </div>
                   <div className="overflow-hidden w-fit">
                     <button
-                      className="flex text-lg items-center justify-start gap-2 __project-title-mobile translate-x-full"
+                      className="flex items-center justify-start gap-2 text-lg translate-x-full __project-title-mobile"
                       ref={(el) => (titleRefs.current[indx] = el)}
                     >
                       {title}
-                      <span className="material-symbols-outlined text-base">
+                      <span className="text-base material-symbols-outlined">
                         open_in_new
                       </span>
                     </button>

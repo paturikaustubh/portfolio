@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Name from "../../components/Name/Name";
-import Projects from "../../components/Projects/Projects";
+import Projects from "../../components/HeroProjects/HeroProjects";
 import Skills from "../../components/Skills/Skills";
 import Summary from "../../components/Summary/Summary";
 
@@ -34,7 +34,7 @@ export default function Hero() {
         y: 0,
         delay: 1.5,
         duration: 0.8,
-      },
+      }
     );
 
     // ANCHOR SECTION TITLE ANIMATION  ||========================================================================
@@ -57,7 +57,7 @@ export default function Hero() {
         gsap.to("body", {
           scrollTrigger: {
             trigger: darkElement,
-            start: "top 80%",
+            start: "top 70%",
             end: "bottom 70%",
             onEnter: () => {
               document.body.classList.add("__dark-mode");

@@ -5,17 +5,39 @@ import Hero from "./Pages/Hero/Hero";
 import ProjectsList from "./Pages/Projects/ProjectsList";
 import ProjectDetails from "./Pages/Projects/ProjectDetails";
 import NotFound from "./components/NotFound/NotFound";
+import MoreAboutMe from "./Pages/Projects/MoreAboutMe/MoreAboutMe";
 
 export default function AnimatedRoutes() {
+  const paths = [
+    {
+      path: "/portfolio/",
+      element: <Hero />,
+    },
+    {
+      path: "/portfolio/projects",
+      element: <ProjectsList />,
+    },
+    {
+      path: "/portfolio/projects/:name",
+      element: <ProjectDetails />,
+    },
+    {
+      path: "/portfolio/about-me",
+      element: <MoreAboutMe />,
+    },
+    {
+      path: "/portfolio/*",
+      element: <NotFound />,
+    },
+  ];
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/portfolio/" element={<Hero />} />
-        <Route path="/portfolio/projects" element={<ProjectsList />} />
-        <Route path="/portfolio/projects/:name" element={<ProjectDetails />} />
-        <Route path="/portfolio/*" element={<NotFound />} />
+        {paths.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
       </Routes>
     </AnimatePresence>
   );
