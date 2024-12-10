@@ -14,23 +14,30 @@ h1 > span {
 }
 
 .desc-img {
-  display: block;
   position: relative;
 }
 
 .description > p {
   margin-bottom: 1.2em;
   z-index: 0;
+  line-height: 2em;
+}
+
+.details-text {
+  font-size: clamp(1.2dvw, 1.5dvw, 1.8dvw);
 }
 
 .description > p:last-child {
   margin-bottom: 0;
 }
 
-.description p.name-title strong {
-  display: block;
+.description strong {
   font-size: 1.4em;
   font-weight: 600;
+}
+
+.name-title strong {
+  display: block !important;
 }
 
 #img-container {
@@ -43,7 +50,7 @@ h1 > span {
   margin-bottom: 3em;
   position: relative;
   z-index: 1;
-  /* animation: shadow-lift 0.8s 1s cubic-bezier(0.07, 0.44, 0.48, 0.8) forwards; */
+  animation: shadow-lift 0.6s 1.5s cubic-bezier(0.84, 0.02, 0.28, 0.7) forwards;
 }
 
 #img-container::after {
@@ -57,7 +64,23 @@ h1 > span {
   border-radius: 0px;
   overflow: hidden;
   transform: translateY(0%);
-  animation: img-reveal 0.8s 1s cubic-bezier(0.07, 0.44, 0.48, 0.8) forwards;
+  animation: img-reveal 1s 0.6s cubic-bezier(0.84, 0.02, 0.28, 0.7) forwards;
+}
+
+@media (max-width: 768px) {
+  #img-container {
+    float: unset;
+    margin-inline: auto;
+    width: 90%;
+  }
+
+  .__section-padding {
+    padding-top: 0 !important;
+  }
+
+  .details-text {
+    font-size: clamp(3dvw, 2dvw, 1.8dvw);
+  }
 }
 
 @keyframes img-reveal {

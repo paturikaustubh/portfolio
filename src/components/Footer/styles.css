@@ -35,7 +35,7 @@ textarea:focus {
   transform: translateY(40%);
   left: 1px;
   padding-inline: 0.5em;
-  @apply text-neutral-500 duration-200;
+  @apply duration-200 text-neutral-500;
   pointer-events: none;
 }
 
@@ -47,7 +47,7 @@ textarea:focus {
   font-size: 0.8em;
   background-color: rgb(12 10 9);
   padding-inline: 0.5em;
-  @apply text-neutral-400 duration-200;
+  @apply duration-200 text-neutral-400;
   pointer-events: none;
 }
 
@@ -90,7 +90,7 @@ textarea:focus {
 }
 
 .social-link {
-  @apply h-7 overflow-hidden flex flex-col justify-start items-center p-4;
+  @apply flex flex-col items-center justify-start p-4 overflow-hidden h-7;
 }
 
 .social-link > span,
@@ -165,12 +165,12 @@ textarea:focus {
 
 @keyframes social-link-pulse {
   0% {
-    background-color: rgba(231, 229, 228, 1);
+    opacity: 1;
   }
   50% {
-    background-color: rgba(231, 229, 228, 0.5);
+    opacity: 0.5;
   }
   100% {
-    background-color: rgba(231, 229, 228, 1);
+    opacity: 0.5;
   }
 }

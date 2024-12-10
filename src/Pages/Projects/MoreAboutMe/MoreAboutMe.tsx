@@ -7,64 +7,83 @@ import dayjs from "dayjs";
 import { TransitionOverlay } from "../../../Transition/transition";
 
 import "./styles.css";
+// import { Link } from "react-router-dom";
 
 export default function MoreAboutMe() {
   const [visibleParagraphs, setVisibleParagraphs] = useState(2);
-
-  console.log(
-    dayjs().month(2).date(23).isBefore(dayjs(), "day")
-      ? dayjs().month(2).date(23).add(1, "year").diff(dayjs(), "day")
-      : dayjs().month(2).date(23).diff(dayjs(), "day")
-  );
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const paragraphs = [
     <p className="name-title">
-      <strong>
-        Hey there! <span className="text-emoji">👋</span> Kaustubh Paturi here
-      </strong>
-      (yupp, that’s me in the pic <span className="text-emoji">👀</span>)
+      <strong>Hey there! 👋 Kaustubh Paturi here</strong>
+      (yupp, that’s me in the pic 👀)
     </p>,
     <p>
-      So, how did I end up on your screen? It all started on March 23rd, 2002
-      (yes, I’ll wait while you add it to your reminders—
+      So, how did I end up on your screen? It all started on{" "}
+      <strong>
+        <i>
+          March 23<sup>rd</sup>
+        </i>
+      </strong>
+      , 2002 (yes, I’ll wait while you add it to your reminders—
       {dayjs().month(2).date(23).isBefore(dayjs(), "day")
         ? dayjs().month(2).date(23).add(1, "year").diff(dayjs(), "day")
         : dayjs().month(2).date(23).diff(dayjs(), "day")}{" "}
-      days to go! <span className="text-emoji">🎂</span>
-      <span className="text-emoji">😏</span>). That’s when the world got 1
-      Kaustubh richer (worldPopulation++)
-      <span className="text-emoji">😎</span>
+      days to go! 🎂 😏). That’s when the world got 1 Kaustubh richer
+      (worldPopulation++).😎
     </p>,
     <p>
       Back in 2019, I finished my 12th grade with absolutely no clue what I
       wanted to do in life. But while I was doing my engineering (CSE, because
-      duh), a friend roped me into this college project called Exam Branch
-      Portal. And BOOM <span className="text-emoji">💥</span>—I was introduced
-      to the beautiful chaos that is web app development (I can really center a
-      div, trust me).
+      duh), a friend roped me into this college project called{" "}
+      {/* <Link to={"/projects/exam-branch-portal"} className="underline"> */}
+      <strong>
+        <i>Exam Branch Portal</i>
+      </strong>
+      {/* </Link> */}. And BOOM 💥—I was introduced to the beautiful chaos; web
+      app development (I can really center a div, trust me).
     </p>,
     <p>
       I’m also into video and image editing — because who doesn’t love a bit of
-      creativity? <span className="text-emoji">🎨</span> This love for creating
-      things pushed me deeper into frontend development (although, cars were my
-      first love <span className="text-emoji">😍</span>). And talking about
-      cars, I just admire Aston Martin Vanquish{" "}
-      <span className="text-emoji">💘</span>.
+      creativity? 🎨 This love for creating things pushed me deeper into
+      frontend development (although, cars were my first love 😍). And talking
+      about cars, I just admire{" "}
+      <strong>
+        <i>Aston Martin Vanquish</i>
+      </strong>
+      . 💘
     </p>,
     <>
       <p>
-        My journey didn’t stop there. I started my journey at Veratroniks, where
-        I developed VBOSS (sounds fancy, right?). Then I leveled up{" "}
-        <span className="text-emoji">🎮</span> and joined Centific as an intern.
-        After six months of proving I’m not just here to make coffee, I got
-        converted to full-time. Now I’m chilling (well, kind of) as an Associate
-        Software Engineer.
+        My journey didn’t stop there. I started my journey at{" "}
+        <strong>
+          <i>Veratroniks</i>
+        </strong>
+        , where I developed{" "}
+        <strong>
+          <i>VBOSS</i>
+        </strong>{" "}
+        (sounds fancy, right?). Then I leveled up 🎮 and joined{" "}
+        <strong>
+          <i>Centific</i>
+        </strong>{" "}
+        as an intern. After six months of proving I’m not just here to make
+        coffee, I got converted to full-time. Now I’m chilling (not really) as
+        an{" "}
+        <strong>
+          <i>Associate Software Engineer</i>
+        </strong>
+        .
       </p>
 
       <p>
         The road ahead is long and wide, and guess what? It’s ours to shape.
-        Let’s build something incredible, one step at a time.{" "}
-        <span className="text-emoji">🌟</span>
+        Let’s build something incredible, one step at a time. 🌟
+      </p>
+      <p className="flex w-full">
+        <strong className="mx-auto">
+          <i>Nothing great ever came that easy</i>
+        </strong>
       </p>
     </>,
   ];
@@ -78,6 +97,7 @@ export default function MoreAboutMe() {
 
     // ANCHOR LARGE SCREEN ANIMS  ||========================================================================
     gsapMatchMedia.add("(min-width: 768px)", () => {
+      setIsSmallScreen(false);
       // ANCHOR CURSOR SIZING  ||========================================================================
       textBlendElements.forEach((element) => {
         element.addEventListener("mouseenter", handleMouseEnter);
@@ -86,8 +106,6 @@ export default function MoreAboutMe() {
     });
 
     if (kaustubhImgEle) {
-      let isHovered = false;
-
       const handleMouseMove = (e: MouseEvent) => {
         const rect = kaustubhImgEle.getBoundingClientRect();
         const clientX = e.clientX;
@@ -112,7 +130,6 @@ export default function MoreAboutMe() {
       };
 
       const handleMouseEnter = () => {
-        isHovered = true;
         kaustubhImgEle.style.transition = "transform 0.1s ease-out";
 
         if (cursor) {
@@ -121,7 +138,6 @@ export default function MoreAboutMe() {
       };
 
       const handleMouseLeave = () => {
-        isHovered = false;
         kaustubhImgEle.style.transition = "transform 0.3s ease-out";
         kaustubhImgEle.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
         if (cursor) {
@@ -142,11 +158,15 @@ export default function MoreAboutMe() {
   }, []);
 
   useEffect(() => {
+    window.addEventListener("resize", () => {
+      console.log(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 768);
+    });
     const paragraphs = document.querySelectorAll(".desc-img .description p");
     const newParagraphs = Array.from(paragraphs);
     const timeline = gsap.timeline({ paused: true });
 
-    (newParagraphs as TargetElement[]).forEach((paragraph, indx) => {
+    (newParagraphs as TargetElement[]).forEach((paragraph) => {
       const { words } = new SplitType(paragraph, { types: "words" });
 
       timeline.from(words, {
@@ -184,12 +204,13 @@ export default function MoreAboutMe() {
   };
 
   const handleMouseEnter = () => {
+    console.log(document.body.classList.contains("__dark-mode"));
     const cursorElement =
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "14";
-
-      cursorElement.style.backgroundColor = "#E7E5E4";
+      if (!document.body.classList.contains("__dark-mode"))
+        cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };
@@ -215,31 +236,68 @@ export default function MoreAboutMe() {
         <h1 className="__section-title __cursor-blend">
           More About Me
           <span className="z-[12] fun-text-container">
-            🧍🏻‍♂️<span className="fun-text">Imagine the emojI with beard</span>
+            🧍🏻‍♂️
+            {!isSmallScreen && (
+              <span className="fun-text">Imagine the emojI with a beard</span>
+            )}
           </span>
         </h1>
-        <div className="desc-img">
-          <div id="img-container">
-            <img
-              src="./assets/kaustubh-paturi.jpg"
-              alt="Most handsome guy 😎"
-              className="kaustubh-img"
-            />
+        {!isSmallScreen ? (
+          <div className="desc-img">
+            <div id="img-container">
+              <img
+                src="./assets/kaustubh-paturi.jpg"
+                alt="Most handsome guy 😎"
+                className="kaustubh-img"
+              />
+            </div>
+            <div className="description details-text">
+              {paragraphs
+                .slice(0, visibleParagraphs)
+                .map((paragraph, index) => (
+                  <Fragment key={index}>{paragraph}</Fragment>
+                ))}
+            </div>
+            {visibleParagraphs < paragraphs.length && (
+              <button
+                className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md details-text"
+                onClick={handleReadMore}
+              >
+                Read More
+              </button>
+            )}
           </div>
-          <div className="description __cursor-blend __section-desc">
-            {paragraphs.slice(0, visibleParagraphs).map((paragraph, index) => (
-              <Fragment key={index}>{paragraph}</Fragment>
-            ))}
+        ) : (
+          <div className="desc-img">
+            <div className="description details-text">
+              {paragraphs.slice(0, 1).map((paragraph, index) => (
+                <Fragment key={index}>{paragraph}</Fragment>
+              ))}
+            </div>
+            <div id="img-container">
+              <img
+                src="./assets/kaustubh-paturi.jpg"
+                alt="Most handsome guy 😎"
+                className="kaustubh-img"
+              />
+            </div>
+            <div className="description details-text">
+              {paragraphs
+                .slice(1, visibleParagraphs)
+                .map((paragraph, index) => (
+                  <Fragment key={index}>{paragraph}</Fragment>
+                ))}
+            </div>
+            {visibleParagraphs < paragraphs.length && (
+              <button
+                className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md details-text"
+                onClick={handleReadMore}
+              >
+                Read More
+              </button>
+            )}
           </div>
-          {visibleParagraphs < paragraphs.length && (
-            <button
-              className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md __section-desc"
-              onClick={handleReadMore}
-            >
-              Read More
-            </button>
-          )}
-        </div>
+        )}
       </section>
     </TransitionOverlay>
   );
