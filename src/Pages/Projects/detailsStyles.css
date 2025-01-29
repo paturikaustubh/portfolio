@@ -3,7 +3,7 @@
 }
 
 .project-link {
-  @apply h-16 overflow-hidden flex flex-col justify-start items-center gap-10 p-4;
+  @apply flex flex-col items-center justify-start h-16 gap-10 p-4 overflow-hidden;
 }
 
 .project-link > span,
@@ -24,4 +24,11 @@
 .project-link:hover > span,
 .project-link:hover > a {
   transform: translateY(calc(-100% - 3.5rem));
+}
+
+video::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-download-button {
+  display: none !important;
+  pointer-events: none;
 }

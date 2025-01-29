@@ -15,7 +15,7 @@
 
 .__custom-cursor.animate-pulse-fast {
   backdrop-filter: blur(15px) !important;
-  background-color: var(--text-color) !important;
+  background-color: #e7e5e4 !important;
   scale: 1 !important;
   z-index: 11 !important;
   mix-blend-mode: unset !important;

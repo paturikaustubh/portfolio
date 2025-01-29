@@ -1,7 +1,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { TransitionOverlay } from "../../Transition/transition";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { projectsInfos } from "../../ProjectsInfos";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ProjectDetailsType, projectsInfos } from "../../ProjectsInfos";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./detailsStyles.css";
@@ -11,23 +11,20 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ProjectDetails() {
   const { name: projectName } = useParams();
 
-  const [projectDetails, setProjectDetails] = useState<{
-    readonly title: string;
-    readonly img: string;
-    readonly desc: string;
-    readonly to: string;
-    readonly live?: string;
-  }>({
+  const [projectDetails, setProjectDetails] = useState<ProjectDetailsType>({
     title: "",
-    img: "",
     desc: "",
+    img: "",
+    responsive: false,
     to: "",
+    repo: "",
     live: "",
   });
   const [projectIndx, setProjectIndx] = useState(0);
   const [showNextProjectImg, setShowNextProjectImg] = useState(false);
   const [showPrevProjectImg, setShowPrevProjectImg] = useState(false);
   const [previewImgPath, setPreviewImgPath] = useState("");
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const minLg = gsap.matchMedia();
 
@@ -159,6 +156,20 @@ export default function ProjectDetails() {
     }
   };
 
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        const cursor =
+          document.querySelector<HTMLDivElement>(".__custom-cursor");
+        if (cursor) {
+          cursor.style.cursor = "default";
+        }
+
+        videoRef.current.requestFullscreen();
+      }
+    }
+  };
+
   return (
     <TransitionOverlay>
       <section className="min-h-[100dvh] __section-padding lg:mt-8 mt-0 lg:space-y-10 md:space-y-8 sm:space-y-6 space-y-4 overflow-hidden">
@@ -184,8 +195,8 @@ export default function ProjectDetails() {
             <></>
           )}
         </div>
-        <div className="grid grid-cols-12">
-          <div className="lg:text-xl lg:leading-[2rem] font-[500] md:text-lg md:leading-[1.5rem] text-base leading-[1.5rem] lg:col-span-8 md:col-span-10 col-span-12 w-fit __cursor-blend">
+        <div className="grid grid-cols-12 grid-rows-2">
+          <div className="lg:text-xl row-span-1 lg:leading-[2rem] font-[500] md:text-lg md:leading-[1.5rem] text-base leading-[1.5rem] lg:col-span-8 md:col-span-10 col-span-12 w-fit __cursor-blend">
             {projectDetails.desc}
           </div>
         </div>
@@ -196,30 +207,35 @@ export default function ProjectDetails() {
         />
 
         {/* ANCHOR RESPONSIVE IMAGES  ||========================================================== */}
-        <div className="flex flex-col items-start justify-around gap-16 md:flex-row">
-          <img
-            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-1.png`}
-            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
-          />
-          <img
-            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-2.png`}
-            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
-          />
-          <img
-            src={`/portfolio/assets/projects/${projectDetails.img}/responsive-3.png`}
-            className="mx-auto border-2 rounded-md w-72 border-neutral-700"
-          />
-        </div>
+        {projectDetails.responsive && (
+          <div className="flex flex-col items-start justify-around gap-16 md:flex-row">
+            <img
+              src={`/portfolio/assets/projects/${projectDetails.img}/responsive-1.png`}
+              className="mx-auto border-2 rounded-md w-72 border-neutral-700"
+            />
+            <img
+              src={`/portfolio/assets/projects/${projectDetails.img}/responsive-2.png`}
+              className="mx-auto border-2 rounded-md w-72 border-neutral-700"
+            />
+            <img
+              src={`/portfolio/assets/projects/${projectDetails.img}/responsive-3.png`}
+              className="mx-auto border-2 rounded-md w-72 border-neutral-700"
+            />
+          </div>
+        )}
 
         {/* ANCHOR VIDEO  ||========================================================== */}
         <div className="py-12">
           <video
             src={`/portfolio/assets/projects/${projectDetails.img}/sample.mp4`}
+            ref={videoRef}
             loop
             muted
+            controls={false}
             playsInline
             autoPlay
             className="max-h-[35rem] mx-auto border-2 border-neutral-700"
+            onClick={handleFullscreen}
           />
         </div>
 
