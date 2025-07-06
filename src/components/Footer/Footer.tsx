@@ -243,7 +243,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden">
+    <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden dark-footer">
       <div className="flex flex-col items-center md:flex-row gap-x-12 gap-y-6">
         <p className="text-4xl font-bold lg:text-7xl md:text-6xl">
           Let's connect! 🔗

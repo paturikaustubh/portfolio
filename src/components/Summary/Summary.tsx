@@ -5,14 +5,14 @@ export default function Summary() {
   const cursorHoverColorChange = () => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursor) cursor.style.mixBlendMode = "difference";
-    if (!document.body.classList.contains("__dark-mode") && cursor)
+    if (cursor)
       cursor.style.backgroundColor = "var(--bg-color)";
   };
 
   const cursorLeaveColorChange = () => {
     const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursor) cursor.style.mixBlendMode = "";
-    if (!document.body.classList.contains("__dark-mode") && cursor)
+    if (cursor)
       cursor.style.backgroundColor = "var(--text-color)";
   };
   return (

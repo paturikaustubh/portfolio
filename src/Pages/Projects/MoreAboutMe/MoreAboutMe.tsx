@@ -204,13 +204,11 @@ export default function MoreAboutMe() {
   };
 
   const handleMouseEnter = () => {
-    console.log(document.body.classList.contains("__dark-mode"));
     const cursorElement =
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "14";
-      if (!document.body.classList.contains("__dark-mode"))
-        cursorElement.style.backgroundColor = "#E7E5E4";
+      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
     }
   };

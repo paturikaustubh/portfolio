@@ -78,33 +78,7 @@ export default function Skills() {
             },
           });
         });
-        darkThemeElements.forEach((darkElement, indx) => {
-          gsap.to("body", {
-            scrollTrigger: {
-              trigger: darkElement,
-              start: "top 70%",
-              end: "bottom 80%",
-              onEnter: () => {
-                document.body.classList.add("__dark-mode");
-                document.body.style.transition = "300ms ease-in-out";
-              },
-              onEnterBack: () => {
-                document.body.classList.add("__dark-mode");
-                document.body.style.transition = "300ms ease-in-out";
-              },
-              onLeave: () => {
-                if (indx !== darkThemeElements.length - 1) {
-                  document.body.classList.remove("__dark-mode");
-                  document.body.style.transition = "300ms ease-in-out";
-                }
-              },
-              onLeaveBack: () => {
-                document.body.classList.remove("__dark-mode");
-                document.body.style.transition = "300ms ease-in-out";
-              },
-            },
-          });
-        });
+        
       });
     }
   }, [techStackList]);

@@ -78,7 +78,7 @@ export default function ProjectDetails() {
 
   // ANCHOR USEEFFECT  ||========================================================================
   useEffect(() => {
-    document.body.classList.remove("__dark-mode");
+    
 
     // ANCHOR CURSOR  ||========================================================================
 

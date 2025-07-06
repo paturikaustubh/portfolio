@@ -53,29 +53,42 @@ export default function Hero() {
       });
 
       // ANCHOR MODE/THEME CHANGER  ||========================================================================
-      darkThemeElements.forEach((darkElement, indx) => {
-        gsap.to("body", {
+      darkThemeElements.forEach((darkElement) => {
+        darkElement.addEventListener("mouseenter", () => {
+          const cursor = document.querySelector(".__custom-cursor");
+          if (cursor) {
+            cursor.classList.add("light-mode");
+            console.log("Added light-mode class");
+          }
+        });
+        darkElement.addEventListener("mouseleave", () => {
+          const cursor = document.querySelector(".__custom-cursor");
+          if (cursor) {
+            cursor.classList.remove("light-mode");
+            console.log("Removed light-mode class");
+          }
+        });
+
+        gsap.to("nav", {
           scrollTrigger: {
             trigger: darkElement,
-            start: "top 70%",
-            end: "bottom 70%",
+            start: "top 5rem",
+            end: "bottom 5rem",
             onEnter: () => {
-              document.body.classList.add("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document.querySelector("nav")?.classList.add("__header-inverted");
             },
             onEnterBack: () => {
-              document.body.classList.add("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document.querySelector("nav")?.classList.add("__header-inverted");
             },
             onLeave: () => {
-              if (indx !== darkThemeElements.length - 1) {
-                document.body.classList.remove("__dark-mode");
-                document.body.style.transition = "300ms ease-in-out";
-              }
+              document
+                .querySelector("nav")
+                ?.classList.remove("__header-inverted");
             },
             onLeaveBack: () => {
-              document.body.classList.remove("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document
+                .querySelector("nav")
+                ?.classList.remove("__header-inverted");
             },
           },
         });
@@ -175,9 +188,12 @@ export default function Hero() {
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "14";
-
-      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
+      if (cursorElement.style.backgroundColor === "#E7E5E4") {
+        cursorElement.style.backgroundColor = "#1c1917";
+      } else {
+        cursorElement.style.backgroundColor = "#E7E5E4";
+      }
     }
   };
 
@@ -187,8 +203,12 @@ export default function Hero() {
     if (cursorElement) {
       cursorElement.style.scale = "1";
       cursorElement.style.zIndex = "11";
-      cursorElement.style.mixBlendMode = "";
-      cursorElement.style.backgroundColor = "var(--text-color)";
+      cursorElement.style.mixBlendMode = "unset";
+      if (cursorElement.style.backgroundColor === "#E7E5E4") {
+        cursorElement.style.backgroundColor = "#1c1917";
+      } else {
+        cursorElement.style.backgroundColor = "#E7E5E4";
+      }
     }
   };
 

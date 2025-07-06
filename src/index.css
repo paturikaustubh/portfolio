@@ -27,6 +27,25 @@ body {
   transition: 00ms ease-in-out;
 }
 
+.__theme-change-dark {
+  --bg-color: #1c1917;
+  --text-color: #e7e5e4;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 2.5rem;
+}
+
+.no-bottom-radius {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.no-border-radius {
+  border-radius: 0;
+}
+
+
+
 *.__dark-mode {
   --bg-color: #1c1917;
   --text-color: #e7e5e4;
