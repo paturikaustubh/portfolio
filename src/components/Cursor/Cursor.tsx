@@ -29,7 +29,15 @@ export default function Cursor() {
     );
 
     const elementUnderCursor = document.elementFromPoint(clientX, clientY);
-    if (elementUnderCursor?.closest(".__theme-change-dark")) {
+    const navElement = document.querySelector("nav");
+
+    if (navElement && navElement.contains(elementUnderCursor)) {
+      if (navElement.classList.contains("__header-inverted")) {
+        cursor?.classList.add("light-mode");
+      } else {
+        cursor?.classList.remove("light-mode");
+      }
+    } else if (elementUnderCursor?.closest(".__theme-change-dark")) {
       cursor?.classList.add("light-mode");
     } else {
       cursor?.classList.remove("light-mode");

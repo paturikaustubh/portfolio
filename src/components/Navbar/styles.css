@@ -4,6 +4,7 @@ nav.__header-inverted svg#logo {
 
 nav.__header-inverted {
   color: #e7e5e4;
+  --text-color: #e7e5e4;
 }
 
 nav {
