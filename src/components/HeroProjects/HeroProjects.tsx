@@ -111,7 +111,10 @@ export default function Projects() {
 
   // ANCHOR JSX
   return (
-    <section className="__section-padding __theme-change-dark no-bottom-radius" id="projects">
+    <section
+      className="__section-padding __theme-change-dark no-bottom-radius"
+      id="projects"
+    >
       <span className="__cursor-blend">
         <span className="__section-title">
           Projects <span className="z-[12]">⚒️</span>
@@ -193,7 +196,7 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? ` brightness-100 translate-x-5`
                   : mousePresent
-                    ? " brightness-[0.3] blur-sm"
+                    ? " brightness-[0.3]"
                     : ""
               } duration-300`}
             >
@@ -207,7 +210,7 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
                   : mousePresent
-                    ? "brightness-[0.3] blur-sm"
+                    ? "brightness-[0.3]"
                     : ""
               }`}
               style={{

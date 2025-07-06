@@ -79,6 +79,8 @@ export default function Hero() {
       });
 
       
+
+      
       sectionTitles.forEach((sectionTitle) => {
         const { chars } = new SplitType(sectionTitle as TargetElement, {
           types: "chars",

@@ -32,7 +32,13 @@ body {
   --text-color: #e7e5e4;
   background-color: var(--bg-color);
   color: var(--text-color);
-  border-radius: 2.5rem;
+  border-radius: 1rem;
+}
+
+@media (min-width: 768px) {
+  .__theme-change-dark {
+    border-radius: 2.5rem;
+  }
 }
 
 .no-bottom-radius {
@@ -75,9 +81,11 @@ button:focus-visible {
 ::-webkit-scrollbar {
   @apply w-[11px] h-2 duration-300;
 }
+
 .hide-scroll::-webkit-scrollbar {
   @apply hidden;
 }
+
 ::-webkit-scrollbar-track {
   @apply bg-neutral-300 hover:cursor-default;
 }
@@ -85,6 +93,7 @@ button:focus-visible {
 ::-webkit-scrollbar-thumb {
   @apply rounded-sm bg-neutral-600 hover:cursor-default;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   @apply w-4 rounded-sm bg-neutral-800;
 }
@@ -253,22 +262,26 @@ button:focus-visible {
     transform: translateY(-300%);
   }
 }
+
 @keyframes hide-alert {
   to {
     transform: translateX(100%);
     opacity: 0;
   }
 }
+
 @keyframes fade-in {
   from {
     opacity: 0;
   }
 }
+
 @keyframes fade-out {
   to {
     opacity: 0;
   }
 }
+
 @keyframes loading-animation {
   to {
     rotate: 360deg;

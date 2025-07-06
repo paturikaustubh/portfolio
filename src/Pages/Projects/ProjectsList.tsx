@@ -29,7 +29,7 @@ export default function ProjectsList() {
   useEffect(() => {
     document.body.classList.add("__dark-mode");
     document.querySelector("nav")?.classList.add("__header-inverted");
-    
+
     const gsapMatchMedia = gsap.matchMedia();
 
     gsapMatchMedia.add("(min-width:1024px)", () => {
@@ -128,7 +128,6 @@ export default function ProjectsList() {
       });
       ScrollTrigger.killAll();
       document.querySelector("nav")?.classList.remove("__header-inverted");
-      
     };
   }, []);
 
@@ -232,7 +231,7 @@ export default function ProjectsList() {
                     mousePresent && indx === activeProjectIndx
                       ? ` brightness-100 translate-x-5`
                       : mousePresent
-                        ? " brightness-[0.3] blur-sm"
+                        ? " brightness-[0.3]"
                         : ""
                   } duration-300`}
                 >
@@ -246,7 +245,7 @@ export default function ProjectsList() {
                     mousePresent && indx === activeProjectIndx
                       ? `brightness-100 -translate-x-5`
                       : mousePresent
-                        ? "brightness-[0.3] blur-sm"
+                        ? "brightness-[0.3]"
                         : ""
                   }`}
                   style={{

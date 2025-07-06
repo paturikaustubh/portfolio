@@ -39,6 +39,7 @@ export function Footer() {
       timestamp: "",
     }
   );
+  const [prevCursorColor, setPrevCursorColor] = useState("");
 
   const tl = gsap.timeline();
   const gsapMatchMedia = gsap.matchMedia();
@@ -111,6 +112,7 @@ export function Footer() {
         const cursorElement =
           document.querySelector<HTMLDivElement>(".__custom-cursor");
         if (cursorElement) {
+          setPrevCursorColor(cursorElement.style.backgroundColor);
           cursorElement.style.backgroundColor = "#E7E5E4";
         }
       });
@@ -118,7 +120,7 @@ export function Footer() {
         const cursorElement =
           document.querySelector<HTMLDivElement>(".__custom-cursor");
         if (cursorElement) {
-          cursorElement.style.backgroundColor = "var(--text-color)";
+          cursorElement.style.backgroundColor = prevCursorColor;
         }
       });
     }
