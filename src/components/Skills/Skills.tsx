@@ -62,9 +62,6 @@ export default function Skills() {
       });
 
       gsapMatchMedia.add("(max-width: 768px)", () => {
-        const darkThemeElements = document.querySelectorAll(
-          ".__theme-change-dark",
-        );
         // ANCHOR RIGHT TO LEFT SLIDERS  ||========================================================================
         gsap.utils.toArray(".__slide-right-left").forEach((element) => {
           gsap.to(element as Element, {
@@ -78,7 +75,6 @@ export default function Skills() {
             },
           });
         });
-        
       });
     }
   }, [techStackList]);
