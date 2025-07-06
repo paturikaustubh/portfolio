@@ -28,6 +28,8 @@ export default function ProjectsList() {
   // ANCHOR EFFECTS  ||====================||====================
   useEffect(() => {
     document.body.classList.add("__dark-mode");
+    document.querySelector("nav")?.classList.add("__header-inverted");
+
     const gsapMatchMedia = gsap.matchMedia();
 
     gsapMatchMedia.add("(min-width:1024px)", () => {
@@ -125,7 +127,7 @@ export default function ProjectsList() {
         element.removeEventListener("mouseleave", handleMouseLeave);
       });
       ScrollTrigger.killAll();
-      document.body.classList.remove("__dark-mode");
+      document.querySelector("nav")?.classList.remove("__header-inverted");
     };
   }, []);
 
@@ -156,7 +158,7 @@ export default function ProjectsList() {
   return (
     <TransitionOverlay>
       <>
-        <section className="__theme-change-dark __section-padding">
+        <section className="__theme-change-dark __section-padding no-border-radius">
           {/* ANCHOR LARGE SCREENS */}
           <h1 className="inline-block pb-1 overflow-hidden font-bold __section-title">
             All Projects ⚒️

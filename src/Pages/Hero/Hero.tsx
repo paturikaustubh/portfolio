@@ -52,34 +52,35 @@ export default function Hero() {
         element.addEventListener("mouseleave", handleMouseLeave);
       });
 
-      // ANCHOR MODE/THEME CHANGER  ||========================================================================
-      darkThemeElements.forEach((darkElement, indx) => {
-        gsap.to("body", {
+      darkThemeElements.forEach((darkElement) => {
+        gsap.to("nav", {
           scrollTrigger: {
             trigger: darkElement,
-            start: "top 70%",
-            end: "bottom 70%",
+            start: "top 5rem",
+            end: "bottom 5rem",
             onEnter: () => {
-              document.body.classList.add("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document.querySelector("nav")?.classList.add("__header-inverted");
             },
             onEnterBack: () => {
-              document.body.classList.add("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document.querySelector("nav")?.classList.add("__header-inverted");
             },
             onLeave: () => {
-              if (indx !== darkThemeElements.length - 1) {
-                document.body.classList.remove("__dark-mode");
-                document.body.style.transition = "300ms ease-in-out";
-              }
+              document
+                .querySelector("nav")
+                ?.classList.remove("__header-inverted");
             },
             onLeaveBack: () => {
-              document.body.classList.remove("__dark-mode");
-              document.body.style.transition = "300ms ease-in-out";
+              document
+                .querySelector("nav")
+                ?.classList.remove("__header-inverted");
             },
           },
         });
       });
+
+      
+
+      
       sectionTitles.forEach((sectionTitle) => {
         const { chars } = new SplitType(sectionTitle as TargetElement, {
           types: "chars",
@@ -175,9 +176,8 @@ export default function Hero() {
       document.querySelector<HTMLDivElement>(".__custom-cursor");
     if (cursorElement) {
       cursorElement.style.scale = "14";
-
-      cursorElement.style.backgroundColor = "#E7E5E4";
       cursorElement.style.mixBlendMode = "difference";
+      cursorElement.style.backgroundColor = "#E7E5E4";
     }
   };
 
@@ -187,8 +187,8 @@ export default function Hero() {
     if (cursorElement) {
       cursorElement.style.scale = "1";
       cursorElement.style.zIndex = "11";
-      cursorElement.style.mixBlendMode = "";
-      cursorElement.style.backgroundColor = "var(--text-color)";
+      cursorElement.style.mixBlendMode = "unset";
+      cursorElement.style.backgroundColor = "";
     }
   };
 

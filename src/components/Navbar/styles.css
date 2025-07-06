@@ -1,3 +1,11 @@
+nav.__header-inverted svg#logo {
+  fill: #e7e5e4;
+}
+
+nav.__header-inverted {
+  color: #e7e5e4;
+}
+
 nav {
   z-index: 9;
   backdrop-filter: blur(8px);

@@ -1,16 +1,23 @@
 .__custom-cursor {
+  height: 20px;
+  width: 20px;
   scale: 1;
   position: fixed;
   z-index: 11;
   pointer-events: none;
   border-radius: 50%;
-  background-color: var(--text-color);
+  background-color: #1c1917;
   transition:
     transform 300ms,
     scale 300ms;
   top: 200vh;
   border-color: var(--bg-color);
   /* transition: width 300ms; */
+}
+
+.__custom-cursor.light-mode {
+  background-color: #e7e5e4;
+  mix-blend-mode: unset;
 }
 
 .__custom-cursor.animate-pulse-fast {

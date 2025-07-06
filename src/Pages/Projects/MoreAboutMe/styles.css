@@ -1,4 +1,4 @@
-h1 > span {
+h1>span {
   position: relative;
 }
 
@@ -17,7 +17,7 @@ h1 > span {
   position: relative;
 }
 
-.description > p {
+.description>p {
   margin-bottom: 1.2em;
   z-index: 0;
   line-height: 2em;
@@ -27,7 +27,7 @@ h1 > span {
   font-size: clamp(1.2dvw, 1.5dvw, 1.8dvw);
 }
 
-.description > p:last-child {
+.description>p:last-child {
   margin-bottom: 0;
 }
 
@@ -72,10 +72,6 @@ h1 > span {
     float: unset;
     margin-inline: auto;
     width: 90%;
-  }
-
-  .__section-padding {
-    padding-top: 0 !important;
   }
 
   .details-text {

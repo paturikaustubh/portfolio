@@ -111,7 +111,10 @@ export default function Projects() {
 
   // ANCHOR JSX
   return (
-    <section className="__section-padding __theme-change-dark" id="projects">
+    <section
+      className="__section-padding __theme-change-dark no-bottom-radius"
+      id="projects"
+    >
       <span className="__cursor-blend">
         <span className="__section-title">
           Projects <span className="z-[12]">⚒️</span>
