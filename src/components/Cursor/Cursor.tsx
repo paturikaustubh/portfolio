@@ -27,6 +27,14 @@ export default function Cursor() {
     const projectImgSection = document.querySelector<HTMLImageElement>(
       ".__projects-img-section",
     );
+
+    const elementUnderCursor = document.elementFromPoint(clientX, clientY);
+    if (elementUnderCursor?.closest(".__theme-change-dark")) {
+      cursor?.classList.add("light-mode");
+    } else {
+      cursor?.classList.remove("light-mode");
+    }
+
     cursor?.animate(
       {
         left: `${clientX - 10}px`,
@@ -46,10 +54,6 @@ export default function Cursor() {
   return (
     <div
       className="__custom-cursor"
-      style={{
-        height: 20,
-        width: 20,
-      }}
     />
   );
 }

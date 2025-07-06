@@ -193,7 +193,7 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? ` brightness-100 translate-x-5`
                   : mousePresent
-                    ? " brightness-[0.3]"
+                    ? " brightness-[0.3] blur-sm"
                     : ""
               } duration-300`}
             >
@@ -207,7 +207,7 @@ export default function Projects() {
                 mousePresent && indx === activeProjectIndx
                   ? `brightness-100 -translate-x-5`
                   : mousePresent
-                    ? "brightness-[0.3]"
+                    ? "brightness-[0.3] blur-sm"
                     : ""
               }`}
               style={{

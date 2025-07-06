@@ -1,4 +1,6 @@
 .__custom-cursor {
+  height: 20px;
+  width: 20px;
   scale: 1;
   position: fixed;
   z-index: 11;

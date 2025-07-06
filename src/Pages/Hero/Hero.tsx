@@ -52,23 +52,7 @@ export default function Hero() {
         element.addEventListener("mouseleave", handleMouseLeave);
       });
 
-      // ANCHOR MODE/THEME CHANGER  ||========================================================================
       darkThemeElements.forEach((darkElement) => {
-        darkElement.addEventListener("mouseenter", () => {
-          const cursor = document.querySelector(".__custom-cursor");
-          if (cursor) {
-            cursor.classList.add("light-mode");
-            console.log("Added light-mode class");
-          }
-        });
-        darkElement.addEventListener("mouseleave", () => {
-          const cursor = document.querySelector(".__custom-cursor");
-          if (cursor) {
-            cursor.classList.remove("light-mode");
-            console.log("Removed light-mode class");
-          }
-        });
-
         gsap.to("nav", {
           scrollTrigger: {
             trigger: darkElement,
@@ -93,6 +77,8 @@ export default function Hero() {
           },
         });
       });
+
+      
       sectionTitles.forEach((sectionTitle) => {
         const { chars } = new SplitType(sectionTitle as TargetElement, {
           types: "chars",
@@ -189,11 +175,7 @@ export default function Hero() {
     if (cursorElement) {
       cursorElement.style.scale = "14";
       cursorElement.style.mixBlendMode = "difference";
-      if (cursorElement.style.backgroundColor === "#E7E5E4") {
-        cursorElement.style.backgroundColor = "#1c1917";
-      } else {
-        cursorElement.style.backgroundColor = "#E7E5E4";
-      }
+      cursorElement.style.backgroundColor = "#E7E5E4";
     }
   };
 
@@ -204,11 +186,7 @@ export default function Hero() {
       cursorElement.style.scale = "1";
       cursorElement.style.zIndex = "11";
       cursorElement.style.mixBlendMode = "unset";
-      if (cursorElement.style.backgroundColor === "#E7E5E4") {
-        cursorElement.style.backgroundColor = "#1c1917";
-      } else {
-        cursorElement.style.backgroundColor = "#E7E5E4";
-      }
+      cursorElement.style.backgroundColor = "";
     }
   };
 
