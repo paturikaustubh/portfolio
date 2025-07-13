@@ -245,7 +245,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden dark-footer">
+    <footer
+      className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden dark-footer"
+      id="contact-me"
+    >
       <div className="flex flex-col items-center md:flex-row gap-x-12 gap-y-6">
         <p className="text-4xl font-bold lg:text-7xl md:text-6xl">
           Let's connect! 🔗
@@ -443,7 +446,9 @@ export function Footer() {
       <div className="flex flex-col gap-4 mb-4 text-center">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
         <div className="flex flex-col">
-          <p className="text-neutral-700">© 2024 Kaustubh Paturi</p>
+          <p className="text-neutral-700">
+            © {dayjs().year()} Kaustubh Paturi
+          </p>
           <p className="text-neutral-700">All rights reserved</p>
         </div>
       </div>

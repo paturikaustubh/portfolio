@@ -75,19 +75,7 @@ export default function Navbar() {
       </div>
 
       {/* ANCHOR NAVBAR */}
-      <nav
-        className="sticky top-0 z-20 flex items-center justify-between w-full px-4 py-5 lg:px-16 md:px-8"
-        onMouseEnter={() => {
-          const cursor =
-            document.querySelector<HTMLDivElement>(".__custom-cursor");
-          if (cursor) cursor.style.zIndex = "22";
-        }}
-        onMouseLeave={() => {
-          const cursor =
-            document.querySelector<HTMLDivElement>(".__custom-cursor");
-          if (cursor) cursor.style.zIndex = "12";
-        }}
-      >
+      <nav className="sticky top-0 z-20 flex items-center justify-between w-full px-4 py-5 lg:px-16 md:px-8">
         <div className="flex items-center gap-4">
           {locArr[locArr.length - 1] !== "portfolio" && (
             <button

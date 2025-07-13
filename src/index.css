@@ -18,6 +18,15 @@
   --color-interactive: 140, 100, 255;
   --circle-size: 60%;
   --blending: hard-light;
+
+  --console-bg: oklch(14.5% 0 0);
+  --console-base-text-color: oklch(98.5% 0 0);
+  --console-prompt-color: oklch(72.3% 0.219 149.579);
+  --console-caret-color: oklch(98.5% 0 0);
+  --console-command-color: oklch(90.5% 0.182 98.111);
+  --console-files-color: oklch(62.7% 0.194 149.214);
+  --console-folders-color: oklch(54.6% 0.245 262.881);
+  --console-error-color: oklch(57.7% 0.245 27.325);
 }
 
 body {
@@ -59,7 +68,6 @@ body {
 }
 
 * {
-  cursor: none !important;
   user-select: none;
   scroll-padding-block: 5rem;
 }
@@ -74,7 +82,6 @@ button:focus-visible {
 
 @media (max-width: 1024px) {
   * {
-    cursor: default !important;
   }
 }
 
@@ -150,9 +157,8 @@ button:focus-visible {
   @apply lg:text-4xl lg:leading-[4rem] font-[500] md:text-2xl md:leading-[3rem] sm:text-xl text-base sm:leading-[2rem] leading-[1.7rem];
 }
 
-.text-emoji {
-  position: relative;
-  z-index: 12;
+.__cursor-blend {
+  cursor: none !important;
 }
 
 .expand-bg {
