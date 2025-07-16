@@ -52,12 +52,7 @@ export const useConsole = (
     }
     if (commandName in cmdActions) {
       const action = cmdActions[commandName];
-      const result = action(
-        args,
-        navigate,
-        scrollIntoView,
-        toggleTerminalVisible
-      );
+      const result = action(args, navigate, scrollIntoView, killTerminal);
       if (result) {
         setOutput((prev) => [...prev, { command: cmd, response: result }]);
       } else {
@@ -430,5 +425,25 @@ export const useConsole = (
     };
   }, [consoleRef]);
 
-  return { command, cursorPosition, isActive, activateConsole, output };
+  const killTerminal = () => {
+    toggleTerminalVisible();
+    setCommand("");
+    setHistory([]);
+    setOutput([]);
+    setHistoryIndex(-1);
+    setCursorPosition(0);
+    setIsActive(false);
+    setSuggestions([]);
+    setSuggestionIndex(0);
+    setIsTabbing(false);
+  };
+
+  return {
+    command,
+    cursorPosition,
+    isActive,
+    activateConsole,
+    output,
+    killTerminal,
+  };
 };

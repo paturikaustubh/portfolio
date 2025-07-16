@@ -10,10 +10,19 @@ export default function Console() {
   const toggleTerminalVisible = () => {
     consoleRef.current?.classList.toggle("invisible");
     consoleToggle.current?.classList.toggle("invisible");
+
+    if (consoleRef.current?.classList.contains("invisible"))
+      consoleRef.current?.focus();
   };
 
-  const { command, cursorPosition, isActive, activateConsole, output } =
-    useConsole(consoleRef, contentRef, toggleTerminalVisible);
+  const {
+    command,
+    cursorPosition,
+    isActive,
+    activateConsole,
+    output,
+    killTerminal,
+  } = useConsole(consoleRef, contentRef, toggleTerminalVisible);
 
   const renderCommand = () => {
     const words = command.split(/(\s+)/);
@@ -85,7 +94,9 @@ export default function Console() {
         <div className="console-header">
           <span>Terminal</span>
           <div className="actions">
-            <span className="material-symbols-outlined">delete</span>
+            <span className="material-symbols-outlined" onClick={killTerminal}>
+              delete
+            </span>
             <span
               className="material-symbols-outlined"
               onClick={toggleTerminalVisible}

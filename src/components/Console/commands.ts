@@ -10,7 +10,8 @@ type CommandAction = (
   args: string[],
   navigate?: (path: string) => void,
   scrollIntoView?: (id: string) => void,
-  toggleTerminalVisible?: () => void
+  toggleTerminalVisible?: () => void,
+  killTerminal?: () => void
 ) => string | null;
 
 export interface LsDirEntry {
@@ -100,13 +101,12 @@ const exitCmd: CommandAction = (
   _args,
   _navigate,
   _scrollIntoView,
-  toggleTerminalVisible
+  killTerminal
 ) => {
-  if (toggleTerminalVisible) {
-    toggleTerminalVisible();
-    return "Exiting terminal...";
+  if (killTerminal) {
+    killTerminal();
   }
-  return "Error: Could not exit terminal.";
+  return null;
 };
 
 export const cmdActions: Record<string, CommandAction> = {

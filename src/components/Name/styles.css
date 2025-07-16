@@ -3,6 +3,7 @@
 .__name-span {
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: 0.07em;
+  font-size: 12dvw;
 }
 
 .__stroke-only {
@@ -19,5 +20,5 @@
   /* opacity: 0; */
   transition: 300ms ease-in-out;
   letter-spacing: 0.02em;
-  @apply lg:text-[40em] md:text-[30em] sm:text-[25em] text-[15em];
+  font-size: 50dvw;
 }
