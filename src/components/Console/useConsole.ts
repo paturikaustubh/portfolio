@@ -16,7 +16,8 @@ export interface ConsoleOutput {
 
 export const useConsole = (
   consoleRef: React.RefObject<HTMLElement>,
-  contentRef: React.RefObject<HTMLElement>
+  contentRef: React.RefObject<HTMLElement>,
+  toggleTerminalVisible: () => void
 ) => {
   const [command, setCommand] = useState("");
   const [history, setHistory] = useState<string[]>([]);
@@ -24,6 +25,9 @@ export const useConsole = (
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [cursorPosition, setCursorPosition] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const [isTabbing, setIsTabbing] = useState(false);
   const isAtBottom = useRef(true);
   const navigate = useNavigate();
 
@@ -55,7 +59,7 @@ export const useConsole = (
     }
     if (commandName in cmdActions) {
       const action = cmdActions[commandName];
-      const result = action(args, navigate, scrollIntoView);
+      const result = action(args, navigate, scrollIntoView, toggleTerminalVisible);
       if (result) {
         setOutput((prev) => [...prev, { command: cmd, response: result }]);
       } else {
@@ -64,53 +68,123 @@ export const useConsole = (
     } else {
       // Check if the command matches a file in the current directory
       const currentPath = window.location.pathname.replace("/portfolio", "");
-      const pageContent =
+      let pageContent =
         pageLs["portfolio/"][
           currentPath as keyof (typeof pageLs)["portfolio/"]
         ];
 
-      let fileFound = false;
+      if (!pageContent && currentPath.startsWith("/projects/")) {
+        pageContent = pageLs["portfolio/"]["/projects/:name"];
+      }
+
       if (Array.isArray(pageContent)) {
         const targetFile = pageContent.find(
           (item): item is LsFileEntry =>
             item.name === commandName && item.type === "file"
         );
-        if (targetFile && isLsFileEntry(targetFile) && targetFile.scrollId) {
-          scrollIntoView(targetFile.scrollId);
-          setOutput((prev) => [
-            ...prev,
-            { command: cmd, response: `Executing ${commandName}...` },
-          ]);
-          fileFound = true;
+        if (targetFile) {
+          if (targetFile.scrollId) {
+            scrollIntoView(targetFile.scrollId);
+            setOutput((prev) => [
+              ...prev,
+              { command: cmd, response: `Executing ${commandName}...` },
+            ]);
+          } else if (targetFile.clickSelector) {
+            const element = document.querySelector(
+              targetFile.clickSelector
+            ) as HTMLElement;
+            if (element) {
+              element.click();
+              setOutput((prev) => [
+                ...prev,
+                { command: cmd, response: `Executing ${commandName}...` },
+              ]);
+            } else {
+              setOutput((prev) => [
+                ...prev,
+                {
+                  command: cmd,
+                  response: `<span class="error-message">Could not find element with selector: ${targetFile.clickSelector}</span>`,
+                },
+              ]);
+            }
+          }
+          return; // <-- This was missing
         }
-      } else if (
-        pageContent &&
-        isLsFileEntry(pageContent) &&
-        pageContent.name === commandName
-      ) {
-        scrollIntoView(pageContent.scrollId);
-        setOutput((prev) => [
-          ...prev,
-          { command: cmd, response: `Executing ${commandName}...` },
-        ]);
-        fileFound = true;
       }
 
-      if (!fileFound) {
-        setOutput((prev) => [
-          ...prev,
-          {
-            command: cmd,
-            response: `<span class="error-message">Command not found: ${commandName}</span>`,
-          },
-        ]);
-      }
+      setOutput((prev) => [
+        ...prev,
+        {
+          command: cmd,
+          response: `<span class="error-message">Command not found: ${commandName}</span>`,
+        },
+      ]);
     }
+  };
+
+  const handleTabCompletion = () => {
+    let currentSuggestions = suggestions;
+    const isFirstTab = !isTabbing;
+
+    if (isFirstTab) {
+      const [commandName, ...args] = command.trim().split(" ");
+      const currentPath = window.location.pathname.replace("/portfolio", "");
+      let pageContent =
+        pageLs["portfolio/"][
+          currentPath as keyof (typeof pageLs)["portfolio/"]
+        ] || [];
+
+      if (pageContent.length === 0 && currentPath.startsWith("/projects/")) {
+        pageContent = pageLs["portfolio/"]["/projects/:name"];
+      }
+
+      let newSuggestions: string[] = [];
+      const commandPart = commandName === "cd" ? args[0] || "" : command.trim();
+
+      if (commandName === "cd") {
+        newSuggestions = (pageContent as LsEntry[])
+          .filter(
+            (item) => item.type === "dir" && item.name.startsWith(commandPart)
+          )
+          .map((item) => item.name);
+      } else {
+        newSuggestions = (pageContent as LsEntry[])
+          .filter(
+            (item) => item.type === "file" && item.name.startsWith(commandPart)
+          )
+          .map((item) => item.name);
+      }
+
+      setSuggestions(newSuggestions);
+      currentSuggestions = newSuggestions;
+      setIsTabbing(true);
+    }
+
+    if (currentSuggestions.length === 0) return;
+
+    const newIndex = (suggestionIndex + 1) % currentSuggestions.length;
+
+    const suggestion = currentSuggestions[newIndex];
+    const [commandName] = command.trim().split(" ");
+
+    let newCommand = suggestion;
+    if (commandName === "cd") {
+      newCommand = `cd ${suggestion}`;
+    }
+
+    setCommand(newCommand);
+    setCursorPosition(newCommand.length);
+    setSuggestionIndex(newIndex);
   };
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (!isActive) return;
+
+      if (e.key !== "Tab") {
+        setIsTabbing(false);
+      }
 
       if (!e.key.startsWith("F")) {
         e.preventDefault();
@@ -173,6 +247,10 @@ export const useConsole = (
       }
 
       switch (e.key) {
+        case "Tab":
+          e.preventDefault();
+          handleTabCompletion();
+          break;
         case "ArrowUp":
           if (historyIndex < history.length - 1) {
             const newHistoryIndex = historyIndex + 1;
@@ -249,7 +327,16 @@ export const useConsole = (
           break;
       }
     },
-    [isActive, command, history, historyIndex, cursorPosition]
+    [
+      isActive,
+      command,
+      history,
+      historyIndex,
+      cursorPosition,
+      isTabbing,
+      suggestions,
+      suggestionIndex,
+    ]
   );
 
   const activateConsole = () => setIsActive(true);

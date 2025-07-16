@@ -1,3 +1,27 @@
+#console-toggle {
+  visibility: visible;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #e7e5e4;
+  color: #1c1917;
+  font-size: 1em;
+  padding: 1em;
+  border-radius: 50%;
+  z-index: 23;
+  /* border: 1px solid #1c1917; */
+  box-shadow: 0 0px 12px #1c191749;
+  cursor: pointer;
+
+  span {
+    font-size: 3.5em;
+  }
+}
+
+#console-toggle.invisible {
+  visibility: hidden;
+}
+
 #console {
   position: fixed;
   left: 0;
@@ -24,7 +48,22 @@
 
   .console-header {
     background-color: #444;
-    padding: 0.25em 0.5em;
+    padding: 0.3em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3em;
+
+    .actions {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+
+      span {
+        font-size: 1.2em;
+        cursor: pointer;
+      }
+    }
   }
 
   .console-content {
@@ -51,6 +90,11 @@
 
   .history-entry {
     margin-bottom: 1em;
+
+    .response {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
 
     .error-message {
       color: var(--console-error-color, red);
@@ -89,6 +133,10 @@
       }
     }
   }
+}
+
+#console.invisible {
+  visibility: hidden;
 }
 
 .ls-dir {

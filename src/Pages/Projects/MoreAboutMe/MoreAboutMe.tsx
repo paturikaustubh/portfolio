@@ -259,6 +259,7 @@ export default function MoreAboutMe() {
             {visibleParagraphs < paragraphs.length && (
               <button
                 className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md details-text"
+                id="read-more-button"
                 onClick={handleReadMore}
               >
                 Read More
@@ -289,6 +290,7 @@ export default function MoreAboutMe() {
             {visibleParagraphs < paragraphs.length && (
               <button
                 className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md details-text"
+                id="read-more-button"
                 onClick={handleReadMore}
               >
                 Read More

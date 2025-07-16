@@ -78,8 +78,6 @@ export default function ProjectDetails() {
 
   // ANCHOR USEEFFECT  ||========================================================================
   useEffect(() => {
-    
-
     // ANCHOR CURSOR  ||========================================================================
 
     minLg.add("(min-width:1024px)", () => {
@@ -256,6 +254,7 @@ export default function ProjectDetails() {
               <Link
                 to={`/portfolio/projects/${prevProjectDetails.to}`}
                 className="text-2xl lg:text-6xl md:text-4xl __nav-underline-element"
+                id="prev-project-link"
                 onMouseEnter={() => {
                   cursorHoverColorChange();
                 }}
@@ -280,6 +279,7 @@ export default function ProjectDetails() {
               <Link
                 to={`/portfolio/projects/${nextProjectDetails.to}`}
                 className="text-2xl lg:text-6xl md:text-4xl __nav-underline-element"
+                id="next-project-link"
                 onMouseEnter={() => {
                   cursorHoverColorChange();
                 }}

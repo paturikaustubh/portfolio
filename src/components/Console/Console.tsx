@@ -5,14 +5,17 @@ import { useConsole } from "./useConsole";
 export default function Console() {
   const consoleRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const consoleToggle = useRef<HTMLButtonElement>(null);
+
+  const toggleTerminalVisible = () => {
+    consoleRef.current?.classList.toggle("invisible");
+    consoleToggle.current?.classList.toggle("invisible");
+  };
+
   const { command, cursorPosition, isActive, activateConsole, output } =
-    useConsole(consoleRef, contentRef);
+    useConsole(consoleRef, contentRef, toggleTerminalVisible);
 
   const renderCommand = () => {
-    const before = command.slice(0, cursorPosition);
-    const at = command.charAt(cursorPosition) || " ";
-    const after = command.slice(cursorPosition + 1);
-
     const words = command.split(/(\s+)/);
     const firstWord = words[0];
     const restOfCommand = words.slice(1).join("");
@@ -64,40 +67,65 @@ export default function Console() {
   };
 
   return (
-    <section id="console" ref={consoleRef} onClick={activateConsole}>
-      <div className="console-dragger"></div>
-      <div className="console-header">Terminal</div>
-      <div className="console-content" ref={contentRef}>
-        <PKBanner></PKBanner>
-        <div className="helper-text">
-          ⚡Welcome to KPCLI! Type <code>help</code> to get started.
+    <>
+      <button
+        id="console-toggle"
+        ref={consoleToggle}
+        onClick={toggleTerminalVisible}
+      >
+        <span className="material-symbols-outlined">terminal</span>
+      </button>
+      <section
+        id="console"
+        className="invisible"
+        ref={consoleRef}
+        onClick={activateConsole}
+      >
+        <div className="console-dragger"></div>
+        <div className="console-header">
+          <span>Terminal</span>
+          <div className="actions">
+            <span className="material-symbols-outlined">delete</span>
+            <span
+              className="material-symbols-outlined"
+              onClick={toggleTerminalVisible}
+            >
+              close
+            </span>
+          </div>
         </div>
-        <div className="output-container">
-          {output.map((entry, index) => (
-            <div key={index} className="history-entry">
-              <p className="command-container">
-                <span className="prompt">
-                  kaustubhpaturi@portfolio <span>~ $</span>
-                </span>
-                <span className="command">
-                  {renderHistoryCommand(entry.command)}
-                </span>
-              </p>
-              <p
-                className="response"
-                dangerouslySetInnerHTML={{ __html: entry.response }}
-              ></p>
-            </div>
-          ))}
+        <div className="console-content" ref={contentRef}>
+          <PKBanner></PKBanner>
+          <div className="helper-text">
+            ⚡Welcome to KPCLI! Type <code>help</code> to get started.
+          </div>
+          <div className="output-container">
+            {output.map((entry, index) => (
+              <div key={index} className="history-entry">
+                <p className="command-container">
+                  <span className="prompt">
+                    kaustubhpaturi@portfolio <span>~ $</span>
+                  </span>
+                  <span className="command">
+                    {renderHistoryCommand(entry.command)}
+                  </span>
+                </p>
+                <p
+                  className="response"
+                  dangerouslySetInnerHTML={{ __html: entry.response }}
+                ></p>
+              </div>
+            ))}
+          </div>
+          <p className="command-container">
+            <span className="prompt">
+              kaustubhpaturi@portfolio <span>~ $</span>
+            </span>
+            <span className="command">{renderCommand()}</span>
+          </p>
         </div>
-        <p className="command-container">
-          <span className="prompt">
-            kaustubhpaturi@portfolio <span>~ $</span>
-          </span>
-          <span className="command">{renderCommand()}</span>
-        </p>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

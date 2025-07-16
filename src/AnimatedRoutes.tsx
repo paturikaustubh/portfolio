@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 
 import Hero from "./Pages/Hero/Hero";
 import ProjectsList from "./Pages/Projects/ProjectsList";
@@ -9,6 +9,10 @@ import MoreAboutMe from "./Pages/Projects/MoreAboutMe/MoreAboutMe";
 
 export default function AnimatedRoutes() {
   const paths = [
+    {
+      path: "/portfolio",
+      element: <Navigate to="/portfolio/" replace />,
+    },
     {
       path: "/portfolio/",
       element: <Hero />,

@@ -1,6 +1,6 @@
 import { projectsInfos } from "../../ProjectsInfos";
 
-const globalCommands = ["help", "clear", "ls", "cd", "write", "nav", "exit"];
+const globalCommands = ["help", "clear", "ls", "cd", "exit"];
 
 const helpString = `Hello there! Using this CLI, you can controll this site. You can navigate through pages and do some other cool stuff...
 Now, here are the list of available commands you can use:
@@ -9,7 +9,8 @@ ${globalCommands.map((cmd) => `- ${cmd}`).join("\n")}`;
 type CommandAction = (
   args: string[],
   navigate?: (path: string) => void,
-  scrollIntoView?: (id: string) => void
+  scrollIntoView?: (id: string) => void,
+  toggleTerminalVisible?: () => void
 ) => string | null;
 
 export interface LsDirEntry {
@@ -21,7 +22,8 @@ export interface LsDirEntry {
 export interface LsFileEntry {
   name: string;
   type: "file";
-  scrollId: string;
+  scrollId?: string;
+  clickSelector?: string;
 }
 
 export type LsEntry = LsDirEntry | LsFileEntry;
@@ -52,7 +54,7 @@ const cdCmd: CommandAction = (args, navigate) => {
       return `Navigating to ${targetItem.path}`;
     }
   }
-  return `cd: no such file or directory: ${target}`;
+  return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
 };
 
 const lsAction: CommandAction = () => {
@@ -60,8 +62,12 @@ const lsAction: CommandAction = () => {
   let itemsToDisplay: LsEntry[] = [];
 
   // Try to find content for the specific route under "portfolio/"
-  const routeContent =
+  let routeContent =
     pageLs["portfolio/"][currentPath as keyof (typeof pageLs)["portfolio/"]];
+
+  if (!routeContent && currentPath.startsWith("/projects/")) {
+    routeContent = pageLs["portfolio/"]["/projects/:name"];
+  }
 
   if (routeContent) {
     // Ensure routeContent is an array. If it's a single object, wrap it.
@@ -90,11 +96,25 @@ const lsAction: CommandAction = () => {
   return content;
 };
 
+const exitCmd: CommandAction = (
+  _args,
+  _navigate,
+  _scrollIntoView,
+  toggleTerminalVisible
+) => {
+  if (toggleTerminalVisible) {
+    toggleTerminalVisible();
+    return "Exiting terminal...";
+  }
+  return "Error: Could not exit terminal.";
+};
+
 export const cmdActions: Record<string, CommandAction> = {
   help: () => helpString,
   clear: () => null,
   ls: lsAction,
   cd: cdCmd,
+  exit: exitCmd,
 };
 
 export const pageLs: {
@@ -102,6 +122,7 @@ export const pageLs: {
   "portfolio/": {
     "/": (LsFileEntry | LsDirEntry)[];
     "/projects": LsDirEntry[];
+    "/projects/:name": LsFileEntry[];
     "/about-me": LsFileEntry[];
   };
 } = {
@@ -141,13 +162,25 @@ export const pageLs: {
     "/projects": projectsInfos.map((project) => ({
       name: project.title.toLowerCase().split(" ").join("-"),
       type: "dir",
-      path: `/projects/${project.title.toLowerCase().split(" ").join("-")}`,
+      path: `/projects/${project.to}`,
     })),
+    "/projects/:name": [
+      {
+        name: "previous-project.sh",
+        type: "file",
+        clickSelector: "#prev-project-link",
+      },
+      {
+        name: "next-project.sh",
+        type: "file",
+        clickSelector: "#next-project-link",
+      },
+    ],
     "/about-me": [
       {
         name: "read-more.sh",
         type: "file",
-        scrollId: "read-more",
+        clickSelector: "#read-more-button",
       },
     ],
   },
