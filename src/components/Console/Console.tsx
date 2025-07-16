@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./style.css";
 import { useConsole } from "./useConsole";
 
@@ -6,6 +7,9 @@ export default function Console() {
   const consoleRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const consoleToggle = useRef<HTMLButtonElement>(null);
+  const location = useLocation();
+  const currentPath = location.pathname.replace("/portfolio", "") || "/";
+  const displayPath = currentPath === "/" ? "~" : currentPath;
 
   const toggleTerminalVisible = () => {
     consoleRef.current?.classList.toggle("invisible");
@@ -14,6 +18,20 @@ export default function Console() {
     if (consoleRef.current?.classList.contains("invisible"))
       consoleRef.current?.focus();
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === "`") {
+        toggleTerminalVisible();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const {
     command,
@@ -111,26 +129,29 @@ export default function Console() {
             ⚡Welcome to KPCLI! Type <code>help</code> to get started.
           </div>
           <div className="output-container">
-            {output.map((entry, index) => (
-              <div key={index} className="history-entry">
-                <p className="command-container">
-                  <span className="prompt">
-                    kaustubhpaturi@portfolio <span>~ $</span>
-                  </span>
-                  <span className="command">
-                    {renderHistoryCommand(entry.command)}
-                  </span>
-                </p>
-                <p
-                  className="response"
-                  dangerouslySetInnerHTML={{ __html: entry.response }}
-                ></p>
-              </div>
-            ))}
+            {output.map((entry, index) => {
+              const entryDisplayPath = entry.path === "/" ? "~" : entry.path;
+              return (
+                <div key={index} className="history-entry">
+                  <p className="command-container">
+                    <span className="prompt">
+                      kaustubhpaturi@portfolio <span>{entryDisplayPath} $</span>
+                    </span>
+                    <span className="command">
+                      {renderHistoryCommand(entry.command)}
+                    </span>
+                  </p>
+                  <p
+                    className="response"
+                    dangerouslySetInnerHTML={{ __html: entry.response }}
+                  ></p>
+                </div>
+              );
+            })}
           </div>
           <p className="command-container">
             <span className="prompt">
-              kaustubhpaturi@portfolio <span>~ $</span>
+              kaustubhpaturi@portfolio <span>{displayPath} $</span>
             </span>
             <span className="command">{renderCommand()}</span>
           </p>

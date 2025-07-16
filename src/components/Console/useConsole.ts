@@ -5,6 +5,7 @@ import { cmdActions, pageLs, LsFileEntry, LsEntry } from "./commands";
 export interface ConsoleOutput {
   command: string;
   response: string;
+  path: string;
 }
 
 export const useConsole = (
@@ -50,11 +51,16 @@ export const useConsole = (
         }
       }, 0);
     }
+    const currentPath =
+      window.location.pathname.replace("/portfolio", "") || "/";
     if (commandName in cmdActions) {
       const action = cmdActions[commandName];
       const result = action(args, navigate, scrollIntoView, killTerminal);
       if (result) {
-        setOutput((prev) => [...prev, { command: cmd, response: result }]);
+        setOutput((prev) => [
+          ...prev,
+          { command: cmd, response: result, path: currentPath },
+        ]);
       } else {
         setOutput([]);
       }
@@ -80,7 +86,11 @@ export const useConsole = (
             scrollIntoView(targetFile.scrollId);
             setOutput((prev) => [
               ...prev,
-              { command: cmd, response: `Executing ${commandName}...` },
+              {
+                command: cmd,
+                response: `Executing ${commandName}...`,
+                path: currentPath,
+              },
             ]);
           } else if (
             "clickSelector" in targetFile &&
@@ -93,7 +103,11 @@ export const useConsole = (
               element.click();
               setOutput((prev) => [
                 ...prev,
-                { command: cmd, response: `Executing ${commandName}...` },
+                {
+                  command: cmd,
+                  response: `Executing ${commandName}...`,
+                  path: currentPath,
+                },
               ]);
             } else {
               setOutput((prev) => [
@@ -101,6 +115,7 @@ export const useConsole = (
                 {
                   command: cmd,
                   response: `<span class="error-message">Could not find element with selector: ${targetFile.clickSelector}</span>`,
+                  path: currentPath,
                 },
               ]);
             }
@@ -114,6 +129,7 @@ export const useConsole = (
         {
           command: cmd,
           response: `<span class="error-message">Command not found: ${commandName}</span>`,
+          path: currentPath,
         },
       ]);
     }

@@ -29,8 +29,8 @@ export default function Name() {
         transformOrigin: "left left",
         stagger: 0.04,
         ease: "back.out",
-        delay: 0.7,
-        duration: 0.35,
+        delay: 0.6,
+        duration: 0.4,
       });
     });
 
