@@ -29,8 +29,8 @@ export default function Name() {
         transformOrigin: "left left",
         stagger: 0.04,
         ease: "back.out",
-        delay: 0.7,
-        duration: 0.35,
+        delay: 0.6,
+        duration: 0.4,
       });
     });
 
@@ -98,17 +98,17 @@ export default function Name() {
       <div className="absolute flex items-center justify-center w-full h-full pointer-events-none __name-bg">
         hey!
       </div>
-      <div className="flex flex-col items-center justify-center poin __sticky-situation">
+      <div className="flex flex-col items-center justify-center">
         <div
           id="full-name"
-          className="flex gap-4 overflow-hidden justify-center items-center whitespace-nowrap flex-wrap lg:text-[10em] sm:text-9xl text-6xl font-bold __name-span __animate-full-name __cursor-blend"
+          className="flex flex-wrap items-center justify-center gap-4 overflow-hidden font-bold whitespace-nowrap __name-span __animate-full-name __cursor-blend"
         >
           <span className="overflow-hidden">KAUSTUBH</span>
           <span className="overflow-hidden __stroke-only">PATURI</span>
         </div>
         <div
           id="profession"
-          className="mt-2 text-xl font-light lg:text-4xl md:text-2xl __animate-profession __cursor-blend lg:mt-8 md:mt-4"
+          className="mt-2 text-xl font-light lg:text-4xl md:text-2xl __animate-profession __cursor-blend"
         >
           <span className="__accent-text">Application Developer</span>
         </div>
