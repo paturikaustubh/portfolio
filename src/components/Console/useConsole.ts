@@ -1,13 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  cmdActions,
-  pageLs,
-  LsFileEntry,
-  LsDirEntry,
-  LsEntry,
-  isLsFileEntry,
-} from "./commands";
+import { cmdActions, pageLs, LsFileEntry, LsEntry } from "./commands";
 
 export interface ConsoleOutput {
   command: string;
@@ -59,7 +52,12 @@ export const useConsole = (
     }
     if (commandName in cmdActions) {
       const action = cmdActions[commandName];
-      const result = action(args, navigate, scrollIntoView, toggleTerminalVisible);
+      const result = action(
+        args,
+        navigate,
+        scrollIntoView,
+        toggleTerminalVisible
+      );
       if (result) {
         setOutput((prev) => [...prev, { command: cmd, response: result }]);
       } else {
@@ -83,13 +81,16 @@ export const useConsole = (
             item.name === commandName && item.type === "file"
         );
         if (targetFile) {
-          if (targetFile.scrollId) {
+          if ("scrollId" in targetFile && targetFile.scrollId) {
             scrollIntoView(targetFile.scrollId);
             setOutput((prev) => [
               ...prev,
               { command: cmd, response: `Executing ${commandName}...` },
             ]);
-          } else if (targetFile.clickSelector) {
+          } else if (
+            "clickSelector" in targetFile &&
+            targetFile.clickSelector
+          ) {
             const element = document.querySelector(
               targetFile.clickSelector
             ) as HTMLElement;
