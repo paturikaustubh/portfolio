@@ -248,6 +248,7 @@ export default function ProjectDetails() {
                 onMouseLeave={() => {
                   cursorLeaveColorChange();
                 }}
+                id="prev-project-link"
               >
                 {prevProjectDetails.title}
               </Link>
@@ -272,6 +273,7 @@ export default function ProjectDetails() {
                 onMouseLeave={() => {
                   cursorLeaveColorChange();
                 }}
+                id="next-project-link"
               >
                 {nextProjectDetails.title}
               </Link>
