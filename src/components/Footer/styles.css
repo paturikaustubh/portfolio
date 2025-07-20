@@ -9,7 +9,7 @@ textarea {
   outline: 0;
   padding: 1rem;
   width: 100%;
-  cursor: pointer;
+  cursor: text;
   transition-duration: 200ms;
   transition-property: border;
 }
@@ -35,7 +35,7 @@ textarea:focus {
   transform: translateY(40%);
   left: 1px;
   padding-inline: 0.5em;
-  @apply duration-200 text-neutral-500;
+  @apply duration-200 text-neutral-400;
   pointer-events: none;
 }
 
@@ -47,7 +47,7 @@ textarea:focus {
   font-size: 0.8em;
   background-color: rgb(12 10 9);
   padding-inline: 0.5em;
-  @apply duration-200 text-neutral-400;
+  @apply duration-200 text-neutral-200;
   pointer-events: none;
 }
 
@@ -62,7 +62,7 @@ textarea:focus {
   left: 12px;
   font-size: 0.7em;
   background-color: rgb(12 10 9);
-  @apply text-neutral-50;
+  @apply text-neutral-200;
 }
 
 .connector-circle {
@@ -93,19 +93,19 @@ textarea:focus {
   @apply flex flex-col items-center justify-start p-4 overflow-hidden h-7;
 }
 
-.social-link > span,
-.social-link > a {
+.social-link>span,
+.social-link>a {
   transition: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-weight: 500;
   transform: translateY(-1rem);
 }
 
-.social-link > a {
+.social-link>a {
   text-decoration: underline;
 }
 
-.social-link:hover > span,
-.social-link:hover > a {
+.social-link:hover>span,
+.social-link:hover>a {
   transform: translateY(calc(-100% - 1rem));
 }
 
@@ -116,7 +116,7 @@ textarea:focus {
   margin-right: auto;
 }
 
-.footer-name > * {
+.footer-name>* {
   transition: 200ms;
 }
 
@@ -167,9 +167,11 @@ textarea:focus {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
+
   100% {
     opacity: 0.5;
   }

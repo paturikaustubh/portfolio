@@ -15,6 +15,7 @@ import Loading from "../LoadingScreen";
 import Alert from "../Alert";
 import { Link } from "react-router-dom";
 import SplitType from "split-type";
+import { socialLinks } from "../../socialLinks";
 // import EmailTemplate from "../EmailTemplate/EmailTemplate";
 
 dayjs.extend(utc);
@@ -245,7 +246,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden dark-footer">
+    <footer
+      className="bg-stone-950 lg:px-12 flex flex-col lg:pt-12 md:px-6 md:pt-6 px-3 pt-3 text-[#E2E0DF] mt-auto overflow-x-hidden dark-footer"
+      id="contact-me"
+    >
       <div className="flex flex-col items-center md:flex-row gap-x-12 gap-y-6">
         <p className="text-4xl font-bold lg:text-7xl md:text-6xl">
           Let's connect! 🔗
@@ -356,66 +360,21 @@ export function Footer() {
             Find me on socials
           </p>
           <div className="flex flex-col items-center justify-center gap-3 mt-12 text-xl">
-            <div className="social-link">
-              <span>GitHub</span>
-              <Link
-                target="_blank"
-                to={"https://github.com/paturikaustubh"}
-                className="text-white"
-                onMouseEnter={handleSocialMediaLinkHover}
-                onMouseLeave={handleSocialMediaLinkBlur}
-              >
-                paturikaustubh
-              </Link>
-            </div>
-            <div className="social-link">
-              <span>LinkedIn</span>
-              <Link
-                target="_blank"
-                to={"https://www.linkedin.com/in/kaustubhpaturi/"}
-                className="text-blue-400"
-                onMouseEnter={handleSocialMediaLinkHover}
-                onMouseLeave={handleSocialMediaLinkBlur}
-              >
-                kaustubhpaturi
-              </Link>
-            </div>
-            <div className="social-link">
-              <span>Facebook</span>
-              <Link
-                target="_blank"
-                to={"https://www.facebook.com/kaustubh.paturi.5/"}
-                className="text-blue-500"
-                onMouseEnter={handleSocialMediaLinkHover}
-                onMouseLeave={handleSocialMediaLinkBlur}
-              >
-                kaustubh.paturi.5
-              </Link>
-            </div>
-            <div className="social-link">
-              <span>X (Twitter)</span>
-              <Link
-                target="_blank"
-                to={"https://twitter.com/kaustub18850193"}
-                className="text-white"
-                onMouseEnter={handleSocialMediaLinkHover}
-                onMouseLeave={handleSocialMediaLinkBlur}
-              >
-                kaustub18850193
-              </Link>
-            </div>
-            <div className="social-link">
-              <span>Instagram</span>
-              <Link
-                target="_blank"
-                to={"https://www.instagram.com/not_sardonian/"}
-                className="text-pink-600"
-                onMouseEnter={handleSocialMediaLinkHover}
-                onMouseLeave={handleSocialMediaLinkBlur}
-              >
-                not_sardonian
-              </Link>
-            </div>
+            {socialLinks.map(({ name, url, username, color }, indx) => (
+              <div className="social-link" key={indx}>
+                <span>{name}</span>
+                <Link
+                  target="_blank"
+                  to={url}
+                  className={color}
+                  onMouseEnter={handleSocialMediaLinkHover}
+                  onMouseLeave={handleSocialMediaLinkBlur}
+                  id={`social-${name.toLowerCase()}`}
+                >
+                  {username}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -443,7 +402,9 @@ export function Footer() {
       <div className="flex flex-col gap-4 mb-4 text-center">
         <p className="text-neutral-300 ">Nothing great ever came that easy</p>
         <div className="flex flex-col">
-          <p className="text-neutral-700">© 2024 Kaustubh Paturi</p>
+          <p className="text-neutral-700">
+            © {new Date().getFullYear()} Kaustubh Paturi
+          </p>
           <p className="text-neutral-700">All rights reserved</p>
         </div>
       </div>

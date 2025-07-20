@@ -59,8 +59,6 @@ body {
   border-radius: 0;
 }
 
-
-
 *.__dark-mode {
   --bg-color: #1c1917;
   --text-color: #e7e5e4;
@@ -70,6 +68,11 @@ body {
 * {
   user-select: none;
   scroll-padding-block: 5rem;
+}
+
+#console,
+#console * {
+  user-select: text;
 }
 
 button {
@@ -85,7 +88,6 @@ button:focus-visible {
 }
 
 @media (max-width: 1024px) {
-  * {}
 }
 
 ::-webkit-scrollbar {

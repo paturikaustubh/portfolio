@@ -31,6 +31,7 @@ export default function ProjectsList() {
     document.querySelector("nav")?.classList.add("__header-inverted");
 
     const gsapMatchMedia = gsap.matchMedia();
+    let scrollListener: (() => void) | null = null;
 
     gsapMatchMedia.add("(min-width:1024px)", () => {
       gsap.to(".__slide-right-left", {
@@ -48,8 +49,8 @@ export default function ProjectsList() {
         document.querySelectorAll(".__project-row")
       );
 
-      if (customCursor)
-        window.addEventListener("scroll", () => {
+      if (customCursor) {
+        scrollListener = () => {
           const elementsUnderCursor = document.elementsFromPoint(
             customCursor.getBoundingClientRect().x,
             customCursor.getBoundingClientRect().y
@@ -88,7 +89,9 @@ export default function ProjectsList() {
             }, 400);
           setImgScale(0);
           return;
-        });
+        };
+        window.addEventListener("scroll", scrollListener);
+      }
     });
 
     gsapMatchMedia.add("(max-width: 1024px)", () => {
@@ -122,6 +125,9 @@ export default function ProjectsList() {
     });
 
     return () => {
+      if (scrollListener) {
+        window.removeEventListener("scroll", scrollListener);
+      }
       textBlendElements.forEach((element) => {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);

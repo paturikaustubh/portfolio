@@ -9,18 +9,36 @@ export default function Navbar() {
 
   const navMenuElementStyle = "px-4 py-6 overflow-hidden border-t expand-bg";
 
-  const menuLinks: { to: string; title: string }[] = [
+  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const contactMeElement = document.getElementById("contact-me");
+    if (contactMeElement) {
+      contactMeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    const navigationMenu = document.getElementById("navigation-menu");
+    if (navigationMenu && navigationMenu.classList.contains("__show")) {
+      navigationMenu.style.height = "0";
+      setTimeout(() => {
+        navigationMenu.classList.remove("__show");
+      }, 300);
+    }
+  };
+
+  const menuLinks = [
     {
       to: "",
       title: "Home",
+      id: "nav-home",
     },
     {
       to: "projects",
       title: "Projects",
+      id: "nav-projects",
     },
     {
       to: "https://drive.google.com/file/d/1MfsXpNlgKppnHvmwcpzISwZCl99xdEj5/view?usp=drive_link",
       title: "Resume",
+      id: "nav-resume",
     },
   ];
 
@@ -50,11 +68,13 @@ export default function Navbar() {
             </button>
           </section>
           <section className="flex flex-col text-[2.2rem] __nav-menu-element-list">
-            {menuLinks.map(({ to, title }, indx) => (
+            {menuLinks.map(({ to, title, id }, indx) => (
               <Link
                 to={title !== "Resume" ? `/portfolio/${to}` : to}
                 target={title === "Resume" ? "_blank" : "_self"}
                 className={navMenuElementStyle}
+                id={id}
+                data-testid={id}
                 onClick={() => {
                   const navigationMenu =
                     document.getElementById("navigation-menu");
@@ -70,6 +90,13 @@ export default function Navbar() {
                 {title}
               </Link>
             ))}
+            <button
+              className={navMenuElementStyle}
+              onClick={handleContactClick}
+              data-testid="nav-contact-me"
+            >
+              Contact Me
+            </button>
           </section>
         </div>
       </div>
@@ -140,16 +167,24 @@ export default function Navbar() {
           </button>
         </div>
         <div className="items-center hidden gap-8 navigation md:flex">
-          {menuLinks.map(({ to, title }, indx) => (
+          {menuLinks.map(({ to, title, id }, indx) => (
             <Link
               key={indx}
               to={title !== "Resume" ? `/portfolio/${to}` : to}
               target={title === "Resume" ? "_blank" : "_self"}
               className="__nav-underline-element"
+              data-testid={id}
             >
               {title}
             </Link>
           ))}
+          <button
+            className="__nav-underline-element"
+            onClick={handleContactClick}
+            data-testid="nav-contact-me"
+          >
+            Contact Me
+          </button>
         </div>
       </nav>
     </>
