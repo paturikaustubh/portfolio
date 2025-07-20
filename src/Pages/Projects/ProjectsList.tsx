@@ -129,7 +129,7 @@ export default function ProjectsList() {
       ScrollTrigger.killAll();
       document.querySelector("nav")?.classList.remove("__header-inverted");
     };
-  }, []);
+  }, [mousePresent]);
 
   // ANCHOR FUNCTIONS  ||========================================================================
   const handleMouseLeave = () => {

@@ -45,7 +45,7 @@ export default function ProjectDetails() {
     );
     setProjectDetails(projectFilteredArr[0]);
     setProjectIndx(projectsInfos.indexOf(projectFilteredArr[0]));
-  }, []);
+  }, [projectName]);
 
   const { pathname } = useLocation();
   useEffect(() => {
@@ -74,14 +74,10 @@ export default function ProjectDetails() {
       if (cursor) cursor.style.borderWidth = "0";
       handleMouseLeave();
     };
-  }, [pathname]);
+  }, [pathname, minLg]);
 
   // ANCHOR USEEFFECT  ||========================================================================
   useEffect(() => {
-    
-
-    // ANCHOR CURSOR  ||========================================================================
-
     minLg.add("(min-width:1024px)", () => {
       const cursor = document.querySelector<HTMLDivElement>(".__custom-cursor");
       if (cursor) {
@@ -99,16 +95,6 @@ export default function ProjectDetails() {
         element.addEventListener("mouseleave", handleMouseLeave);
       });
 
-      // gsap.to(".__parallax-img", {
-      //   scrollTrigger: {
-      //     trigger: ".__parallax-img",
-      //     start: "top bottom",
-      //     end: "bottom top",
-      //     scrub: true,
-      //   },
-      //   translateY: "-25%",
-      // });
-
       return () => {
         textBlendElements.forEach((element) => {
           element.removeEventListener("mouseenter", handleMouseEnter);
@@ -116,7 +102,7 @@ export default function ProjectDetails() {
         });
       };
     });
-  }, []);
+  }, [minLg]);
 
   // ANCHOR FUNCTIONS  ||========================================================================
   const handleMouseEnter = () => {

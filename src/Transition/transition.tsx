@@ -19,7 +19,7 @@ export const TransitionOverlay = ({ children }: { children: JSX.Element }) => {
     setTimeout(() => {
       window.scrollTo({ top: 0 });
     }, 800);
-  }, [location.pathname]);
+  }, []);
 
   const anim = (variants: Variants) => ({
     initial: "initial",

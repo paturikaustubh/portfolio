@@ -181,27 +181,27 @@ export default function MoreAboutMe() {
     timeline.play();
   }, []);
 
-  useEffect(() => animateNewParagraphs, [visibleParagraphs]);
-
-  // GSAP animation for the newly revealed paragraphs
-  const animateNewParagraphs = () => {
-    const paragraphs = document.querySelectorAll(".desc-img .description p");
-    const newParagraphs = Array.from(paragraphs).slice(visibleParagraphs);
-    const timeline = gsap.timeline({ paused: true, delay: 0.2 });
-
-    (newParagraphs as TargetElement[]).forEach((paragraph) => {
-      const { words } = new SplitType(paragraph, { types: "words" });
-
-      timeline.from(words, {
-        opacity: 0.03,
-        filter: "blur(8px)",
-        stagger: 0.04,
-        duration: 1,
-        ease: "power1.out",
+  useEffect(() => {
+    const animateNewParagraphs = () => {
+      const paragraphs = document.querySelectorAll(".desc-img .description p");
+      const newParagraphs = Array.from(paragraphs).slice(visibleParagraphs);
+      const timeline = gsap.timeline({ paused: true, delay: 0.2 });
+  
+      (newParagraphs as TargetElement[]).forEach((paragraph) => {
+        const { words } = new SplitType(paragraph, { types: "words" });
+  
+        timeline.from(words, {
+          opacity: 0.03,
+          filter: "blur(8px)",
+          stagger: 0.04,
+          duration: 1,
+          ease: "power1.out",
+        });
       });
-    });
-    timeline.play();
-  };
+      timeline.play();
+    };
+    animateNewParagraphs();
+  }, [visibleParagraphs]);
 
   const handleMouseEnter = () => {
     const cursorElement =
