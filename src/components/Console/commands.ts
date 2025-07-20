@@ -189,15 +189,13 @@ const navCmd: CommandAction = (args) => {
 const socialsCmd: CommandAction = (args) => {
   if (args.length < 2 || args.includes("--help")) {
     return `Get my social links or directly redirect to them!\n\nUsage: socials [flag] ${angLt}social_name${angGt}\n\nFlags:\n  -g, --get-link    Get the social media link\n  -r, --redirect    Redirect to the social media page\n\nAvailable socials:\n${socialLinks
-      .map(({ name }) => `- ${name.toLowerCase().split(" ")[0]}`)
+      .map(({ id }) => `- ${id}`)
       .join("\n")}`;
   }
 
   const flag = args[0];
   const socialName = args[1].toLowerCase();
-  const social = socialLinks.find(
-    (link) => link.name.toLowerCase() === socialName
-  );
+  const social = socialLinks.find(({ id }) => id === socialName);
 
   if (!social) {
     return `<span class="error-message">Invalid social media name: ${socialName}</span>`;
