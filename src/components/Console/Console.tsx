@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import "./style.css";
 import { useConsole } from "./useConsole";
@@ -11,13 +11,18 @@ export default function Console() {
   const currentPath = location.pathname.replace("/portfolio", "") || "/";
   const displayPath = currentPath === "/" ? "~" : currentPath;
 
-  const toggleTerminalVisible = () => {
+  const toggleTerminalVisible = useCallback(() => {
+    const isCurrentlyInvisible =
+      consoleRef.current?.classList.contains("invisible");
+
     consoleRef.current?.classList.toggle("invisible");
     consoleToggle.current?.classList.toggle("invisible");
 
-    if (consoleRef.current?.classList.contains("invisible"))
-      consoleRef.current?.focus();
-  };
+    // If it was invisible and now it's visible
+    if (isCurrentlyInvisible) {
+      activateConsole();
+    }
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,7 +36,7 @@ export default function Console() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [toggleTerminalVisible]);
 
   const {
     command,
@@ -183,4 +188,3 @@ function PKBanner() {
     </pre>
   );
 }
-

@@ -41,65 +41,63 @@ export const useConsole = (
     }
   }, []);
 
-  const executeCommand = (cmd: string) => {
-    const [commandName, ...args] = cmd.trim().split(" ");
-    if (isAtBottom.current) {
-      setTimeout(() => {
-        const contentEl = contentRef.current;
-        if (contentEl) {
-          contentEl.scrollTop = contentEl.scrollHeight;
+  const killTerminal = useCallback(() => {
+    toggleTerminalVisible();
+    setCommand("");
+    setHistory([]);
+    setOutput([]);
+    setHistoryIndex(-1);
+    setCursorPosition(0);
+    setIsActive(false);
+    setSuggestions([]);
+    setSuggestionIndex(0);
+    setIsTabbing(false);
+  }, [toggleTerminalVisible]);
+
+  const executeCommand = useCallback(
+    (cmd: string) => {
+      const [commandName, ...args] = cmd.trim().split(" ");
+      if (isAtBottom.current) {
+        setTimeout(() => {
+          const contentEl = contentRef.current;
+          if (contentEl) {
+            contentEl.scrollTop = contentEl.scrollHeight;
+          }
+        }, 0);
+      }
+      const currentPath =
+        window.location.pathname.replace("/portfolio", "") || "/";
+      if (commandName in cmdActions) {
+        const action = cmdActions[commandName];
+        const result = action(args, navigate, scrollIntoView, killTerminal);
+        if (result) {
+          setOutput((prev) => [
+            ...prev,
+            { command: cmd, response: result, path: currentPath },
+          ]);
+        } else {
+          setOutput([]);
         }
-      }, 0);
-    }
-    const currentPath = window.location.pathname.replace("/portfolio", "") || "/";
-    if (commandName in cmdActions) {
-      const action = cmdActions[commandName];
-      const result = action(args, navigate, scrollIntoView, killTerminal);
-      if (result) {
-        setOutput((prev) => [
-          ...prev,
-          { command: cmd, response: result, path: currentPath },
-        ]);
       } else {
-        setOutput([]);
-      }
-    } else {
-      // Check if the command matches a file in the current directory
-      const currentPath = window.location.pathname.replace("/portfolio", "");
-      let pageContent =
-        pageLs["portfolio/"][
-          currentPath as keyof (typeof pageLs)["portfolio/"]
-        ];
+        // Check if the command matches a file in the current directory
+        const currentPath = window.location.pathname.replace("/portfolio", "");
+        let pageContent =
+          pageLs["portfolio/"][
+            currentPath as keyof (typeof pageLs)["portfolio/"]
+          ];
 
-      if (!pageContent && currentPath.startsWith("/projects/")) {
-        pageContent = pageLs["portfolio/"]["/projects/:name"];
-      }
+        if (!pageContent && currentPath.startsWith("/projects/")) {
+          pageContent = pageLs["portfolio/"]["/projects/:name"];
+        }
 
-      if (Array.isArray(pageContent)) {
-        const targetFile = pageContent.find(
-          (item): item is LsFileEntry =>
-            item.name === commandName && item.type === "file"
-        );
-        if (targetFile) {
-          if ("scrollId" in targetFile && targetFile.scrollId) {
-            scrollIntoView(targetFile.scrollId);
-            setOutput((prev) => [
-              ...prev,
-              {
-                command: cmd,
-                response: `Executing ${commandName}...`,
-                path: currentPath,
-              },
-            ]);
-          } else if (
-            "clickSelector" in targetFile &&
-            targetFile.clickSelector
-          ) {
-            const element = document.querySelector(
-              targetFile.clickSelector
-            ) as HTMLElement;
-            if (element) {
-              element.click();
+        if (Array.isArray(pageContent)) {
+          const targetFile = pageContent.find(
+            (item): item is LsFileEntry =>
+              item.name === commandName && item.type === "file"
+          );
+          if (targetFile) {
+            if ("scrollId" in targetFile && targetFile.scrollId) {
+              scrollIntoView(targetFile.scrollId);
               setOutput((prev) => [
                 ...prev,
                 {
@@ -108,33 +106,52 @@ export const useConsole = (
                   path: currentPath,
                 },
               ]);
-            } else {
-              setOutput((prev) => [
-                ...prev,
-                {
-                  command: cmd,
-                  response: `<span class="error-message">Could not find element with selector: ${targetFile.clickSelector}</span>`,
-                  path: currentPath,
-                },
-              ]);
+            } else if (
+              "clickSelector" in targetFile &&
+              targetFile.clickSelector
+            ) {
+              const element = document.querySelector(
+                targetFile.clickSelector
+              ) as HTMLElement;
+              if (element) {
+                element.click();
+                setOutput((prev) => [
+                  ...prev,
+                  {
+                    command: cmd,
+                    response: `Executing ${commandName}...`,
+                    path: currentPath,
+                  },
+                ]);
+              } else {
+                setOutput((prev) => [
+                  ...prev,
+                  {
+                    command: cmd,
+                    response: `<span class="error-message">Could not find element with selector: ${targetFile.clickSelector}</span>`,
+                    path: currentPath,
+                  },
+                ]);
+              }
             }
+            return; // <-- This was missing
           }
-          return; // <-- This was missing
         }
+
+        setOutput((prev) => [
+          ...prev,
+          {
+            command: cmd,
+            response: `<span class="error-message">Command not found: ${commandName}</span>`,
+            path: currentPath,
+          },
+        ]);
       }
+    },
+    [contentRef, isAtBottom, killTerminal, navigate, scrollIntoView]
+  );
 
-      setOutput((prev) => [
-        ...prev,
-        {
-          command: cmd,
-          response: `<span class="error-message">Command not found: ${commandName}</span>`,
-          path: currentPath,
-        },
-      ]);
-    }
-  };
-
-  const handleTabCompletion = () => {
+  const handleTabCompletion = useCallback(() => {
     let currentSuggestions = suggestions;
     const isFirstTab = !isTabbing;
 
@@ -187,7 +204,7 @@ export const useConsole = (
     setCommand(newCommand);
     setCursorPosition(newCommand.length);
     setSuggestionIndex(newIndex);
-  };
+  }, [command, isTabbing, suggestionIndex, suggestions]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -204,36 +221,41 @@ export const useConsole = (
       // Word navigation and deletion
       if (e.ctrlKey) {
         switch (e.key) {
-          case "ArrowLeft":
+          case "ArrowLeft": {
             const prevWordIndex = command
               .slice(0, cursorPosition)
               .trimEnd()
               .lastIndexOf(" ");
             setCursorPosition(prevWordIndex === -1 ? 0 : prevWordIndex + 1);
             return;
-          case "ArrowRight":
+          }
+          case "ArrowRight": {
             const nextWordIndex = command.indexOf(" ", cursorPosition + 1);
             setCursorPosition(
               nextWordIndex === -1 ? command.length : nextWordIndex + 1
             );
             return;
+          }
           case "Backspace":
             if (cursorPosition === 0) return;
-            const textBeforeCursor = command.slice(0, cursorPosition);
-            const trimmedText = textBeforeCursor.trimEnd();
-            const lastSpaceIndex = trimmedText.lastIndexOf(" ");
-            const from = lastSpaceIndex === -1 ? 0 : lastSpaceIndex + 1;
-            const newCommand =
-              command.slice(0, from) + command.slice(cursorPosition);
-            setCommand(newCommand);
-            setCursorPosition(from);
-            return;
-          case "Delete":
+            {
+              const textBeforeCursor = command.slice(0, cursorPosition);
+              const trimmedText = textBeforeCursor.trimEnd();
+              const lastSpaceIndex = trimmedText.lastIndexOf(" ");
+              const from = lastSpaceIndex === -1 ? 0 : lastSpaceIndex + 1;
+              const newCommand =
+                command.slice(0, from) + command.slice(cursorPosition);
+              setCommand(newCommand);
+              setCursorPosition(from);
+              return;
+            }
+          case "Delete": {
             const nextSpaceIndex = command.indexOf(" ", cursorPosition);
             const to = nextSpaceIndex === -1 ? command.length : nextSpaceIndex;
             const newCmd = command.slice(0, cursorPosition) + command.slice(to);
             setCommand(newCmd);
             return;
+          }
           case "u":
             setCommand(command.slice(cursorPosition));
             setCursorPosition(0);
@@ -344,9 +366,8 @@ export const useConsole = (
       history,
       historyIndex,
       cursorPosition,
-      isTabbing,
-      suggestions,
-      suggestionIndex,
+      executeCommand,
+      handleTabCompletion,
     ]
   );
 
@@ -439,19 +460,6 @@ export const useConsole = (
       dragger.removeEventListener("mousedown", handleMouseDown);
     };
   }, [consoleRef]);
-
-  const killTerminal = () => {
-    toggleTerminalVisible();
-    setCommand("");
-    setHistory([]);
-    setOutput([]);
-    setHistoryIndex(-1);
-    setCursorPosition(0);
-    setIsActive(false);
-    setSuggestions([]);
-    setSuggestionIndex(0);
-    setIsTabbing(false);
-  };
 
   return {
     command,

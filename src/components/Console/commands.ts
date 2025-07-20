@@ -42,6 +42,24 @@ const cdCmd: CommandAction = (args, navigate) => {
   if (args.length === 0) return "Usage: cd <directory>";
 
   const target = args[0];
+
+  if (target.startsWith("..")) {
+    const currentPath = window.location.pathname.replace("/portfolio", "") || "/";
+    if (currentPath === "/")
+      return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
+    const pathSegments = currentPath.split("/").filter((segment) => segment);
+    const upLevels = (target.match(/\.\./g) || []).length;
+
+    if (upLevels > pathSegments.length) {
+      return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
+    }
+
+    const newPathSegments = pathSegments.slice(0, -upLevels);
+    const newPath = `/${newPathSegments.join("/")}`;
+    navigate(`/portfolio${newPath}`);
+    return `Navigating to ${newPath}`;
+  }
+
   const currentPath = window.location.pathname.replace("/portfolio", "");
   const currentDirContent =
     pageLs["portfolio/"][currentPath as keyof (typeof pageLs)["portfolio/"]];
