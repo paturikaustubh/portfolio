@@ -154,3 +154,32 @@
   color: var(--console-files-color);
   margin-right: 1.5em;
 }
+
+.console-flag {
+  color: #9ca3af;
+}
+
+.console-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+/* Scrollbar styles */
+.console-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.console-content::-webkit-scrollbar-track {
+  background: var(--console-scrollbar-track-bg, #222);
+}
+
+.console-content::-webkit-scrollbar-thumb {
+  background-color: var(--console-scrollbar-thumb-bg, #555);
+  border-radius: 6px;
+  border: 3px solid var(--console-scrollbar-track-bg, #222);
+}
+
+.console-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--console-scrollbar-thumb-hover-bg, #777);
+}

@@ -49,51 +49,104 @@ export default function Console() {
 
   const renderCommand = () => {
     const words = command.split(/(\s+)/);
-    const firstWord = words[0];
-    const restOfCommand = words.slice(1).join("");
 
-    const renderColoredCommand = () => {
-      if (cursorPosition <= firstWord.length) {
-        const beforeFirstWord = firstWord.slice(0, cursorPosition);
-        const atFirstWord = firstWord.charAt(cursorPosition) || " ";
-        const afterFirstWord = firstWord.slice(cursorPosition + 1);
+    // Render without cursor if not active
+    if (!isActive) {
+      return (
+        <>
+          {words.map((word, index) => {
+            const isFirstWord = index === 0;
+            const isFlag = word.startsWith("-");
+            const className = isFirstWord
+              ? "command-first-word"
+              : isFlag
+              ? "console-flag"
+              : "";
+            return (
+              <span key={index} className={className}>
+                {word}
+              </span>
+            );
+          })}
+        </>
+      );
+    }
+
+    // Render with cursor
+    let renderedChars = 0;
+    let cursorPlaced = false;
+
+    const parts = words.map((word, index) => {
+      const isFirstWord = index === 0;
+      const isFlag = word.startsWith("-");
+      const className = isFirstWord
+        ? "command-first-word"
+        : isFlag
+        ? "console-flag"
+        : "";
+
+      // Don't process if cursor is already placed
+      if (cursorPlaced) {
         return (
-          <>
-            <span className="command-first-word">
-              {beforeFirstWord}
-              {isActive && <span className="caret">{atFirstWord}</span>}
-              {afterFirstWord}
-            </span>
-            {restOfCommand}
-          </>
-        );
-      } else {
-        const adjustedCursorPosition = cursorPosition - firstWord.length;
-        const beforeRest = restOfCommand.slice(0, adjustedCursorPosition);
-        const atRest = restOfCommand.charAt(adjustedCursorPosition) || " ";
-        const afterRest = restOfCommand.slice(adjustedCursorPosition + 1);
-        return (
-          <>
-            <span className="command-first-word">{firstWord}</span>
-            {beforeRest}
-            {isActive && <span className="caret">{atRest}</span>}
-            {afterRest}
-          </>
+          <span key={index} className={className}>
+            {word}
+          </span>
         );
       }
-    };
 
-    return <>{renderColoredCommand()}</>;
+      const wordStart = renderedChars;
+      const wordEnd = wordStart + word.length;
+
+      if (cursorPosition >= wordStart && cursorPosition <= wordEnd) {
+        const localCursorPos = cursorPosition - wordStart;
+        const before = word.slice(0, localCursorPos);
+        const at = word.charAt(localCursorPos) || " ";
+        const after = word.slice(localCursorPos + 1);
+        cursorPlaced = true;
+
+        return (
+          <span key={index} className={className}>
+            {before}
+            <span className="caret">{at}</span>
+            {after}
+          </span>
+        );
+      } else {
+        renderedChars += word.length;
+        return (
+          <span key={index} className={className}>
+            {word}
+          </span>
+        );
+      }
+    });
+
+    // If cursor is at the very end (i.e., after the last character)
+    if (!cursorPlaced && cursorPosition === command.length) {
+      parts.push(<span key="caret-end" className="caret"> </span>);
+    }
+
+    return <>{parts}</>;
   };
 
   const renderHistoryCommand = (cmd: string) => {
     const words = cmd.split(/(\s+)/);
-    const firstWord = words[0];
-    const restOfCommand = words.slice(1).join("");
     return (
       <>
-        <span className="command-first-word">{firstWord}</span>
-        {restOfCommand}
+        {words.map((word, index) => {
+          const isFirstWord = index === 0;
+          const isFlag = word.startsWith("-");
+          const className = isFirstWord
+            ? "command-first-word"
+            : isFlag
+            ? "console-flag"
+            : "";
+          return (
+            <span key={index} className={className}>
+              {word}
+            </span>
+          );
+        })}
       </>
     );
   };

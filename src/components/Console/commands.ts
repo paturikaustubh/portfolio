@@ -1,6 +1,10 @@
 import { projectsInfos } from "../../ProjectsInfos";
+import { socialLinks } from "../../socialLinks";
 
-const globalCommands = ["help", "clear", "ls", "cd", "exit"];
+const angLt = "&lt;";
+const angGt = "&gt;";
+
+const globalCommands = ["help", "clear", "ls", "cd", "nav", "socials", "exit"];
 
 const helpString = `Hello there! Using this CLI, you can controll this site. You can navigate through pages and do some other cool stuff...
 Now, here are the list of available commands you can use:
@@ -39,19 +43,21 @@ export function isLsDirEntry(item: LsEntry): item is LsDirEntry {
 
 const cdCmd: CommandAction = (args, navigate) => {
   if (!navigate) return "Navigation not available.";
-  if (args.length === 0) return "Usage: cd <directory>";
+  if (args.length === 0)
+    return `I wonder where a directory taskes me...\n\nUsage: cd ${angLt}directory${angGt}`;
 
   const target = args[0];
+  const currentPath = window.location.pathname.replace("/portfolio", "") || "/";
 
   if (target.startsWith("..")) {
-    const currentPath = window.location.pathname.replace("/portfolio", "") || "/";
     if (currentPath === "/")
-      return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
+      return `<span class="error-message">cd: No such directory: ${target}</span>`;
+
     const pathSegments = currentPath.split("/").filter((segment) => segment);
     const upLevels = (target.match(/\.\./g) || []).length;
 
     if (upLevels > pathSegments.length) {
-      return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
+      return `<span class="error-message">cd: No such directory: ${target}</span>`;
     }
 
     const newPathSegments = pathSegments.slice(0, -upLevels);
@@ -60,7 +66,6 @@ const cdCmd: CommandAction = (args, navigate) => {
     return `Navigating to ${newPath}`;
   }
 
-  const currentPath = window.location.pathname.replace("/portfolio", "");
   const currentDirContent =
     pageLs["portfolio/"][currentPath as keyof (typeof pageLs)["portfolio/"]];
 
@@ -73,7 +78,7 @@ const cdCmd: CommandAction = (args, navigate) => {
       return `Navigating to ${targetItem.path}`;
     }
   }
-  return `<span class="error-message">cd: No such file or directory: ${target}</span>`;
+  return `<span class="error-message">cd: No such directory: ${target}</span>`;
 };
 
 const lsAction: CommandAction = () => {
@@ -93,14 +98,6 @@ const lsAction: CommandAction = () => {
     itemsToDisplay = Array.isArray(routeContent)
       ? routeContent
       : [routeContent];
-  } else {
-    // If no specific route content, check the global "*" entry
-    const globalContent = pageLs["*"];
-    if (globalContent) {
-      itemsToDisplay = [globalContent]; // Wrap the single object in an array
-    } else {
-      return "Invalid path or no content to display.";
-    }
   }
 
   let content = "";
@@ -127,16 +124,79 @@ const exitCmd: CommandAction = (
   return null;
 };
 
+const navCmd: CommandAction = (args) => {
+  const navMapping: { [key: string]: string } = {
+    home: "nav-home",
+    projects: "nav-projects",
+    resume: "nav-resume",
+    "contact-me": "nav-contact-me",
+  };
+
+  if (args.length === 0) {
+    const availableDestinations = Object.keys(navMapping);
+    return `Control the nav bar with this command!\n\nUsage: nav ${angLt}destination${angGt}\n\nAvailable destinations:\n${availableDestinations.map((dest) => `- ${dest}`).join("\n")}`;
+  }
+
+  const destination = args[0].toLowerCase();
+  const testId = navMapping[destination];
+  if (!testId) {
+    return `<span class="error-message">Invalid navigation destination: ${destination}</span>`;
+  }
+
+  const element = document.querySelector(
+    `[data-testid="${testId}"]`
+  ) as HTMLElement;
+  if (element) {
+    element.click();
+    return `Navigating to ${destination}...`;
+  } else {
+    return `<span class="error-message">Could not find navigation element for: ${destination}</span>`;
+  }
+};
+
+const socialsCmd: CommandAction = (args) => {
+  if (args.length < 2) {
+    return `Get my social links or directly redirect to them!\n\nUsage: socials [-g | --get-link]  [-r | --redirect] ${angLt}social_name${angGt}\n\nAvailable socials:\n${socialLinks
+      .map(({ name }) => `- ${name.toLowerCase().split(" ")[0]}`)
+      .join("\n")}`;
+  }
+
+  const flag = args[0];
+  const socialName = args[1].toLowerCase();
+  const social = socialLinks.find(
+    (link) => link.name.toLowerCase() === socialName
+  );
+
+  if (!social) {
+    return `<span class="error-message">Invalid social media name: ${socialName}</span>`;
+  }
+
+  if (["-g", "--get-link"].includes(flag)) {
+    return `<a href="${social.url}" target="_blank" rel="noopener noreferrer" class="console-link">${social.url}</a>`;
+  } else if (["-r", "--redirect"].includes(flag)) {
+    const element = document.getElementById(`social-${socialName}`);
+    if (element) {
+      element.click();
+      return `Redirecting to ${socialName}...`;
+    } else {
+      return `<span class="error-message">Could not find social link for: ${socialName}</span>`;
+    }
+  } else {
+    return `<span class="error-message">Invalid flag: ${flag}. Use <span class="console-flag">-g</span> to get the link or <span class="console-flag">-r</span> to redirect.</span>`;
+  }
+};
+
 export const cmdActions: Record<string, CommandAction> = {
   help: () => helpString,
   clear: () => null,
   ls: lsAction,
   cd: cdCmd,
   exit: exitCmd,
+  nav: navCmd,
+  socials: socialsCmd,
 };
 
 export const pageLs: {
-  "*": LsFileEntry;
   "portfolio/": {
     "/": (LsFileEntry | LsDirEntry)[];
     "/projects": LsDirEntry[];
@@ -144,11 +204,6 @@ export const pageLs: {
     "/about-me": LsFileEntry[];
   };
 } = {
-  "*": {
-    name: "contact-me.sh",
-    type: "file",
-    scrollId: "contact-me",
-  },
   "portfolio/": {
     "/": [
       {
@@ -171,6 +226,11 @@ export const pageLs: {
         type: "dir",
         path: "/about-me",
       },
+      ...(projectsInfos.slice(0, 4).map((project) => ({
+        name: project.title.toLowerCase().split(" ").join("-"),
+        type: "dir",
+        path: `/projects/${project.to}`,
+      })) as LsDirEntry[]),
       {
         name: "all-projects",
         type: "dir",

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cmdActions, pageLs, LsFileEntry, LsEntry } from "./commands";
 
 export interface ConsoleOutput {
@@ -24,11 +24,12 @@ export const useConsole = (
   const [isTabbing, setIsTabbing] = useState(false);
   const isAtBottom = useRef(true);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollIntoView = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const navbar = document.querySelector(".navbar"); // Assuming your navbar has a class 'navbar'
+      const navbar = document.querySelector(".navbar");
       const navbarHeight = navbar ? navbar.clientHeight : 0;
       const elementPosition =
         element.getBoundingClientRect().top + window.pageYOffset;
@@ -57,6 +58,8 @@ export const useConsole = (
   const executeCommand = useCallback(
     (cmd: string) => {
       const [commandName, ...args] = cmd.trim().split(" ");
+      const currentPath = location.pathname.replace("/portfolio", "") || "/";
+
       if (isAtBottom.current) {
         setTimeout(() => {
           const contentEl = contentRef.current;
@@ -65,36 +68,37 @@ export const useConsole = (
           }
         }, 0);
       }
-      const currentPath =
-        window.location.pathname.replace("/portfolio", "") || "/";
+
       if (commandName in cmdActions) {
         const action = cmdActions[commandName];
-        const result = action(args, navigate, scrollIntoView, killTerminal);
+        const result = action(
+          args,
+          navigate,
+          scrollIntoView,
+          toggleTerminalVisible,
+          killTerminal
+        );
+
         if (result) {
           setOutput((prev) => [
             ...prev,
             { command: cmd, response: result, path: currentPath },
           ]);
-        } else {
+        } else if (commandName === "clear") {
           setOutput([]);
         }
       } else {
-        // Check if the command matches a file in the current directory
-        const currentPath = window.location.pathname.replace("/portfolio", "");
-        let pageContent =
+        const pageContent =
           pageLs["portfolio/"][
             currentPath as keyof (typeof pageLs)["portfolio/"]
-          ];
-
-        if (!pageContent && currentPath.startsWith("/projects/")) {
-          pageContent = pageLs["portfolio/"]["/projects/:name"];
-        }
+          ] || pageLs["portfolio/"]["/projects/:name"];
 
         if (Array.isArray(pageContent)) {
           const targetFile = pageContent.find(
             (item): item is LsFileEntry =>
               item.name === commandName && item.type === "file"
           );
+
           if (targetFile) {
             if ("scrollId" in targetFile && targetFile.scrollId) {
               scrollIntoView(targetFile.scrollId);
@@ -134,7 +138,7 @@ export const useConsole = (
                 ]);
               }
             }
-            return; // <-- This was missing
+            return;
           }
         }
 
@@ -148,16 +152,24 @@ export const useConsole = (
         ]);
       }
     },
-    [contentRef, isAtBottom, killTerminal, navigate, scrollIntoView]
+    [
+      contentRef,
+      isAtBottom,
+      killTerminal,
+      location.pathname,
+      navigate,
+      scrollIntoView,
+      toggleTerminalVisible,
+    ]
   );
 
   const handleTabCompletion = useCallback(() => {
-    let currentSuggestions = suggestions;
     const isFirstTab = !isTabbing;
+    let currentSuggestions = suggestions;
 
     if (isFirstTab) {
       const [commandName, ...args] = command.trim().split(" ");
-      const currentPath = window.location.pathname.replace("/portfolio", "");
+      const currentPath = location.pathname.replace("/portfolio", "") || "/";
       let pageContent =
         pageLs["portfolio/"][
           currentPath as keyof (typeof pageLs)["portfolio/"]
@@ -191,7 +203,9 @@ export const useConsole = (
 
     if (currentSuggestions.length === 0) return;
 
-    const newIndex = (suggestionIndex + 1) % currentSuggestions.length;
+    const newIndex = isFirstTab
+      ? 0
+      : (suggestionIndex + 1) % currentSuggestions.length;
 
     const suggestion = currentSuggestions[newIndex];
     const [commandName] = command.trim().split(" ");
@@ -204,7 +218,7 @@ export const useConsole = (
     setCommand(newCommand);
     setCursorPosition(newCommand.length);
     setSuggestionIndex(newIndex);
-  }, [command, isTabbing, suggestionIndex, suggestions]);
+  }, [command, isTabbing, location.pathname, suggestionIndex, suggestions]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -214,11 +228,18 @@ export const useConsole = (
         setIsTabbing(false);
       }
 
+      // Allow default browser actions for selection and copy/paste
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        ["a", "c"].includes(e.key.toLowerCase())
+      ) {
+        return;
+      }
+
       if (!e.key.startsWith("F")) {
         e.preventDefault();
       }
 
-      // Word navigation and deletion
       if (e.ctrlKey) {
         switch (e.key) {
           case "ArrowLeft": {
@@ -237,8 +258,7 @@ export const useConsole = (
             return;
           }
           case "Backspace":
-            if (cursorPosition === 0) return;
-            {
+            if (cursorPosition > 0) {
               const textBeforeCursor = command.slice(0, cursorPosition);
               const trimmedText = textBeforeCursor.trimEnd();
               const lastSpaceIndex = trimmedText.lastIndexOf(" ");
@@ -247,8 +267,8 @@ export const useConsole = (
                 command.slice(0, from) + command.slice(cursorPosition);
               setCommand(newCommand);
               setCursorPosition(from);
-              return;
             }
+            return;
           case "Delete": {
             const nextSpaceIndex = command.indexOf(" ", cursorPosition);
             const to = nextSpaceIndex === -1 ? command.length : nextSpaceIndex;
@@ -268,12 +288,12 @@ export const useConsole = (
             setCursorPosition(0);
             return;
           case "l":
-            setHistory([]);
+            setOutput([]);
             return;
-          case "a": // Handle Ctrl+A here
+          case "a":
             setCursorPosition(0);
             return;
-          case "e": // Handle Ctrl+E here
+          case "e":
             setCursorPosition(command.length);
             return;
         }
@@ -331,10 +351,10 @@ export const useConsole = (
             setCommand(newCommand);
           }
           break;
-        case "Home": // Handle Home key directly
+        case "Home":
           setCursorPosition(0);
           break;
-        case "End": // Handle End key directly
+        case "End":
           setCursorPosition(command.length);
           break;
         case "Enter":
@@ -439,7 +459,7 @@ export const useConsole = (
       const handleMouseMove = (e: MouseEvent) => {
         const newHeight = startHeight - (e.clientY - startY);
         const maxHeight = window.innerHeight;
-        const minHeight = 0; // Or any other minimum height you prefer
+        const minHeight = 0;
         if (newHeight > minHeight && newHeight < maxHeight) {
           consoleEl.style.height = `${newHeight}px`;
         }
