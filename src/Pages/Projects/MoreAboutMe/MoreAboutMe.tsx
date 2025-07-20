@@ -186,10 +186,10 @@ export default function MoreAboutMe() {
       const paragraphs = document.querySelectorAll(".desc-img .description p");
       const newParagraphs = Array.from(paragraphs).slice(visibleParagraphs);
       const timeline = gsap.timeline({ paused: true, delay: 0.2 });
-  
+
       (newParagraphs as TargetElement[]).forEach((paragraph) => {
         const { words } = new SplitType(paragraph, { types: "words" });
-  
+
         timeline.from(words, {
           opacity: 0.03,
           filter: "blur(8px)",
@@ -244,7 +244,7 @@ export default function MoreAboutMe() {
           <div className="desc-img">
             <div id="img-container">
               <img
-                src="./assets/kaustubh-paturi.jpg"
+                src="./assets/kaustubhpaturi.jpg"
                 alt="Most handsome guy 😎"
                 className="kaustubh-img"
               />

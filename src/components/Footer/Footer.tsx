@@ -360,7 +360,7 @@ export function Footer() {
             Find me on socials
           </p>
           <div className="flex flex-col items-center justify-center gap-3 mt-12 text-xl">
-            {socialLinks.map(({ name, url, username, color }, indx) => (
+            {socialLinks.map(({ name, url, username, color, id }, indx) => (
               <div className="social-link" key={indx}>
                 <span>{name}</span>
                 <Link
@@ -369,7 +369,7 @@ export function Footer() {
                   className={color}
                   onMouseEnter={handleSocialMediaLinkHover}
                   onMouseLeave={handleSocialMediaLinkBlur}
-                  id={`social-${name.toLowerCase()}`}
+                  id={`social-${id}`}
                 >
                   {username}
                 </Link>
