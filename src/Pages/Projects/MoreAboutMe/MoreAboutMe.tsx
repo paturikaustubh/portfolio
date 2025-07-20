@@ -260,6 +260,7 @@ export default function MoreAboutMe() {
               <button
                 className="px-4 py-2 mt-12 font-light border expand-bg duration-300s hover:rounded-md details-text"
                 onClick={handleReadMore}
+                id="read-more-button"
               >
                 Read More
               </button>
