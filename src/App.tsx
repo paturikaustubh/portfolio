@@ -14,7 +14,7 @@ import Console from "./components/Console/Console";
 function App() {
   useEffect(() => {
     const lenis = new Lenis();
-    function raf(time: any) {
+    function raf(time: DOMHighResTimeStamp) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }

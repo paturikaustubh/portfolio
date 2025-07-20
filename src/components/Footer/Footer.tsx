@@ -162,7 +162,7 @@ export function Footer() {
         });
       }
     });
-  }, []);
+  }, [gsapMatchMedia, prevCursorColor, tl]);
 
   const handleInstantMsgDetailsChange = (
     event:

@@ -17,9 +17,8 @@ export default function Skills() {
   const [accordianActiveIndx, setAccordionActiveIndx] = useState(0);
   const [techStackList, setTechStackList] = useState<TechStackDetails[]>();
 
-  const techStackOrder = ["frontend", "backend", "database", "genAi"];
-
   useLayoutEffect(() => {
+    const techStackOrder = ["frontend", "backend", "database", "genAi"];
     const fetchTechStack = async () => {
       const techStackCollection = collection(db, "techStack");
       const techStackSnapshot = await getDocs(techStackCollection);
@@ -46,7 +45,7 @@ export default function Skills() {
   }, []);
 
   useEffect(() => {
-    if (Boolean(techStackList)) {
+    if (techStackList) {
       const gsapMatchMedia = gsap.matchMedia();
       gsap.utils.toArray(".__slide-right-left").forEach((element) => {
         gsap.to(element as Element, {
