@@ -159,7 +159,6 @@ export default function MoreAboutMe() {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      console.log(window.innerWidth < 768);
       setIsSmallScreen(window.innerWidth < 768);
     });
     const paragraphs = document.querySelectorAll(".desc-img .description p");
