@@ -79,10 +79,6 @@ button {
   outline: 0;
 }
 
-a:hover {
-  color: inherit;
-}
-
 button:focus-visible {
   outline: 1;
 }
